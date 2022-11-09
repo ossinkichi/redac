@@ -42,7 +42,7 @@
         .container{
             border-radius: 2px;
 
-            width: 30%;
+            /* width: 30%; */
             height: 370px;
         }
 
@@ -88,7 +88,7 @@
         }
 
         table{
-            width: 90%;
+            width: 100%;
 
             /* border: 1px solid; */
             border-collapse: collapse;
@@ -171,7 +171,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-around;
-            gap: 3px;
+            gap: 5px;
 
             height: 400px;
             width: 350px;

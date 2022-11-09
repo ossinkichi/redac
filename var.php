@@ -4,4 +4,4 @@
     $usuario = 'root';
     $senha = '';
     $host = 'localhost';
-    $dbname = 'redac';
+    $dbname = 'redacteste';

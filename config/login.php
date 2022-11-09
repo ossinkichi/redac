@@ -25,7 +25,7 @@
         public function prof($name,$senha){
             $dado = array();
 
-            $sql =  $this->pdo->prepare("SELECT * FROM professores WHERE nome LIKE :n AND senha = :p");
+            $sql =  $this->pdo->prepare("SELECT * FROM professore WHERE nome LIKE :n AND nasciento = :p");
             $sql->bindValue(":n","%$name%");
             $sql->bindValue(":p",$senha);
 
@@ -42,7 +42,7 @@
         public function aluno($name,$senha){
             $dado = array();
 
-            $sql = $this->pdo->prepare("SELECT * FROM alunos WHERE matricula = :n AND senha = :p");
+            $sql = $this->pdo->prepare("SELECT * FROM alunos WHERE matricula = :n AND nome = :p");
             $sql->bindValue(":n",$name);
             $sql->bindValue(":p",$senha);
 

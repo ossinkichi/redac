@@ -9,7 +9,7 @@
 
                 $dados = array();
 
-                $sql = $this->pdo->prepare("SELECT * FROM turma ORDER BY `ano`");
+                $sql = $this->pdo->prepare("SELECT * FROM turmas");
                 $sql->execute();
 
                 $dados = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -26,7 +26,7 @@
             try{
                 $dados  = array();
 
-                $sql = $this->pdo->prepare("SELECT * FROM professores");
+                $sql = $this->pdo->prepare("SELECT * FROM professor");
                 $sql->execute();
 
                 $dados = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -42,7 +42,7 @@
             try{
                 $dados = array();
 
-                $sql  = $this->pdo->prepare("SELECT * FROM alunos");
+                $sql  = $this->pdo->prepare("SELECT * FROM aluno");
                 $sql->execute();
 
                 $dados = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -59,7 +59,7 @@
 
                 $dados = array();
 
-                $sql = $this->pdo->prepare("SELECT * FROM turma WHERE id = :id");
+                $sql = $this->pdo->prepare("SELECT * FROM turmas WHERE id = :id");
                 $sql->bindValue(":id",$id);
                 $sql->execute();
 
@@ -79,7 +79,7 @@
             try{
                 $dados  = array();
 
-                $sql = $this->pdo->prepare("SELECT * FROM professores WHERE id = :id");
+                $sql = $this->pdo->prepare("SELECT * FROM professor WHERE id = :id");
                 $sql->bindValue(":id",$id);
                 $sql->execute();
 
@@ -98,7 +98,7 @@
             try{
                 $dados = array();
 
-                $sql  = $this->pdo->prepare("SELECT * FROM alunos WHERE id = :id");
+                $sql  = $this->pdo->prepare("SELECT * FROM aluno WHERE matricula = :id");
                 $sql->bindValue(":id",$id);
                 $sql->execute();
 

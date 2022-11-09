@@ -3,10 +3,11 @@
             <thead>
                 <tr>
                     <th class="row" scope="row">#</th>
-                    <th class="row" scope="row">Ano escolar</th>
-                    <th scope="col">Turma</th>
+                    <th class="row" scope="row">Serie</th>
+                    <th scope="col">Curso</th>
                     <th scope="col">Turno</th>
-                    <th colspan="2">Config</th>
+                    <th scope="col">Sala</th>
+                    <th class="row" scope="row">Config</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,7 +21,7 @@
 
                         if($tam <= 0){
                         ?>
-                            <td style="text-align: center;" colspan="5">Nenhuma dado encontrada</td>
+                            <td style="text-align: center;" colspan="6">Nenhuma dado encontrada</td>
                         <?php
                         }else{
 
@@ -42,7 +43,6 @@
 
                                 ?>
                                     <td><a href="./edit.php?editturm=<?=$lista[$i]['id']?>"><img src="./assets/icons/edit-3.png" alt="editar"></a></td>
-                                    <td><a href="./delete.php?excluirturm=<?=$lista[$i]['id']?>"><img src="./assets/icons/trash-2.png" alt="excluir"></a></td>
                                     </tr>
                                 <?php
                             }

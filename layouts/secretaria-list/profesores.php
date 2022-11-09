@@ -7,7 +7,8 @@
                 <th scope="col">Nascimento</th>
                 <th scope="col">Materia</th>
                 <th scope="col">Telefone</th>
-                <th colspan="2">Config</th>
+                <th scope="col">email</th>
+                <th class="row" scope="row">Config</th>
             </tr>
         </thead>
         <tbody>
@@ -32,7 +33,7 @@
 
                             foreach($lista[$i] as $collun=>$value){
 
-                                if($collun != 'id' && $collun != 'cargo' && $collun != 'senha'){
+                                if($collun != 'id' && $collun != 'cargo'){
 
                                     ?>
                                         <td scope="row"><?=$value?></td>
@@ -44,7 +45,6 @@
 
                             ?>
                                 <td><a href="./edit.php?editprof=<?=$lista[$i]['id']?>"><img src="./assets/icons/edit-3.png" alt="editar"></a></td>
-                                <td><a href="./delete.php?excluirprof=<?=$lista[$i]['id']?>"><img src="./assets/icons/trash-2.png" alt="excluir"></a></td>
                             </tr>   
                             <?php
                         }

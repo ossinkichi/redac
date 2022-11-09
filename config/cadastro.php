@@ -4,15 +4,21 @@
 
     class cadastro extends connect{
 
-        public function turmas($ano,$sal,$tur){
+        public function turmas($ano,$turn,$cur,$turm){
 
             try{
 
-                $sql = $this->pdo->prepare("INSERT INTO turma(ano, turma, turno) VALUES(:a , :turm , :turn)");
-                $sql->bindValue(":a", $ano);
-                $sql->bindValue(":turm", $sal);
-                $sql->bindValue(":turn", $tur);
-                $sql->execute();
+                $sql = $this->pdo->prepare("INSERT INTO turmas(serie, curso, turno, sala) VALUES(:s , :cur , :turn, :sal)");
+                $sql->bindValue(":s", $ano);
+                $sql->bindValue(":cur", $cur);
+                $sql->bindValue(":turn", $turn);
+                $sql->bindValue(":sal", $turm);
+                
+                if($sql->execute()){
+                    return "<p style ='background: red; widht: 100vw; padding: 12px; border: 1px solid;'>Cadastrado com sucesso</p>";
+                }else{
+                    return "<p style ='background: red; widht: 100vw; padding: 12px; border: 1px solid;'>Erro ao cadastrar</p>";
+                }
             
             }catch(PDOException $error){
                 echo $error->getMessage()."<br>";
@@ -26,14 +32,18 @@
 
             try {
                 
-                $sql = $this->pdo->prepare("INSERT INTO professores(nome, nascimento, materia, telefone, senha) 
-                                                VALUES(:nom, :nasc, :t, :mat, :p)");
+                $sql = $this->pdo->prepare("INSERT INTO professor(nome, nascimento, materia, telefone, email)VALUES(:nom, :nasc, :t, :mat, :e)");
                 $sql->bindValue(":nom",$nome);
                 $sql->bindValue(":nasc",$nasc);
                 $sql->bindValue(":mat",$mater);
                 $sql->bindValue(":t",$tel);
-                $sql->bindValue(":p",$pass);
-                $sql->execute();
+                $sql->bindValue(":e",$pass);
+                
+                if($sql->execute()){
+                    return "<p style ='background: red; widht: 100vw; padding: 12px; border: 1px solid;'>Cadastrado com sucesso</p>";
+                }else{
+                    return "<p style ='background: red; widht: 100vw; padding: 12px; border: 1px solid;'>Erro ao cadastrar</p>";
+                }
 
             } catch (PDOException $error) {
                 echo $error->getMessage()."<br>";
@@ -43,22 +53,28 @@
 
         }
 
-        public function aluno($matricula,$name,$nasc,$ano,$cur,$tur,$sal,$form,$pass){
+        public function aluno($matricula,$name,$nasc,$serie,$cur,$tur,$sal,$email,$tel,$sit){
 
             try {
 
-                $sql = $this->pdo->prepare("INSERT INTO alunos(matricula,nome,nascimento,ano,curso,turno,turma,senha,formado)
-                                            VALUES(:mat,:nam,:nasc,:an,:cur,:tur,:sal,:se,:f)");
+                $sql = $this->pdo->prepare("INSERT INTO aluno(matricula,nome,nascimento,telefone,email,serie,curso,turno,turma,situação)
+                VALUES(:mat,:nam,:nasc,:tel,:em,:s,:cur,:turn,:turm,:si)");
                 $sql->bindValue(":mat",$matricula);
                 $sql->bindValue(":nam",$name);
                 $sql->bindValue(":nasc",$nasc);
-                $sql->bindValue("an",$ano);
+                $sql->bindValue(":tel",$tel);
+                $sql->bindValue(":em",$email);
+                $sql->bindValue(":s",$serie);
                 $sql->bindValue(":cur",$cur);
-                $sql->bindValue(":tur",$tur);
-                $sql->bindValue(":sal",$sal);
-                $sql->bindValue(":se",$pass);
-                $sql->bindValue(":f",$form);
-                $sql->execute();
+                $sql->bindValue(":turn",$tur);
+                $sql->bindValue(":turm",$sal);
+                $sql->bindValue(":si",$sit);
+                                
+                if($sql->execute()){
+                    return "<p style ='background: red; widht: 100vw; padding: 12px; border: 1px solid;'>Cadastrado com sucesso</p>";
+                }else{
+                    return "<p style ='background: red; widht: 100vw; padding: 12px; border: 1px solid;'>Erro ao cadastrar</p>";
+                }
 
             } catch (PDOException $error) {
                 echo $error->getMessage()."<br>";

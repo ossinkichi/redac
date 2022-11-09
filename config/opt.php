@@ -4,26 +4,6 @@
 
     class option extends connect{
 
-
-        public function delete($table, $id){
-            
-            try{
-
-                $sql = $this->pdo->prepare("DELETE FROM :t WHERE id = :id");
-                $sql->bindValue(":t", $table);
-                $sql->bindValue(":id", $id);
-                $sql->execute();
-
-                header('location: ./secret.php');
-
-            }catch(PDOException $error){
-                echo $error->getMessage()."<br>";
-            }catch(Exception $erro){
-                echo $erro->getMessage()."<br>";
-            }
-
-        }
-
         public function editAluno($matricula,$name,$nasc,$ano,$cur,$tur,$sal,$form,$pass,$id){
 
 
