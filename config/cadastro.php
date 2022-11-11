@@ -57,7 +57,7 @@
 
             try {
 
-                $sql = $this->pdo->prepare("INSERT INTO aluno(matricula,nome,nascimento,telefone,email,serie,curso,turno,turma,situação)
+                $sql = $this->pdo->prepare("INSERT INTO aluno(matricula,nome,nascimento,telefone,email,serie,curso,turno,turma,situacao)
                 VALUES(:mat,:nam,:nasc,:tel,:em,:s,:cur,:turn,:turm,:si)");
                 $sql->bindValue(":mat",$matricula);
                 $sql->bindValue(":nam",$name);

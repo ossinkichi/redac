@@ -98,7 +98,7 @@
             try{
                 $dados = array();
 
-                $sql  = $this->pdo->prepare("SELECT * FROM aluno WHERE matricula = :id");
+                $sql  = $this->pdo->prepare("SELECT matricula,nome,nascimento,telefone,email,serie,curso,turno,turma,situação FROM aluno WHERE matricula = :id");
                 $sql->bindValue(":id",$id);
                 $sql->execute();
 
