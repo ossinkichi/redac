@@ -7,6 +7,9 @@
 
     session_start();
     // require('./verify.php');
+    require_once('./var.php');
+    require_once('./config/freq.php');
+
     
     include('./layouts/header-perfil.php');
 
@@ -19,10 +22,18 @@
 
     if(isset($_GET['freq'])){
         
+        $f = new freq($dbname,$host,$usuario,$senha);
+
+        $dados = $f->getFreq('3TIM');
+        
         include('./layouts/prof-lis/frequencia.php');
 
     }else if(isset($_GET['not'])){
 
+        require_once('./config/nota.php');
+
+        $n = new nota($dbname,$host,$usuario,$senha);
+        $dados = $n->getNota('3TIM');
         include('./layouts/prof-lis/notas.php');
 
     }else{

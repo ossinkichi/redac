@@ -40,12 +40,14 @@
 
                 case "professor":
                     // ativando a configuração de login                    
-                    $dados = $l->prof($name,$password);
+                    /*$dados = $l->prof($name,$password);
 
                     session_start();
                     $_SESSION['id'] = $dados['id'];
                     $_SESSION['nome'] = $dados['nome'];
                     $_SESSION['cargo'] = $dados['cargo'];
+                    */
+                    echo '<p style="background: red; padding: 5px;">Modo professor não disponivel</p>';
                 break;
 
                 case "aluno":

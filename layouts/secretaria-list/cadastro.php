@@ -77,8 +77,9 @@
         <input type="date" placeholder="Ano de nascimento" name="nasc" autocomplete="off">
         <input type="number" placeholder="Serie" name="ano" autocomplete="off">
         <input type="text" placeholder="Curso" name="curso" autocomplete="off">
-        <input type="text" placeholder="turno" name="turn" autocomplete="off">
-        <input type="text" placeholder="sala" name="sal" autocomplete="off">
+        <input type="text" placeholder="Turno" name="turn" autocomplete="off">
+        <input type="text" placeholder="Sala" name="sal" autocomplete="off">
+        <input type="text" placeholder="Turma" name="turm" autocomplete="off">
         <input type="tel" placeholder="Telefone" name="tel" autocomplete="off">
         <input type="email" placeholder="Email" name="mail" autocomplete="off">
         <input type="text" name="sit" placeholder="Situação" autocomplete="off">
@@ -95,11 +96,16 @@
             $curso = addslashes($_POST['curso']);
             $turno = addslashes($_POST['turn']);
             $sala = addslashes($_POST['sal']);
+            $turma = addslashes($_POST['turm']);
             $telefone = addslashes($_POST['tel']);
             $email = addslashes($_POST['mail']);
             $sit = addslashes($_POST['sit']);
 
             echo $c->aluno($matricula,$name,$nascimento,$ano,$curso,$turno,$sala,$email,$telefone,$sit);
+
+            $c->freq($matricula,$name,$turma);
+            $c->nota($matricula,$name,$turma);
+        
         }
         }else{}
     ?>

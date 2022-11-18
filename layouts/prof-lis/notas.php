@@ -23,9 +23,18 @@
             </thead>
             <tbody>
                 <tr>
-                    <td class="row" scope="row">1</td>
-                    <td>123456789</td>
-                    <td>Cleonices da Silva Pereira Rocha</td>
+                    <?php
+                        $quant = count($dados);
+                        if($quant == 0){
+                            echo '<tr>
+                                <td class="center" colspan="18">Nenhum dado encontrado</td>
+                            </tr>';
+                        }else{
+                        for($i = 0; $i < $quant; $i++){
+                    ?>
+                    <td class="row" scope="row"><?=$i?></td>
+                    <td><?=$dados[$i]['matricula']?></td>
+                    <td><?=$dados[$i]['nome']?></td>
                     <td class="center"><input type="text" value="0" name="atv1"></td>
                     <td class="center"><input type="text" value="0" name="atv2"></td>
                     <td class="center"><input type="text" value="0" name="atv3"></td>
@@ -41,11 +50,12 @@
                     
                     <td class="center"><p>0</p></td>
                 </tr>
-
+                <?php } ?>
                 <tr>
                     <td colspan="16"><button type="submit">Enviar</button></td>
                 </tr>
             </tbody>
+            <?php }?>
         </table>
     </div>
 </section>

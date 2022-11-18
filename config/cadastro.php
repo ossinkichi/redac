@@ -21,9 +21,11 @@
                 }
             
             }catch(PDOException $error){
-                echo $error->getMessage()."<br>";
+                echo '<p style="background: red; padding:12px;">Algo deu errado, tente mais tarde</p>';
+                $error->getMessage()."<br>";
             }catch(Exception $erro){
-                echo $erro->getMessage()."<br>";
+                echo '<p style="background: red; padding:12px;">Algo deu errado, tente mais tarde</p>';
+                $erro->getMessage()."<br>";
             }
 
         }
@@ -46,9 +48,11 @@
                 }
 
             } catch (PDOException $error) {
-                echo $error->getMessage()."<br>";
+                echo '<p style="background: red; padding:12px;">Algo deu errado, tente mais tarde</p>';
+                $error->getMessage()."<br>";
             } catch(Exception $erro){
-                echo $erro->getMessage()."<br>";
+                echo '<p style="background: red; padding:12px;">Algo deu errado, tente mais tarde</p>';
+                $erro->getMessage()."<br>";
             }
 
         }
@@ -77,10 +81,30 @@
                 }
 
             } catch (PDOException $error) {
-                echo $error->getMessage()."<br>";
+                echo '<p style="background: red; padding:12px;">Algo deu errado, tente mais tarde</p>';
+                $error->getMessage()."<br>";
             }catch(Exception $erro){
-                echo $erro->getMessage()."<br>";
+                echo '<p style="background: red; padding:12px;">Algo deu errado, tente mais tarde</p>';
+                $erro->getMessage()."<br>";
             }
+        }
+
+        public function freq($mat,$nome,$turma){
+
+            $sql = $this->pdo->prepare('INSERT INTO frequenciia(matricula,nome,turma) VALUES(:m,:n,:t)');
+            $sql->bindValue(':m',$mat);
+            $sql->bindValue(':n',$nome);
+            $sql->bindValue(':t',$turma);
+            $sql->execute();
+        }
+
+        public function nota($mat,$nome,$turma){
+
+            $sql = $this->pdo->prepare('INSERT INTO nota(matricula,nome,turma) VALUES(:m,:n,:t)');
+            $sql->bindValue(':m',$mat);
+            $sql->bindValue(':n',$nome);
+            $sql->bindValue(':t',$turma);
+            $sql->execute();
         }
 
     }

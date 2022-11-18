@@ -2,7 +2,7 @@
 
     session_start();
 
-    require('./verify.php');
+    // require('./verify.php');
 
     require_once('./config/busca.php');
     require('./var.php');

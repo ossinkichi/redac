@@ -16,6 +16,11 @@
 
             margin-left: 950px;
         }
+
+        .logout{
+            height: 35px;
+            width: 35px;
+        }
     </style>
 
     <header>

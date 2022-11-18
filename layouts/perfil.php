@@ -88,7 +88,7 @@
     <section class="apresentacao">
         <div class="user">
             <img src="./assets/icons/user.png" alt="">
-            <p class="name"><?=$user?></p>
+            <p class="name"><?=$user ?? 'Nome de usuario' ?></p>
             <?php if($_SESSION['cargo'] == 'professor'){ ?>
             <p class="mater">Materia</p>
             <?php } ?>
@@ -102,16 +102,20 @@
 
     <section class="classes">
                 <?php
+                    /*
                     if($_SESSION['cargo'] == 'Alunos'){
                         $lista = $b->bUpdateAlunos($_SESSION['id']);
                             ?>
-                            <div class="card">
-                                <div class="bg"></div>
-                                <p><?=$lista['turma']?></p>
-                            </div>
+                            
                             <?php
-                    }else{}
+                     }else{}
+                    */
                 ?>
+
+                <div class="card">
+                    <div class="bg"></div>
+                    <p>3ºTIM1</p>
+                </div>
 
         
     </section>

@@ -13,11 +13,6 @@
                 <th scope="col">Turno</th>
                 <th scope="col">Sala</th>
                 <th scope="col">Situação</th>
-                <th scope="col">Presenças</th>
-                <th scope="col">Faltas</th>
-                <th class="row" scope="row">1° Unid</th>
-                <th class="row" scope="row">2° Unid</th>
-                <th class="row" scope="row">3° Unid</th>
                 <th class="row" scope="row">Config</th>
             </tr>
         </thead>
@@ -41,7 +36,7 @@
                                 <td class="row" scope="row"><?=$i?></td>
                             <?php
                             foreach($lista[$i] as $collum=>$value){
-                                if($collum != 'cargo'){
+                                if($collum != 'cargo' && $collum != 'presenca' && $collum != 'falta' && $collum != 'und_1' && $collum != 'und_2' && $collum != 'und_3'){
 
                                     ?>
                                         <td scope="col"><?=$value?></td>

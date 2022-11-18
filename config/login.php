@@ -42,7 +42,7 @@
         public function aluno($name,$senha){
             $dado = array();
 
-            $sql = $this->pdo->prepare("SELECT * FROM aluno WHERE matricula = :n AND nome = :p");
+            $sql = $this->pdo->prepare("SELECT * FROM aluno WHERE matricula = :n AND curso = :p");
             $sql->bindValue(":n",$name);
             $sql->bindValue(":p",$senha);
 
