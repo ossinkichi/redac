@@ -6,11 +6,12 @@
                     <th class="row" scope="col">#</th>
                     <th scope="col">Matricula</th>
                     <th scope="col">Nome</th>
-                    <th scope="col">S</th>
-                    <th scope="col">T</th>
-                    <th scope="col">Q</th>
-                    <th scope="col">Q</th>
-                    <th scope="col">S</th>
+                    <th scope="col">1°</th>
+                    <th scope="col">2°</th>
+                    <th scope="col">3°</th>
+                    <th scope="col">4°</th>
+                    <th scope="col">5°</th>
+                    <th scope="col">6°</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,17 +24,18 @@
                     <td><?=$dados[$i]['matricula']?></td>
                     <td><?=$dados[$i]['nome']?></td>
                     <form action="" method="post">
-                        <td class="center"><input type="text" name="seg" value="<?=$dados[$i]['segunda']?>"></td>
-                        <td class="center"><input type="text" name="ter" value="<?=$dados[$i]['terca']?>"></td>
-                        <td class="center"><input type="text" name="qua" value="<?=$dados[$i]['quarta']?>"></td>
-                        <td class="center"><input type="text" name="qui" value="<?=$dados[$i]['quinta']?>"></td>
-                        <td class="center"><input type="text" name="sex" value="<?=$dados[$i]['sexta']?>"></td>
+                        <td class="center row"><input type="checkbox" name="aula_1" value="40"></td>
+                        <td class="center row"><input type="checkbox" name="aula_2" value="40"></td>
+                        <td class="center row"><input type="checkbox" name="aula_3" value="40"></td>
+                        <td class="center row"><input type="checkbox" name="aula_4" value="40"></td>
+                        <td class="center row"><input type="checkbox" name="aula_5" value="40"></td>
+                        <td class="center row"><input type="checkbox" name="aula_6" value="40"></td>
                 </tr>
                 <?php $mat = $dados[$i]['matricula']; ?>
             </tbody>
             <?php } ?>
             <tr>
-                <td colspan="8"><button type="submit">Enviar</button></td>
+                <td colspan="9"><button type="submit">Enviar</button></td>
                 </form>
             </tr>
         </table>
@@ -44,13 +46,14 @@
     if(isset($_POST['seg'])){
             
         
-        $seg = addslashes($_POST['seg']);
-        $ter = addslashes($_POST['ter']);
-        $qua = addslashes($_POST['qua']);
-        $qui = addslashes($_POST['qui']);
-        $sex = addslashes($_POST['sex']);
+        $aula_1 = addslashes($_POST['aula_1']);
+        $aula_2 = addslashes($_POST['aula_2']);
+        $aula_3 = addslashes($_POST['aula_3']);
+        $aula_4 = addslashes($_POST['aula_4']);
+        $aula_5 = addslashes($_POST['aula_5']);
+        $aula_6 = addslashes($_POST['aula_6']);
 
-        $f->setFreq($mat,$seg,$ter,$qua,$qui,$sex);
+        //$f->setFreq($mat,$seg,$ter,$qua,$qui,$sex);
         
     }
 

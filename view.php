@@ -22,19 +22,42 @@
 
     if(isset($_GET['freq'])){
         
-        $f = new freq($dbname,$host,$usuario,$senha);
-
-        $dados = $f->getFreq('3TIM');
         
-        include('./layouts/prof-lis/frequencia.php');
+        if(isset($_GET['turma'])){
+            $turma = $_GET['turma'];
+            
+            $f = new freq($dbname,$host,$usuario,$senha);
+            $dados = $f->getFreq($turma);
+            
+            include('./layouts/prof-lis/frequencia.php');
+        }else{
+            ?>
+            <section>
+                <p class="vaz">Vazio</p>
+            </section>
+            <?php
+        }
+        
 
     }else if(isset($_GET['not'])){
 
         require_once('./config/nota.php');
-
-        $n = new nota($dbname,$host,$usuario,$senha);
-        $dados = $n->getNota('3TIM');
-        include('./layouts/prof-lis/notas.php');
+        
+        
+        if(isset($_GET['turma'])){
+            $turma = $_GET['turma'];
+            
+            $f = new freq($dbname,$host,$usuario,$senha);
+            $dados = $f->getfreq($turma);
+            
+            include('./layouts/prof-lis/notas.php');
+        }else{
+            ?>
+            <section>
+                <p class="vaz">Vazio</p>
+            </section>
+            <?php
+        }
 
     }else{
         ?>

@@ -19,6 +19,7 @@
                     <th scope="col">3°</th>
                     <th scope="col">3° UND</th>
                     <th scope="col">Final</th>
+                    <th scope="col">Salva</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,13 +50,10 @@
                     <td class="center"><p>0</p></td>
                     
                     <td class="center"><p>0</p></td>
+                    <td scope="row" class="row"><button style="margin: auto; padding: 1px 12px;" type="submit">Salvar</button></td>
                 </tr>
-                <?php } ?>
-                <tr>
-                    <td colspan="16"><button type="submit">Enviar</button></td>
-                </tr>
+                <?php } } ?>
             </tbody>
-            <?php }?>
         </table>
     </div>
 </section>
