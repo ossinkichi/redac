@@ -1,4 +1,12 @@
+<?php
+    $array = explode(' ',$user);
 
+    /*
+    echo '<pre>';
+    print_r($array);
+    echo '</pre>';
+    */
+?>
 
 
     <style>
@@ -88,10 +96,12 @@
     <section class="apresentacao">
         <div class="user">
             <img src="./assets/icons/user.png" alt="">
-            <p class="name"><?=$user ?? 'Nome de usuario' ?></p>
+            <p class="name"><?=$array[0] ?? 'Nome de usuario' ?></p>
             <?php if($_SESSION['cargo'] == 'professor'){ ?>
             <p class="mater">Materia</p>
-            <?php } ?>
+            <?php }else if($_SESSION['cargo'] == 'aluno'){ ?>
+            <p class="mater"><?=$_SESSION['turma'] ?? ''?></p>
+            <?php }else{} ?>
         </div>
 
         <!-- <div class="links">
@@ -106,17 +116,16 @@
                     if($_SESSION['cargo'] == 'Alunos'){
                         $lista = $b->bUpdateAlunos($_SESSION['id']);
                             ?>
-                            
+                                <div class="card">
+                                    <div class="bg"></div>
+                                    <p>3ºTIM1</p>
+                                </div>
                             <?php
                      }else{}
                     */
                 ?>
 
-                <div class="card">
-                    <div class="bg"></div>
-                    <p>3ºTIM1</p>
-                </div>
+                
 
         
     </section>
-    

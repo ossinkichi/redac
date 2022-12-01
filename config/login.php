@@ -25,7 +25,7 @@
         public function prof($name,$senha){
             $dado = array();
 
-            $sql =  $this->pdo->prepare("SELECT * FROM professor WHERE nome = :n AND nasciento = :p");
+            $sql =  $this->pdo->prepare("SELECT * FROM professor WHERE email = :n AND id = :p");
             $sql->bindValue(":n","$name");
             $sql->bindValue(":p",$senha);
 
@@ -33,18 +33,19 @@
 
                 $dado = $sql->fetch(PDO::FETCH_ASSOC);
 
+                //echo count($dado);
+
                 header('location: ./perfil.php');
                 
                 return $dado;
             }
         }
 
-        public function aluno($name,$senha){
+        public function aluno($name){
             $dado = array();
 
-            $sql = $this->pdo->prepare("SELECT * FROM aluno WHERE matricula = :n AND curso = :p");
+            $sql = $this->pdo->prepare("SELECT * FROM aluno WHERE matricula = :n");
             $sql->bindValue(":n",$name);
-            $sql->bindValue(":p",$senha);
 
             if($sql->execute()){
 

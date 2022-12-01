@@ -27,13 +27,10 @@
                     }else{
 
                         for($i = 0; $i < $tam;$i++){
-                            ?>
-                                <td class="row" scope="row"><?=$i?></td>
-                            <?php
 
                             foreach($lista[$i] as $collun=>$value){
 
-                                if($collun != 'id' && $collun != 'cargo'){
+                                if($collun != 'cargo'){
 
                                     ?>
                                         <td scope="row"><?=$value?></td>
