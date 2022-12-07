@@ -208,6 +208,7 @@
                 <a href="?modo=professores">Professores</a>
                 <a href="?modo=alunos">Alunos</a>
                 <a href="?cadastro=">Cadastrar</a>
+                <a href="?curso">Curso</a>
             </div>
             </p>
         </div>
@@ -224,15 +225,17 @@
                 include('./layouts/secretaria-list/profesores.php');
 
             // verificando se na url exites um elemento chamado modo e se seu valor é alunos
-            }elseif(isset($_GET['modo']) && $_GET['modo'] == 'alunos'){
+            }else if(isset($_GET['modo']) && $_GET['modo'] == 'alunos'){
 
                 include('./layouts/secretaria-list/alunos.php');
 
             // verificando se na url exites um elemento chamado cadastro 
-            }elseif(isset($_GET['cadastro'])){
+            }else if(isset($_GET['cadastro'])){
 
                 include('./layouts/secretaria-list/cadastro.php');
 
+            }else if(isset($_GET['curso'])){
+                include('./layouts/secretaria-list/curso.php');
             }else{
                 // se não existir não faz nada
             }

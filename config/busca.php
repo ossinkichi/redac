@@ -56,6 +56,22 @@
             }
         }
 
+        public function curso(){
+
+            try {
+                $dados = [];
+
+                $sql = $this->pdo->prepare('SELECT * FROM cursos');
+                $sql->execute();
+
+                $dados = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+                return $dados;
+            } catch (PDOException $error) {
+                echo $error->getMessage();
+            }
+        }
+
         public function bUpdateTurmas($id){
 
             try{

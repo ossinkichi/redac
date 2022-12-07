@@ -1,3 +1,6 @@
+<head>
+    <title>Redac - Perfil</title>
+</head>
 <?php
 
     session_start();

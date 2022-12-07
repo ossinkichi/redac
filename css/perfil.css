@@ -85,7 +85,7 @@ nav img{
 .mater{
     position: absolute;
 
-    border-bottom: 1px solid;
+    text-decoration-line: underline;
 
     width: 120px;
 
