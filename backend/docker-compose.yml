@@ -1,0 +1,15 @@
+version: 29.1.1
+services:
+  postgres:
+    image: bitnami/postgresql:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=docke
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=redac
+    volumes:
+      - postgres_data:/bitnami/postgresql
+
+volumes:
+  postgres_data:

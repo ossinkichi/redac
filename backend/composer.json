@@ -1,0 +1,15 @@
+{
+	"name": "lobor/backend",
+	"autoload": {
+		"psr-4": {
+			"app\\": "App/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Ossin Kichi",
+			"email": "loboresjunior321@gmail.com"
+		}
+	],
+	"require": {}
+}
