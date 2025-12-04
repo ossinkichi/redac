@@ -1,0 +1,128 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #fff;
+
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* NAV - LOGIN  */
+
+nav{
+    width: 100vw;
+    height: 75px;
+
+    border: 1px solid;
+    background: #616060;
+
+    display: flex;
+    flex-direction: row;
+}
+
+nav h1{
+    color: #fff;
+    
+    font-family: Arial, Helvetica, sans-serif;
+    
+    margin-left: 15px;
+    margin-top: 30px;
+}
+
+nav img{
+    margin: 15px 0;
+    margin-left: 50px;
+
+    width: 50px;
+    height: 50px;
+}
+
+/* FORM - LOGIN */
+
+form{
+    width: 25rem;
+    height: 18.75rem;
+
+    padding: 1.25rem;
+    margin: 150px auto;
+
+    border: 1px solid rgba(153, 144, 144, 0.712);
+    background: #494848;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: .9375rem;
+
+}
+
+.title{
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+
+    color: #fff;
+}
+
+input{
+    width: 100%;
+    height: 2.375rem;
+
+    border: none;
+
+    padding: .625rem;
+}
+
+button{
+    width: 5.3125rem;
+    height: 1.875rem;
+
+    margin-left: 75%;
+
+    border: none;
+    color: #808080;
+
+    cursor: pointer;
+}
+
+button:hover{
+    border: 1px solid #686767;
+    color: #000;
+}
+
+/* FOOTER - LOGIN */
+
+footer{
+    flex-shrink: 0;
+
+    width: 100vw;
+    height: 120px;
+
+    padding: 10px 2px;
+    
+    border: 1px solid;
+    background-color: #d1cece;
+}
+
+footer p{
+    color: #000;
+
+    font-size: smaller;
+
+    text-align: center;
+
+    margin: 15px 0;
+}
+
+footer p>img{
+    width: 15px;
+    height: 15px;
+
+    margin-right: 7px;
+}
+
