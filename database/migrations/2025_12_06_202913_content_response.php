@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('content_response', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('content_id')->constrained(' contents')->onDelete('cascade');
-            $table->foreign('student_resgistration_number')->references('registration')->on('students')->onDelete('cascade');
+            $table->integer('student_resgistration_number');
+            $table->foreignId('content_id')->constrained('contents')->onDelete('cascade');
             $table->text('response_id');
             $table->timestamps();
+
+            $table->foreign('student_resgistration_number')->references('registration')->on('students')->onDelete('cascade');
         });
     }
 

@@ -15,7 +15,7 @@ return new class extends Migration
             'classes',
             function (Blueprint $table) {
                 $table->id();
-                $table->int('series', 2);
+                $table->integer('series');
                 $table->string('course');
                 $table->string('shift');
                 $table->string('room');

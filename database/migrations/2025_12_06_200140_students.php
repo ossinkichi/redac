@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->int('registration');
+            $table->integer('registration')->unique();
             $table->string('full_name');
             $table->date('date_of_birth');
             $table->string('address');

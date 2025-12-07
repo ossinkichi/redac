@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('class_discipline', function (Blueprint $table) {
             $table->id();
-
-            $table->foreign('class_id')->references('id')->on('classes');
-            $table->foreign('discipline_id')->references('id')->on('disciplines');
+            $table->foreignId('class_id')->constrained('classes');
+            $table->foreignId('discipline_id')->constrained('subjects');
             $table->timestamps();
         });
     }

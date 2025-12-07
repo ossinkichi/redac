@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->foreign('student_registration_number')->references('registration')->on('students');
+            $table->integer('student_registration_number');
             $table->foreignId('class_id')->constrained('classes');
             $table->foreignId('discipline_id')->constrained('subjects');
             $table->float('note_value');
-            $table->int('unit');
+            $table->integer('unit');
             $table->timestamps();
+
+            $table->foreign('student_registration_number')->references('registration')->on('students');
         });
     }
 

@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('frequency', function (Blueprint $table) {
             $table->id();
-            $table->foreign('student_registration_number')->references('registration')->on('students');
+            $table->integer('student_registration_number');
             $table->foreignId('teacher_id')->constrained('teachers');
             $table->foreignId('discipline_id')->constrained('subjects');
             $table->foreignId('class_id')->constrained('classes');
             $table->boolean('presence')->default(false);
             $table->timestamps();
+
+            $table->foreign('student_registration_number')->references('registration')->on('students');
         });
     }
 
