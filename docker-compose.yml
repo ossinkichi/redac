@@ -5,7 +5,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=docke
+      - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=
       - POSTGRES_DB=redac
     volumes:
