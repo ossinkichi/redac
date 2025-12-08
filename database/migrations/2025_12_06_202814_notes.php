@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('student_registration_number');
             $table->foreignId('class_id')->constrained('classes');
             $table->foreignId('discipline_id')->constrained('subjects');
-            $table->float('note_value');
+            $table->float('note');
             $table->integer('unit');
             $table->timestamps();
 
