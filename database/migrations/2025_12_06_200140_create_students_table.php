@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('registration')->unique();
             $table->string('full_name');
+            $table->string('gender');
             $table->date('date_of_birth');
             $table->string('address');
             $table->string('email')->unique()->nullable();
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->foreignId('course_id')->constrained('courses');
             $table->foreignId('class_id')->constrained('classes');
             $table->boolean('is_active')->default(true);
+            $table->boolean('formed')->default(false);
             $table->timestamps();
         });
     }
