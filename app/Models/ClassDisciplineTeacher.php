@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ClassDiscipline extends Model
+class ClassDisciplineTeacher extends Model
 {
 
     use HasFactory;
 
-    protected $table = 'classes';
+    protected $table = 'classes_disciplines_teachers';
 
     protected $fillable = [
         'id',
         'class_id',
         'discipline_id',
+        'teacher_id',
         'created_at',
     ];
 
