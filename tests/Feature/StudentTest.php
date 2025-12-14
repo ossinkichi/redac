@@ -6,15 +6,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class registerTest extends TestCase
+class StudentTest extends TestCase
 {
     /**
      * A basic feature test example.
      */
-    public function test_example(): void
+    public function testStudentFind(): void
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $response = $this->get('/api/student/00100000001')->assertJson([])->assertStatus(200);
     }
 }

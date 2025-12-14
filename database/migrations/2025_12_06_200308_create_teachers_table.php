@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->string('full_name');
-            $table->string('password');
+            $table->string('cpf')->unique();
             $table->string('gender');
             $table->string('date_of_birth');
+            $table->string('address');
             $table->string('email')->unique();
             $table->string('phone_number')->unique();
-            $table->string('address');
             $table->foreignId('specialization_subject_id')->constrained('subjects');
             $table->boolean('is_active')->default(true);
             $table->timestamps();

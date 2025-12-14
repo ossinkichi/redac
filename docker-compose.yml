@@ -3,10 +3,11 @@ services:
     image: bitnami/postgresql:latest
     ports:
       - "5432:5432"
-    environment: POSTGRES_USER:docker
-      POSTGRES_PASSWORD:1234567
-      POSTGRES_DB:redac
-      ALLOW_EMPTY_PASSWORD:no
+    environment:
+      - POSTGRESQL_USERNAME= ${DB_USERNAME}
+      - POSTGRESQL_PASSWORD= ${DB_PASSWORD}
+      - POSTGRESQL_DATABASE= ${DB_DATABASE}
+      - ALLOW_EMPTY_PASSWORD= ${ALLOW_EMPTY_PASSWORD}
     volumes:
       - postgres_data:/bitnami/postgresql
 
