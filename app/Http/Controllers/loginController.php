@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\loginRequest;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class loginController extends Controller
 {
@@ -12,5 +12,18 @@ class loginController extends Controller
         return view('login');
     }
 
-    private function authenticate(loginRequest $request) {}
+    private function authenticate(loginRequest $request)
+    {
+        $credentials = $request->only('user', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('/home');
+        }
+
+        return \back()->withErrors([
+            'user' => 'Usuario ou senha inválidos.',
+        ])->withInput();
+    }
 }
