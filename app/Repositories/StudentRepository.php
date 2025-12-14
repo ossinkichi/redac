@@ -14,7 +14,7 @@ class StudentRepository
         $this->model = new Student();
     }
 
-    public function newStudent(array $data): Student
+    public function create(array $data): Student
     {
         return Student::create($data);
     }

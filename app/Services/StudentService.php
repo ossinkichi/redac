@@ -40,4 +40,9 @@ class StudentService
 
         return StudentDto::make($student);
     }
+
+    public function newStudent($student)
+    {
+        $this->studentRepository->create($student);
+    }
 }

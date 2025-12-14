@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Dtos\NewSrudentDto;
+use App\Models\Student;
 use App\Services\StudentService;
 use Nette\Utils\Json;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,5 +23,18 @@ class StudentController extends Controller
         );
     }
 
-    public function newStudent() {}
+    public function newStudent($student): Response
+    {
+
+        $this
+            ->studentService
+            ->newStudent(
+                student: $student
+            );
+
+        return response(
+            content: [],
+            status: 201
+        );
+    }
 }
