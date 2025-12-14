@@ -22,11 +22,11 @@ class Student extends Model
         'class_id',
         'is_active',
         'created_at',
-
     ];
 
     protected $casts = [
         'date_of_birth' => 'datetime:d-m-Y H:i:s',
+        'created_at' => 'datetime:d-m-Y H:i:s',
         'is_active' => 'boolean'
     ];
 
