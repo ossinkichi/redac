@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Dtos\NewStudentDto;
 use App\Http\Requests\CreateStudentRequest;
+use App\Repositories\UserRepository;
 use App\Services\StudentService;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -25,14 +25,14 @@ class StudentController extends Controller
     public function newStudent(CreateStudentRequest $request): Response
     {
 
-        $this
+        $response = $this
             ->studentService
             ->newStudent(
-                student: $request
+                student: $request->toDto()
             );
 
         return response(
-            content: [],
+            content: [$response ?? null],
             status: 201
         );
     }

@@ -8,10 +8,8 @@ use App\Models\Course;
 class CourseRepository
 {
 
-    public function find($courseId): CourseDto
+    public function find($courseId): Course
     {
-        $course = Course::where('id', $courseId)->first()->toArray();
-
-        return CourseDto::make($course);
+        return Course::where('id', $courseId)->first();
     }
 }

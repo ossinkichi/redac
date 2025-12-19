@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Dtos\NewStudentDto;
 use App\Models\Student;
+use Throwable;
 
 class StudentRepository
 {

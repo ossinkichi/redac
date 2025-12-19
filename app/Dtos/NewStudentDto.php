@@ -19,4 +19,22 @@ class NewStudentDto
         public ?bool $is_active = false,
         public ?bool $formed = false
     ) {}
+
+    public static function make(array $data): NewStudentDto
+    {
+        return new NewStudentDto(
+            full_name: $data['full_name'],
+            registration: $data['registration'],
+            cpf: $data['cpf'],
+            gender: $data['gender'],
+            date_of_birth: $data['date_of_birth'],
+            address: $data['address'],
+            email: $data['email'],
+            phone_number: $data['phone_number'] ?? '',
+            course_id: $data['course_id'],
+            class_id: $data['class_id'],
+            is_active: $data['is_active'] ?? false,
+            formed: $data['formed'] ?? false
+        );
+    }
 }

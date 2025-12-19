@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Dtos\NewStudentDto;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateStudentRequest extends FormRequest
@@ -11,7 +12,7 @@ class CreateStudentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +26,7 @@ class CreateStudentRequest extends FormRequest
             'full_name' => 'required|string|max:255|min:15',
             'registration' => 'required|string|min:10',
             'cpf' => 'required|digits:11|cpf|unique:students,cpf',
-            'gender' => 'required|string|',
+            'gender' => 'required|string|in:male,female,outher',
             'date_of_birth' => 'required|date',
             'address' => 'required|string|max:255|min:10',
             'email' => 'required|string|email|unique:students,email',
@@ -49,8 +50,26 @@ class CreateStudentRequest extends FormRequest
             'registration.min' => 'Campo matrícula deve ter no mínimo 10 caracteres.',
             'cpf.required' => 'Campo CPF é obrigatório.',
             'cpf.string' => 'Campo CPF deve ser um texto válido.',
-            'cpf.size' => 'Campo CPF deve ter exatamente 11 caracteres.',
+            'cpf.digits' => 'Campo CPF deve ter exatamente 11 caracteres.',
             'cpf.unique' => 'O CPF informado não é válido.',
         ];
+    }
+
+    public function toDto(): NewStudentDto
+    {
+        return new NewStudentDto(
+            full_name: $this->input('full_name'),
+            registration: $this->input('registration'),
+            cpf: preg_replace('/\D/', '', $this->input('cpf')),
+            gender: $this->input('gender'),
+            date_of_birth: $this->input('date_of_birth'),
+            address: $this->input('address'),
+            email: $this->input('email'),
+            phone_number: preg_replace('/\D/', '', $this->input('phone_number')) ?? $this->input('phone_number'),
+            course_id: $this->input('course_id'),
+            class_id: $this->input('class_id'),
+            is_active: $this->input('is_active', true),
+            formed: $this->input('formed', false),
+        );
     }
 }

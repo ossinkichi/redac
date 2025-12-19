@@ -2,16 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Dtos\ClassDto;
 use App\Models\ClassModel;
 
 class ClassRepository
 {
 
-    public function find($classId): ClassDto
+    public function find($classId): ClassModel
     {
-        $class = ClassModel::where('id', $classId)->first()->toArray();
-
-        return ClassDto::make($class);
+        return ClassModel::where('id', $classId)->first();
     }
 }
