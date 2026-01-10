@@ -4,10 +4,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRESQL_USERNAME= ${DB_USERNAME}
-      - POSTGRESQL_PASSWORD= ${DB_PASSWORD}
-      - POSTGRESQL_DATABASE= ${DB_DATABASE}
-      - ALLOW_EMPTY_PASSWORD= ${ALLOW_EMPTY_PASSWORD}
+      - POSTGRESQL_USERNAME=${DB_USERNAME}
+      - POSTGRESQL_PASSWORD=${DB_PASSWORD}
+      - POSTGRESQL_DATABASE=${DB_DATABASE}
     volumes:
       - postgres_data:/bitnami/postgresql
 
