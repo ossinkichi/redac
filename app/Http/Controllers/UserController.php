@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UserRegisterRequest;
+use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -33,13 +34,13 @@ class UserController extends Controller
         return view('register');
     }
 
-    public function AuthenticateRegister(RegisterRequest $request)
+    public function register(UserRegisterRequest $request)
     {
-        $credentials = $request->only('user', 'password');
+        $user = $request->only('user', 'password', 'role');
 
-        $user = [];
+        $response = UserService::newUser($user);
 
-        // Auth::login($user)
+        return $response;
     }
 
     public function logout()

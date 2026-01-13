@@ -7,15 +7,8 @@ use App\Repositories\UserRepository;
 class UserService
 {
 
-    private UserRepository $userRepository;
-
-    public function __construct()
+    public static function newUser($user)
     {
-        $userRepository = new UserRepository;
-    }
-
-    public function newUser($user)
-    {
-        $this->userRepository->newUser($user);
+        UserRepository::newUser($user);
     }
 }

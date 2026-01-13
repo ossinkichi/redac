@@ -7,17 +7,11 @@ use Throwable;
 
 class UserRepository
 {
-    private User $model;
 
-    public function __construct()
-    {
-        $this->model = new User();
-    }
-
-    public function newUser(array $data): array
+    public static function newUser(array $data): array
     {
         try {
-            $this->model->create($data);
+            User::create($data);
             return [
                 'status' => '201',
                 'message' => ''
