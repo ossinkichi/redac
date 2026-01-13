@@ -13,11 +13,13 @@ Route::get('/', [
 
 Route::get('/home', function () {
     return view('home');
-});
+})->middleware('auth')->name('home.page');
 
-Route::middleware(middleware: [EnsureIsSecretary::class])->group(callback: function () {
+Route::middleware(['auth', 'student'])->group(function () {
     Route::get('/register', [
         UserController::class,
         'registerView'
     ])->name('register.page');
 });
+
+Route::middleware(['auth', 'student'])->group(function () {});

@@ -15,6 +15,16 @@ class EnsureIsTeacher
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $user = $request->user();
+
+        if (!$user) {
+            return \redirect()->route('login.page')->with('error', 'Sem permissão para prosseguir!');
+        }
+
+        if ($user->role !== 'teacher') {
+            return \abort(403, 'Sem permissão para prosseguir!');
+        }
+
         return $next($request);
     }
 }
