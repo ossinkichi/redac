@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateStudentRequest;
 use App\Repositories\UserRepository;
 use App\Services\StudentService;
+use App\Services\UserService;
 use Symfony\Component\HttpFoundation\Response;
 
 class StudentController extends Controller
@@ -22,7 +23,7 @@ class StudentController extends Controller
         );
     }
 
-    public function newStudent(CreateStudentRequest $request): Response
+    public function createNewStudent(CreateStudentRequest $request): Response
     {
 
         $response = $this
@@ -31,8 +32,16 @@ class StudentController extends Controller
                 student: $request->toDto()
             );
 
+        $userResponse = UserService::newUser(
+            [
+                'user' => $request->cpf,
+                'password' => $request->password,
+                'role' => $request->role,
+            ]
+        );
+
         return response(
-            content: [$response ?? null],
+            content: $response,
             status: 201
         );
     }

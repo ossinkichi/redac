@@ -35,6 +35,7 @@ class CreateStudentRequest extends FormRequest
             'class_id' => 'required|integer|exists:classes,id',
             'is_active' => 'nullable|boolean',
             'formed' => 'nullable|boolean',
+            'role' => 'required|string|in:student'
         ];
     }
 
@@ -52,6 +53,7 @@ class CreateStudentRequest extends FormRequest
             'cpf.string' => 'Campo CPF deve ser um texto válido.',
             'cpf.digits' => 'Campo CPF deve ter exatamente 11 caracteres.',
             'cpf.unique' => 'O CPF informado não é válido.',
+            'cpf.cpf' => 'O CPF informado não é válido.',
         ];
     }
 

@@ -34,11 +34,9 @@ class UserController extends Controller
         return view('register');
     }
 
-    public function register(UserRegisterRequest $request)
+    public function register(array $data)
     {
-        $user = $request->only('user', 'password', 'role');
-
-        $response = UserService::newUser($user);
+        $response = UserService::newUser($data);
 
         return $response;
     }
