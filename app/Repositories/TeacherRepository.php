@@ -3,23 +3,22 @@
 namespace App\Repositories;
 
 use App\Models\Teacher;
+use Illuminate\Database\Eloquent\Collection;
 
 class TeacherRepository
 {
-    private Teacher $model;
 
-    public function __construct()
+    public function all(): Collection
     {
-        $this->model = new Teacher();
+        return Teacher::all();
     }
-
     public function newTeacher(array $data): Teacher
     {
-        return $this->model->create($data);
+        return Teacher::create($data);
     }
 
-    public function findByCpf(string $cpf): ?Teacher
+    public function findByCpf(string $cpf): Teacher
     {
-        return $this->model->where('cpf', $cpf)->first();
+        return Teacher::where('cpf', $cpf)->first();
     }
 }

@@ -7,14 +7,9 @@ use App\Dtos\CourseDto;
 use App\Dtos\NewStudentDto;
 use App\Dtos\StudentDto;
 use App\Exceptions\Exceptions;
-use App\Models\ClassModel;
-use App\Models\Course;
-use App\Models\Student;
 use App\Repositories\ClassRepository;
 use App\Repositories\CourseRepository;
 use App\Repositories\StudentRepository;
-use PhpParser\Node\Expr\Array_;
-use Symfony\Component\HttpFoundation\Request;
 use Throwable;
 
 class StudentService
