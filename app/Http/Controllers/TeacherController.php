@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Dtos\NewTeacerDto;
+use App\Dtos\CreateTeacherDto;
+use App\Http\Requests\CreateTeacherRequest;
 use App\Models\Teacher;
 use App\Services\TeacherService;
 
@@ -25,9 +26,12 @@ class TeacherController extends Controller
         return $this->service->find($cpf);
     }
 
-    public function edit(array $data): void {}
+    public function newTeacher(CreateTeacherRequest $dto): void
+    {
+        $this->service->create($dto->toArray());
+    }
 
-    public function newTeacher(array $data): void {}
+    public function edit(array $data): void {}
 
     public function tradePassword(array $data): void {}
 }
