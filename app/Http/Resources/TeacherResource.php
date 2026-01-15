@@ -5,7 +5,8 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Teacher extends JsonResource
+class TeacherResource
+extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,6 +15,8 @@ class Teacher extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $data =  parent::toArray($request);
+        unset($data['password']);
+        return $data;
     }
 }
