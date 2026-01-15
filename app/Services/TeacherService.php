@@ -50,7 +50,7 @@ class TeacherService
         return $created;
     }
 
-    public function edit(array $data): Teacher
+    public function update(array $data): Teacher
     {
         !$data['cpf'] && throw new \InvalidArgumentException("CPF é obrigatório para editar um professor.");
 
