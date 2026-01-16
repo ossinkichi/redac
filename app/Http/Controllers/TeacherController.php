@@ -8,7 +8,9 @@ use App\Http\Requests\CreateTeacherRequest;
 use App\Http\Resources\TeacherResource;
 use App\Models\Teacher;
 use App\Services\TeacherService;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
+use Nette\Utils\Json;
 use Throwable;
 
 class TeacherController extends Controller
@@ -20,16 +22,15 @@ class TeacherController extends Controller
         $this->service = $service;
     }
 
-    public function findAll()
+    public function findAll(): JsonResource
     {
-        return $this->service->findAll();
+        return TeacherResource::collection($this->service->findAll());
     }
 
-    public function find(string $cpf): Response
+    public function find(string $cpf): JsonResource
     {
         $data = $this->service->find($cpf);
-        $teacher = TeacherResource::collection($data);
-        return response(content: $teacher, status: 200);
+        return new TeacherResource($data);
     }
 
     public function newTeacher(CreateTeacherRequest $teacherData): Response

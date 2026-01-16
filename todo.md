@@ -12,6 +12,7 @@ Este projeto é um sistema de gerenciamento escolar desenvolvido em Laravel, vis
 -   ✅ Autenticação básica (login) implementada
 -   ✅ API básica para estudantes
 -   ✅ Views básicas (login, register, home)
+-   🔄 CRUD para Professores em desenvolvimento (TeacherController)
 
 ## TODOs Pendentes
 
