@@ -6,13 +6,14 @@ Este projeto é um sistema de gerenciamento escolar desenvolvido em Laravel, vis
 
 ## Status Atual
 
--   ✅ Estrutura Laravel 12 configurada
--   ✅ Models e Migrations criadas para todas as entidades principais
--   ✅ Repositories e Services implementados para estudantes
+-   ✅ Estrutura Laravel configurada
+-   ✅ Models e Migrations criadas para todas as entidades principais (User, Student, Teacher, Secretary, Course, Subject, Class, Note, Frequency, Content, etc.)
+-   ✅ Repositories implementados (Student, Teacher, Secretary, User, Course, Class)
+-   ✅ Services implementados (Student, Teacher, Secretary, User)
+-   ✅ Controllers criados (TeacherController com CRUD completo, StudentController, SecretaryController, UserController)
 -   ✅ Autenticação básica (login) implementada
--   ✅ API básica para estudantes
+-   ✅ API básica implementada com rotas para Professores e Secretária
 -   ✅ Views básicas (login, register, home)
--   ✅ CRUD para Professores implementado (TeacherController)
 
 ## TODOs Pendentes
 
@@ -27,10 +28,10 @@ Este projeto é um sistema de gerenciamento escolar desenvolvido em Laravel, vis
 
 ### 2. CRUD de Usuários
 
--   [ ] Implementar CRUD completo para Alunos (StudentController)
--   [x] Implementar CRUD completo para Professores (TeacherController)
--   [ ] Implementar CRUD completo para Secretária (SecretaryController)
--   [ ] Implementar CRUD completo para Usuários (UserController)
+-   [ ] Implementar CRUD completo para Alunos (StudentController) - Controller criado, mas métodos precisam ser implementados
+-   [x] Implementar CRUD completo para Professores (TeacherController) - ✅ CRUD completo via API (findAll, find, newTeacher, update, desactive, active)
+-   [ ] Implementar CRUD completo para Secretária (SecretaryController) - Controller criado, métodos básicos implementados
+-   [ ] Implementar CRUD completo para Usuários (UserController) - Controller criado, login implementado
 -   [ ] Adicionar validação de CPF único
 -   [ ] Implementar upload de fotos de perfil
 
@@ -75,6 +76,8 @@ Este projeto é um sistema de gerenciamento escolar desenvolvido em Laravel, vis
 
 ### 8. Rotas e Navegação
 
+-   [x] Implementar rotas API para Professores (findAll, find, create, update, desactive, active)
+-   [x] Implementar rotas API para Secretária (find, update, create, desactive, active)
 -   [ ] Completar rotas web para todas as funcionalidades
 -   [ ] Organizar rotas por prefixos (admin, student, teacher)
 -   [ ] Implementar breadcrumbs
@@ -130,14 +133,16 @@ Este projeto é um sistema de gerenciamento escolar desenvolvido em Laravel, vis
 
 ## Prioridades
 
-1. **Alta**: Completar autenticação e CRUD básico
-2. **Média**: Implementar interface frontend completa
-3. **Baixa**: Melhorias de UX e migração do legado
+1. **Alta**: Completar CRUD para Alunos e Secretária, implementar rotas web
+2. **Média**: Implementar interface frontend completa, gestão de cursos/disciplinas
+3. **Baixa**: Melhorias de UX, testes, migração do legado
 
 ## Notas
 
 -   O sistema legado está localizado na pasta `backup/`
+-   API implementada com middleware para roles (secretary, teacher, admin)
 -   Usar DTOs para transferência de dados
 -   Seguir padrões de arquitetura (Repository/Service)
--   Manter consistência com Laravel conventions</content>
+-   Manter consistência com Laravel conventions
+-   Próximo foco: Completar StudentController e implementar views para CRUD</content>
     <parameter name="filePath">c:\projects\redac\todo.md
