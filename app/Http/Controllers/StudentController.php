@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Dtos\NewStudentDto;
 use App\Http\Requests\CreateStudentRequest;
 use App\Repositories\UserRepository;
 use App\Services\StudentService;
@@ -10,39 +11,34 @@ use Symfony\Component\HttpFoundation\Response;
 
 class StudentController extends Controller
 {
-    private StudentService $studentService;
+
+    public function __construct(
+        private StudentService $service
+    ) {
+        $this->service = $service;
+    }
 
     public function findStudent(string $student): Response
     {
         return response(
             content: $this
-                ->studentService
-                ->findStudent(
-                    studentCpf: $student
+                ->service
+                ->find(
+                    $student
                 )
         );
     }
 
     public function createNewStudent(CreateStudentRequest $request): Response
     {
+        $dto = NewStudentDto::make(($request->toArray()));
 
-        $response = $this
-            ->studentService
+        $this
+            ->service
             ->newStudent(
-                student: $request->toDto()
+                $dto->toArray()
             );
 
-        $userResponse = UserService::newUser(
-            [
-                'user' => $request->cpf,
-                'password' => $request->password,
-                'role' => $request->role,
-            ]
-        );
-
-        return response(
-            content: $response,
-            status: 201
-        );
+        return response()->noContent();
     }
 }

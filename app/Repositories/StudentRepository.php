@@ -2,18 +2,14 @@
 
 namespace App\Repositories;
 
-use App\Dtos\NewStudentDto;
 use App\Models\Student;
-use Throwable;
 
 class StudentRepository
 {
 
-    private Student $model;
-
-    public function __construct()
+    public function __construct(private Student $model)
     {
-        $this->model = new Student();
+        $this->model = $model;
     }
 
     public function create(array $data): Student

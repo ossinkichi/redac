@@ -6,74 +6,89 @@ use App\Dtos\ClassDto;
 use App\Dtos\CourseDto;
 use App\Dtos\NewStudentDto;
 use App\Dtos\StudentDto;
+use App\Dtos\UpdateStudentDataDto;
 use App\Exceptions\Exceptions;
+use App\Models\Student;
 use App\Repositories\ClassRepository;
 use App\Repositories\CourseRepository;
 use App\Repositories\StudentRepository;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
+use RuntimeException;
 use Throwable;
 
 class StudentService
 {
+    public function __construct(
+        private StudentRepository $studentRepository,
+        private ClassRepository $classRepository,
+        private CourseRepository $courseRepository
+    ) {
+        $this->studentRepository = $studentRepository;
+        $this->classRepository = $classRepository;
+        $this->courseRepository = $courseRepository;
+    }
 
-    private StudentRepository $studentRepository;
-    private ClassRepository $classRepository;
-    private CourseRepository $courseRepository;
-
-    public function findStudent(string $studentCpf): array
+    public function findAll(): Collection
     {
-        try {
-            $student = $this->studentRepository->findByCpf($studentCpf);
-            $studentDto = $this->formarterDataStudent($student);
+        $response = $this->studentRepository->findAll();
 
-            return $studentDto->toJson();
-        } catch (\Throwable $th) {
-            return throw Exceptions::fromMessage($th);
+        if (!$response->empty()) {
+            return  $response->map(function ($studens) {
+                return $this->aditionalInfo($studens);
+            });
         }
+        return $response;
     }
 
-    protected function getClassStudent(int $classId): ClassDto
+    public function find(string $cpf): Student
     {
-        return ClassDto::make(
-            $this->classRepository->find($classId)->toArray()
-        );
+        $student = $this->studentRepository->findByCpf($cpf);
+
+        !$student && throw new ModelNotFoundException('Estudante não encontrado');
+
+        return $this->aditionalInfo($student);
     }
 
-    protected function getCourseStudent(int $courseId): CourseDto
+    private function aditionalInfo(Student $student): Student
     {
-        return CourseDto::make(
-            $this->courseRepository->find($courseId)->toArray()
-        );
+        $student['class_id'] = $this->classRepository->find($student['class_id']);
+        $student['course_id'] = $this->courseRepository->find($student['course_id']);
+
+        return $student;
     }
 
-    private function formarterDataStudent($student): StudentDto
+    public function newStudent(array $student): ?Student
     {
-        $student['class_id'] = $this->getClassStudent($student['class_id'])->toJson();
-        $student['course_id'] = $this->getClassStudent($student['course_id'])->toJson();
 
-        return StudentDto::make($student);
+        DB::transaction(function () use ($student, &$response) {
+
+            $response =  $this->studentRepository->create($student);
+
+            UserService::newUser(
+                [
+                    'user' => $student['cpf'],
+                    'password' => $student['date_of_birth'],
+                    'role' => 'student',
+                ]
+            );
+        });
+
+        return $response;
     }
 
-    public function newStudent(NewStudentDto $student): StudentDto
+    public function update(array $data)
     {
-        try {
-            $response =  $this->studentRepository->create([
-                'full_name' => $student->full_name,
-                'registration' => $student->registration,
-                'cpf' => $student->cpf,
-                'gender' => $student->gender,
-                'date_of_birth' => $student->date_of_birth,
-                'address' => $student->address,
-                'email' => $student->email,
-                'phone_number' => $student->phone_number,
-                'course_id' => $student->course_id,
-                'class_id' => $student->class_id,
-                'is_active' => $student->is_active,
-                'formed' => $student->formed,
-            ]);
+        $student = $this->studentRepository->findByCpf($data['cpf']);
 
-            return $this->formarterDataStudent($response->toArray());
-        } catch (Throwable $th) {
-            return throw Exceptions::fromMessage($th);
-        }
+        !$student && throw new ModelNotFoundException('Estudante não encontrado');
+
+        unset($data['cpf']);
+        $student->update($data);
+
+        !$student->wasChanged() && throw new RuntimeException('Nenhum dado foi alterado.');
+
+        return $student;
     }
 }

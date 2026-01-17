@@ -37,4 +37,9 @@ class NewStudentDto
             formed: $data['formed'] ?? false
         );
     }
+
+    public function toArray(): array
+    {
+        return \get_object_vars($this);
+    }
 }

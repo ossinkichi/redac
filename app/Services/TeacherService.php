@@ -65,6 +65,9 @@ class TeacherService
         !$data['cpf'] && throw new \InvalidArgumentException("CPF é obrigatório para editar um professor.");
 
         $teacher = $this->find($data['cpf']);
+
+        !$teacher && throw new ModelNotFoundException("Professor não encontrado.");
+
         unset($data['cpf']);
         $teacher->update($data);
 

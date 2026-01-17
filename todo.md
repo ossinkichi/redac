@@ -10,10 +10,12 @@ Este projeto é um sistema de gerenciamento escolar desenvolvido em Laravel, vis
 - ✅ Models e Migrations criadas para todas as entidades principais (User, Student, Teacher, Secretary, Course, Subject, Class, Note, Frequency, Content, etc.)
 - ✅ Repositories implementados (Student, Teacher, Secretary, User, Course, Class)
 - ✅ Services implementados (Student, Teacher, Secretary, User)
-- ✅ Controllers criados (TeacherController com CRUD completo, StudentController, SecretaryController, UserController)
-- ✅ Autenticação básica (login) implementada
+- ✅ Controllers criados (TeacherController com CRUD completo, StudentController parcial, SecretaryController quase completo, UserController com autenticação)
+- ✅ Autenticação básica (login, logout) implementada
 - ✅ API básica implementada com rotas para Professores e Secretária
 - ✅ Views básicas (login, register, home)
+- ✅ Middlewares para roles implementados (EnsureIsAdmin, EnsureIsSecretary, EnsureIsTeacher)
+- ✅ DTOs criados para criação e atualização de entidades
 
 ## TODOs Pendentes
 
