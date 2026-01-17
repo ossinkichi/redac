@@ -13,7 +13,6 @@ class UpdateAllDataOfTeacherDto
         public string $email,
         public string $phone_number,
         public int $specialization_subject_id,
-        public bool $is_active = true,
     ) {}
 
     public static function make(array $data): self
@@ -27,7 +26,6 @@ class UpdateAllDataOfTeacherDto
             email: $data['email'],
             phone_number: $data['phone_number'],
             specialization_subject_id: $data['specialization_subject_id'],
-            is_active: $data['is_active'] ?? true,
         );
     }
 

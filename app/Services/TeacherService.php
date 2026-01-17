@@ -7,6 +7,7 @@ use App\Repositories\TeacherRepository;
 use DomainException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 
 class TeacherService
@@ -41,13 +42,22 @@ class TeacherService
         return $teacher;
     }
 
-    public function create(array $data): Teacher
+    public function create(array $data): ?Teacher
     {
-        $created = $this->repository->newTeacher($data);
+        DB::transaction(function () use ($data, &$createdTeacher) {
+            $createdTeacher = $this->repository->newTeacher($data);
 
-        (!$created instanceof Teacher || !$created->exists) && throw new DomainException("Erro ao criar professor.");
+            (!$createdTeacher instanceof Teacher || !$createdTeacher->exists) && throw new DomainException("Erro ao criar professor.");
 
-        return $created;
+            UserService::newUser([
+                'user' => $data['cpf'],
+                'password' => $data['date_of_birth'],
+                'role' => 'teacher'
+            ]);
+        });
+
+
+        return $createdTeacher;
     }
 
     public function update(array $data): Teacher

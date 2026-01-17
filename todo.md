@@ -12,7 +12,7 @@ Este projeto é um sistema de gerenciamento escolar desenvolvido em Laravel, vis
 -   ✅ Autenticação básica (login) implementada
 -   ✅ API básica para estudantes
 -   ✅ Views básicas (login, register, home)
--   🔄 CRUD para Professores em desenvolvimento (TeacherController)
+-   ✅ CRUD para Professores implementado (TeacherController)
 
 ## TODOs Pendentes
 
@@ -28,7 +28,7 @@ Este projeto é um sistema de gerenciamento escolar desenvolvido em Laravel, vis
 ### 2. CRUD de Usuários
 
 -   [ ] Implementar CRUD completo para Alunos (StudentController)
--   [ ] Implementar CRUD completo para Professores (TeacherController)
+-   [x] Implementar CRUD completo para Professores (TeacherController)
 -   [ ] Implementar CRUD completo para Secretária (SecretaryController)
 -   [ ] Implementar CRUD completo para Usuários (UserController)
 -   [ ] Adicionar validação de CPF único
