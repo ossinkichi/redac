@@ -36,8 +36,8 @@ class TeacherController extends Controller
     public function find(string $cpf): JsonResource
     {
         try {
-            $data = $this->service->find($cpf);
-            return new TeacherResource($data);
+            $response = $this->service->find($cpf);
+            return new TeacherResource($response);
         } catch (Throwable $th) {
             throw Exceptions::fromMessage($th);
         }
@@ -49,9 +49,7 @@ class TeacherController extends Controller
             $dto = CreateTeacherDto::make($teacherData->toArray());
             $this->service->create($dto->toArray());
 
-            return response(content: [
-                'message' => 'Professor criado com sucesso.'
-            ], status: 200);
+            return response()->noContent();
         } catch (\Throwable $th) {
             throw Exceptions::fromMessage($th);
         }
@@ -63,9 +61,7 @@ class TeacherController extends Controller
             $dto = UpdateAllDataOfTeacherDto::make($data->toArray());
             $this->service->update($dto->toArray());
 
-            return \response(content: [
-                'message' => 'Dados do professor atualizados com sucesso.',
-            ], status: 200);
+            return \response()->noContent();
         } catch (\Throwable $th) {
             throw Exceptions::fromMessage($th);
         }
