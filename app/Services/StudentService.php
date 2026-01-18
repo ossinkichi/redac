@@ -2,12 +2,6 @@
 
 namespace App\Services;
 
-use App\Dtos\ClassDto;
-use App\Dtos\CourseDto;
-use App\Dtos\NewStudentDto;
-use App\Dtos\StudentDto;
-use App\Dtos\UpdateStudentDataDto;
-use App\Exceptions\Exceptions;
 use App\Models\Student;
 use App\Repositories\ClassRepository;
 use App\Repositories\CourseRepository;
@@ -16,7 +10,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
-use Throwable;
 
 class StudentService
 {
@@ -59,12 +52,14 @@ class StudentService
         return $student;
     }
 
-    public function newStudent(array $student): ?Student
+    public function create(array $student): ?Student
     {
 
         DB::transaction(function () use ($student, &$response) {
 
             $response =  $this->studentRepository->create($student);
+
+            $response->exists() || throw new RuntimeException('Erro ao criar estudante.');
 
             UserService::newUser(
                 [
