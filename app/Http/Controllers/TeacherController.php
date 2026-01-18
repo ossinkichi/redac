@@ -17,9 +17,8 @@ use Throwable;
 
 class TeacherController extends Controller
 {
-    private TeacherService $service;
 
-    public function __construct(TeacherService $service)
+    public function __construct(private TeacherService $service)
     {
         $this->service = $service;
     }
@@ -43,7 +42,7 @@ class TeacherController extends Controller
         }
     }
 
-    public function newTeacher(CreateTeacherRequest $teacherData): Response
+    public function register(CreateTeacherRequest $teacherData): Response
     {
         try {
             $dto = CreateTeacherDto::make($teacherData->toArray());

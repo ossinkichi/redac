@@ -7,6 +7,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\EnsureIsAdmin;
 use App\Http\Middleware\EnsureIsSecretary;
+use App\Http\Middleware\EnsureIsStudent;
 use App\Http\Middleware\EnsureIsTeacher;
 
 
@@ -25,7 +26,7 @@ Route::middleware(['auth', EnsureIsSecretary::class, EnsureIsAdmin::class])->gro
     // Teacher Routes
     Route::get('/teachers', [TeacherController::class, 'findAll'])->name('teachers.all');
     Route::get('/teacher/{cpf}', [TeacherController::class, 'find'])->name('teacher.find');
-    Route::post('/teacher/create', [TeacherController::class, 'newTeacher'])->name('teacher.create');
+    Route::post('/teacher/create', [TeacherController::class, 'register'])->name('teacher.create');
     Route::put('/teacher/update', [TeacherController::class, 'update'])->name('teacher.update');
     Route::patch('/teacher/desactive', [TeacherController::class, 'desactive'])->name('teacher.active');
     Route::patch('/teacher/active', [TeacherController::class, 'active'])->name('teacher.active');
@@ -36,6 +37,9 @@ Route::middleware(['auth', EnsureIsTeacher::class, EnsureIsAdmin::class])->group
     Route::get('/teacher/{cpf}', [TeacherController::class, 'find'])->name('teacher.find');
     Route::put('/teacher/simpleupdate', [TeacherController::class, 'simpleUpdate'])->name('teacher.simple-update');
 });
+
+// Student Routes Access
+Route::middleware(['auth', EnsureIsStudent::class, EnsureIsSecretary::class])->group(function () {});
 
 // Admin Routes Access
 Route::middleware(['auth', EnsureIsAdmin::class])->group(function () {

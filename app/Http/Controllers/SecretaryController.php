@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Dtos\CreateSecretaryEmployeDto;
+use App\Dtos\UpdateSecretaryEmployerDto;
 use App\Exceptions\Exceptions;
 use App\Http\Requests\createsecretaryEmployerRequest;
-use App\Http\Requests\UpdateAllDataSecretaryEmployerRequest;
+use App\Http\Requests\UpdateSecretaryEmployerRequest;
 use App\Http\Resources\SecretaryResource;
 use App\Services\SecretaryService;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -20,20 +21,20 @@ class SecretaryController extends Controller
         $this->service = $service;
     }
 
-    public function find(string $cpf): JsonResource
+    public function findAll(): JsonResource
     {
         try {
-            $response = $this->service->find($cpf);
-            return new SecretaryResource($response);
+            return SecretaryResource::collection($this->service->findAll());
         } catch (Throwable $th) {
             throw Exceptions::fromMessage($th);
         }
     }
 
-    public function findAll(): JsonResource
+    public function find(string $cpf): JsonResource
     {
         try {
-            return SecretaryResource::collection($this->service->findAll());
+            $response = $this->service->find($cpf);
+            return new SecretaryResource($response);
         } catch (Throwable $th) {
             throw Exceptions::fromMessage($th);
         }
@@ -51,10 +52,10 @@ class SecretaryController extends Controller
         }
     }
 
-    public function update(UpdateAllDataSecretaryEmployerRequest $data)
+    public function update(UpdateSecretaryEmployerRequest $data)
     {
         try {
-            $dto = CreateSecretaryEmployeDto::make($data->toArray());
+            $dto = UpdateSecretaryEmployerDto::make($data->toArray());
             $this->service->update($dto->toArray());
 
             return \response()->noContent();
