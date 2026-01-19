@@ -3,25 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\Exceptions;
-use App\Http\Resources\CourseResource;
-use App\Services\CourseService;
+use App\Services\ClassService;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
-use PhpParser\Node\Expr\FuncCall;
 use Throwable;
 
-class CourseController extends Controller
+class ClassController extends Controller
 {
+
     public function __construct(
-        private CourseService $service
+        private ClassService $service
     ) {
         $this->service = $service;
     }
-
-    public function findAll(): JsonResource
+    public function findAll()
     {
         try {
-            return CourseResource::collection($this->service->findAll());
+            return ($this->service->findAll());
         } catch (Throwable $th) {
             throw Exceptions::fromMessage($th);
         }

@@ -35,12 +35,16 @@ class CourseService
         return $response;
     }
 
-    public function update(array $data)
+    public function update(array $data): Course
     {
         $course = $this->find($data['id']);
 
         !$course && new ModelNotFoundException('Curso não encontrado.');
 
         $course->update($data);
+
+        !$course->wasChanged() && new ModelNotFoundException('Nào foi possivel editar o curso');
+
+        return $course;
     }
 }
