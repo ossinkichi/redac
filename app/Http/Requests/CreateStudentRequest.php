@@ -56,22 +56,4 @@ class CreateStudentRequest extends FormRequest
             'cpf.cpf' => 'O CPF informado não é válido.',
         ];
     }
-
-    public function toDto(): NewStudentDto
-    {
-        return new NewStudentDto(
-            full_name: $this->input('full_name'),
-            registration: $this->input('registration'),
-            cpf: preg_replace('/\D/', '', $this->input('cpf')),
-            gender: $this->input('gender'),
-            date_of_birth: $this->input('date_of_birth'),
-            address: $this->input('address'),
-            email: $this->input('email'),
-            phone_number: preg_replace('/\D/', '', $this->input('phone_number')) ?? $this->input('phone_number'),
-            course_id: $this->input('course_id'),
-            class_id: $this->input('class_id'),
-            is_active: $this->input('is_active', true),
-            formed: $this->input('formed', false),
-        );
-    }
 }

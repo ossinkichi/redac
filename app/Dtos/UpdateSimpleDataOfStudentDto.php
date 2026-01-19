@@ -1,16 +1,29 @@
 <?php
+
 namespace App\Dtos;
 
 class UpdateSimpleDataOfStudentDto
 {
     public function __construct(
-        // Define your DTO properties here
+        public string $full_name,
+        public string $registration,
+        public string $gender,
+        public string $date_of_birth,
+        public string $address,
+        public string $email,
+        public ?string $phone_number = '',
     ) {}
 
     public static function make(array $data): self
     {
         return new self(
-            // Map array data to DTO properties here
+            full_name: $data['full_name'],
+            registration: $data['registration'],
+            gender: $data['gender'],
+            date_of_birth: $data['date_of_birth'],
+            address: $data['address'],
+            email: $data['email'],
+            phone_number: $data['phone_number'] ?? '',
         );
     }
 
