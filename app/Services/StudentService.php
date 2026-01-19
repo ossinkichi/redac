@@ -16,11 +16,11 @@ class StudentService
     public function __construct(
         private StudentRepository $studentRepository,
         private ClassRepository $classRepository,
-        private CourseRepository $courseRepository
+        private CourseService $courseService
     ) {
         $this->studentRepository = $studentRepository;
         $this->classRepository = $classRepository;
-        $this->courseRepository = $courseRepository;
+        $this->courseService = $courseService;
     }
 
     public function findAll(): Collection
@@ -47,7 +47,7 @@ class StudentService
     private function aditionalInfo(Student $student): Student
     {
         $student['class_id'] = $this->classRepository->find($student['class_id']);
-        $student['course_id'] = $this->courseRepository->find($student['course_id']);
+        $student['course_id'] = $this->courseService->find($student['course_id']);
 
         return $student;
     }
