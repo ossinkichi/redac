@@ -30,16 +30,33 @@ Route::middleware(['auth', EnsureIsSecretary::class, EnsureIsAdmin::class])->gro
     Route::put('/teacher/update', [TeacherController::class, 'update'])->name('teacher.update');
     Route::patch('/teacher/desactive', [TeacherController::class, 'desactive'])->name('teacher.active');
     Route::patch('/teacher/active', [TeacherController::class, 'active'])->name('teacher.active');
+
+    // Student Routes
+    Route::post('/student/register', [StudentController::class, 'register'])->name('student.create');
+    Route::get('/students', [StudentController::class, 'findAll'])->name('student.all');
+    Route::get('/student/{cpf}', [StudentController::class, 'find'])->name('student.find');
+    Route::put('/student/update', [StudentController::class, 'updateAllData'])->name('student.update');
+    Route::patch('/student/active/{cpf}', [StudentController::class, 'active'])->name('student.active');
+    Route::patch('/student/desactive/{cpf}', [StudentController::class, 'desactive'])->name('student.desactive');
+    Route::patch('/student/formed/{cpf}', [StudentController::class, 'formed'])->name('student.formed');
 });
 
 // Teacher Routes Access
 Route::middleware(['auth', EnsureIsTeacher::class, EnsureIsAdmin::class])->group(function () {
+    // Teacher Routes
     Route::get('/teacher/{cpf}', [TeacherController::class, 'find'])->name('teacher.find');
     Route::put('/teacher/simpleupdate', [TeacherController::class, 'simpleUpdate'])->name('teacher.simple-update');
+
+    // Student Routes
+    Route::patch('/student/formed/{cpf}', [StudentController::class, 'formed'])->name('student.formed');
 });
 
 // Student Routes Access
-Route::middleware(['auth', EnsureIsStudent::class, EnsureIsSecretary::class])->group(function () {});
+Route::middleware(['auth', EnsureIsStudent::class, EnsureIsAdmin::class])->group(function () {
+    // Student Routes
+    Route::get('/student/{cpf}', [StudentController::class, 'find'])->name('student.find');
+    Route::put('/student/SimpleUp', [StudentController::class, 'simpleUpdate'])->name('student.simpleUp');
+});
 
 // Admin Routes Access
 Route::middleware(['auth', EnsureIsAdmin::class])->group(function () {

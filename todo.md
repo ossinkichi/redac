@@ -10,36 +10,36 @@ Este projeto é um sistema de gerenciamento escolar desenvolvido em Laravel, vis
 - ✅ Models e Migrations criadas para todas as entidades principais (User, Student, Teacher, Secretary, Course, Subject, Class, Note, Frequency, Content, etc.)
 - ✅ Repositories implementados (Student, Teacher, Secretary, User, Course, Class)
 - ✅ Services implementados (Student, Teacher, Secretary, User)
-- ✅ Controllers criados (TeacherController com CRUD completo, StudentController parcial, SecretaryController quase completo, UserController com autenticação)
+- ✅ Controllers criados (TeacherController com CRUD completo, StudentController com CRUD completo, SecretaryController completo, UserController com autenticação)
 - ✅ Autenticação básica (login, logout) implementada
 - ✅ API básica implementada com rotas para Professores e Secretária
 - ✅ Views básicas (login, register, home)
-- ✅ Middlewares para roles implementados (EnsureIsAdmin, EnsureIsSecretary, EnsureIsTeacher)
+- ✅ Middlewares para roles implementados (EnsureIsAdmin, EnsureIsSecretary, EnsureIsTeacher, EnsureIsStudent)
 - ✅ DTOs criados para criação e atualização de entidades
 
 ## TODOs Pendentes
 
 ### 1. Autenticação e Autorização
 
-- [ ] Completar implementação do registro de usuários (UserController::AuthenticateRegister)
-- [ ] Implementar logout completo
-- [ ] Adicionar middleware para proteção de rotas
+- [x] Completar implementação do registro de usuários (UserController::register)
+- [x] Implementar logout completo
+- [x] Adicionar middleware para proteção de rotas
 - [ ] Implementar recuperação de senha
-- [ ] Adicionar roles e permissões (admin, professor, aluno, secretária)
+- [x] Adicionar roles e permissões (admin, professor, aluno, secretária)
 - [ ] Implementar autenticação via API (JWT ou Sanctum)
 
 ### 2. CRUD de Usuários
 
-- [ ] Implementar CRUD completo para Alunos (StudentController) - Controller criado, mas métodos precisam ser implementados
+- [x] Implementar CRUD completo para Alunos (StudentController) - ✅ CRUD completo via API (findAll, find, register, updateAllData, simpleUpdate, active, desactive, formed)
 - [x] Implementar CRUD completo para Professores (TeacherController) - ✅ CRUD completo via API (findAll, find, newTeacher, update, desactive, active)
-- [ ] Implementar CRUD completo para Secretária (SecretaryController) - Controller criado, métodos básicos implementados
-- [ ] Implementar CRUD completo para Usuários (UserController) - Controller criado, login implementado
+- [ ] Implementar CRUD completo para Secretária (SecretaryController) - adicionar delete se necessário
+- [ ] Implementar CRUD completo para Usuários (UserController) - adicionar CRUD além de login
 - [ ] Adicionar validação de CPF único
 - [ ] Implementar upload de fotos de perfil
 
 ### 3. Gestão de Cursos e Disciplinas
 
-- [ ] Implementar CRUD para Cursos (CourseController)
+- [ ] Implementar CRUD para Cursos (CourseController) - Controller criado, mas métodos precisam ser implementados
 - [ ] Implementar CRUD para Disciplinas (SubjectController)
 - [ ] Implementar associação Curso-Disciplina (CourseSubject)
 - [ ] Implementar listagem de disciplinas por curso
@@ -80,6 +80,7 @@ Este projeto é um sistema de gerenciamento escolar desenvolvido em Laravel, vis
 
 - [x] Implementar rotas API para Professores (findAll, find, create, update, desactive, active)
 - [x] Implementar rotas API para Secretária (find, update, create, desactive, active)
+- [x] Implementar rotas API para Alunos (findAll, find, create, update, active, desactive, formed)
 - [ ] Completar rotas web para todas as funcionalidades
 - [ ] Organizar rotas por prefixos (admin, student, teacher)
 - [ ] Implementar breadcrumbs
@@ -135,16 +136,16 @@ Este projeto é um sistema de gerenciamento escolar desenvolvido em Laravel, vis
 
 ## Prioridades
 
-1. **Alta**: Completar CRUD para Alunos e Secretária, implementar rotas web
-2. **Média**: Implementar interface frontend completa, gestão de cursos/disciplinas
+1. **Alta**: Implementar CRUD completo para CourseController, criar SubjectController, implementar rotas web, completar CRUD para Secretária se necessário
+2. **Média**: Implementar interface frontend completa, gestão de classes, notas e frequência
 3. **Baixa**: Melhorias de UX, testes, migração do legado
 
 ## Notas
 
 - O sistema legado está localizado na pasta `backup/`
-- API implementada com middleware para roles (secretary, teacher, admin)
+- API implementada com middleware para roles (secretary, teacher, admin, student)
 - Usar DTOs para transferência de dados
 - Seguir padrões de arquitetura (Repository/Service)
 - Manter consistência com Laravel conventions
-- Próximo foco: Completar StudentController e implementar views para CRUD</content>
+- Próximo foco: Implementar métodos no CourseController, criar SubjectController, e expandir views</content>
   <parameter name="filePath">c:\projects\redac\todo.md
