@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\Exceptions;
 use App\Services\ClassService;
-use Illuminate\Http\Request;
 use Throwable;
 
 class ClassController extends Controller

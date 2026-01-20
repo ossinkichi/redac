@@ -3,12 +3,23 @@
 namespace App\Repositories;
 
 use App\Models\ClassModel;
+use Illuminate\Support\Collection;
 
 class ClassRepository
 {
 
-    public function find($classId): ClassModel
+    public function findAll(): Collection
     {
-        return ClassModel::where('id', $classId)->first();
+        return ClassModel::all();
+    }
+
+    public function find($id): ClassModel
+    {
+        return ClassModel::where('id', $id)->first();
+    }
+
+    public function create(array $data): ClassModel
+    {
+        return ClassModel::create($data);
     }
 }

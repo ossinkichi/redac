@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Course;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 
 class CourseRepository
 {
