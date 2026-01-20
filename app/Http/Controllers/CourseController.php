@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Exceptions\Exceptions;
 use App\Http\Resources\CourseResource;
 use App\Services\CourseService;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use PhpParser\Node\Expr\FuncCall;
 use Throwable;
 
 class CourseController extends Controller
