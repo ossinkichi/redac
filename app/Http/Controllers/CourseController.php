@@ -27,9 +27,10 @@ class CourseController extends Controller
         }
     }
 
-    public function find()
+    public function find(int $id)
     {
         try {
+            return new CourseResource($this->service->find($id));
         } catch (Throwable $th) {
             throw Exceptions::fromMessage($th);
         }
