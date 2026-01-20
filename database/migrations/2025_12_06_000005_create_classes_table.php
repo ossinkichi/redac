@@ -19,6 +19,7 @@ return new class extends Migration
                 $table->string('course');
                 $table->string('shift');
                 $table->string('room');
+                $table->boolean('status')->default(true);
                 $table->timestamps();
             }
         );
