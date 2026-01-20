@@ -56,4 +56,31 @@ class CourseController extends Controller
             throw Exceptions::fromMessage($th);
         }
     }
+
+    public function active($id)
+    {
+        try {
+            $this->service->update([
+                'id' => $id,
+                'status' => true
+            ]);
+
+            return response()->noContent();
+        } catch (Throwable $th) {
+            throw Exceptions::fromMessage($th);
+        }
+    }
+    public function desactive($id)
+    {
+        try {
+            $this->service->update([
+                'id' => $id,
+                'status' => false
+            ]);
+
+            return response()->noContent();
+        } catch (Throwable $th) {
+            throw Exceptions::fromMessage($th);
+        }
+    }
 }
