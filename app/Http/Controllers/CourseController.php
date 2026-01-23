@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
+use App\Dtos\CreateCourseDto;
 use App\Exceptions\Exceptions;
+use App\Http\Requests\CreateCourseRequest;
 use App\Http\Resources\CourseResource;
 use App\Services\CourseService;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -26,7 +30,7 @@ class CourseController extends Controller
         }
     }
 
-    public function find(int $id)
+    public function find(int $id): JsonResource
     {
         try {
             return new CourseResource($this->service->find($id));
@@ -35,10 +39,11 @@ class CourseController extends Controller
         }
     }
 
-    public function register(array $data): Response
+    public function register(CreateCourseRequest $data): Response
     {
         try {
-            $this->service->register($data);
+            $dto = CreateCourseDto::make($data->toArray());
+            $this->service->register($dto->toArray());
 
             return response()->noContent();
         } catch (Throwable $th) {
@@ -57,7 +62,7 @@ class CourseController extends Controller
         }
     }
 
-    public function active($id)
+    public function active(int $id): Response
     {
         try {
             $this->service->update([
@@ -70,7 +75,8 @@ class CourseController extends Controller
             throw Exceptions::fromMessage($th);
         }
     }
-    public function desactive($id)
+
+    public function desactive(int $id): Response
     {
         try {
             $this->service->update([

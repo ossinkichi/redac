@@ -14,9 +14,9 @@ class ClassDisciplineTeacher extends Model
 
     protected $fillable = [
         'id',
+        'teacher_id',
         'class_id',
         'discipline_id',
-        'teacher_id',
         'created_at',
     ];
 

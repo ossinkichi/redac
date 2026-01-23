@@ -41,6 +41,7 @@ class CourseService
 
         !$course && new ModelNotFoundException('Curso não encontrado.');
 
+        unset($data['id']);
         $course->update($data);
 
         !$course->wasChanged() && new ModelNotFoundException('Nào foi possivel editar o curso');
