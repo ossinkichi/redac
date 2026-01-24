@@ -15,6 +15,7 @@ class ClassModel extends Model
     protected $fillable = [
         'id',
         'series',
+        'course',
         'shift',
         'room',
         'created_at'

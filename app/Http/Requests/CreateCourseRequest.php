@@ -22,7 +22,15 @@ class CreateCourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string',
+            'description' => 'sometimes|string',
+        ];
+    }
+
+    public function message(): array
+    {
+        return [
+            'name.required' => 'Nome do curso não informado.'
         ];
     }
 }

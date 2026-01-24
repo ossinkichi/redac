@@ -2,48 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CourseSubject;
-use Illuminate\Http\Request;
+use App\Dtos\CreateCourseSubjectDto;
+use App\Http\Requests\CreateCourseSubjectRequest;
+use App\Http\Requests\CreateSubjectRequest;
+use App\Http\Resources\CourseSubjectResource;
+use App\Services\CourseSubjectService;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Symfony\Component\HttpFoundation\Response;
 
 class CourseSubjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function __construct(
+        private readonly CourseSubjectService $service
+    ) {}
+
+    public function index(): JsonResource
     {
-        //
+        return CourseSubjectResource::collection($this->service->findAll());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(CreateCourseSubjectRequest $request): Response
     {
-        //
+        $dto = CreateCourseSubjectDto::make($request->toArray());
+
+        $this->service->register($dto->toArray());
+
+        return \response()->noContent();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(CourseSubject $courseSubject)
+    public function destroy(int $id): Response
     {
-        //
-    }
+        $this->service->delete($id);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, CourseSubject $courseSubject)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(CourseSubject $courseSubject)
-    {
-        //
+        return \response()->noContent();
     }
 }

@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Student;
 use App\Repositories\ClassRepository;
-use App\Repositories\CourseRepository;
 use App\Repositories\StudentRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

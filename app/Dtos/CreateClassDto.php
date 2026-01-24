@@ -2,20 +2,22 @@
 
 namespace App\Dtos;
 
-class CreateClassDisciplineTeacherDto
+class CreateClassDto
 {
     public function __construct(
-        public int $teacher_id,
-        public int $class_id,
-        public int $discipline_id,
+        public int $series,
+        public string $course,
+        public string $shift,
+        public string $room,
     ) {}
 
     public static function make(array $data): self
     {
         return new self(
-            teacher_id: $data['teacher_id'],
-            class_id: $data['class_id'],
-            discipline_id: $data['discipline_id'],
+            series: $data['series'],
+            course: $data['course'],
+            shift: $data['shift'],
+            room: $data['room'],
         );
     }
 

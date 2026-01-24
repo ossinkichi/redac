@@ -23,7 +23,11 @@ class CourseService
 
     public function find(int $id): Course
     {
-        return $this->repository->find($id);
+        $response = $this->repository->find($id);
+
+        !$response && new ModelNotFoundException('Curso não encontrada.');
+
+        return $response;
     }
 
     public function register(array $data): Course

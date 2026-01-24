@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAllDataOfSubjectRequest extends FormRequest
+class CreateCourseSubjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,16 +22,19 @@ class UpdateAllDataOfSubjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique:subjects,name',
-            'description' => 'sometimes|string'
+            'course_id' => 'required|integer|exists:courses',
+            'discipline_id' => 'required|integer|exists:subjects',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'name.required' => 'Nome não informado.',
-            'name.unique' => 'Materia já existe.'
+            'course_id.required' => 'Curso não informado.',
+            'course_id.exists' => 'Curso não encontrado.',
+
+            'discipline_id.required' => 'Disciplina não informada.',
+            'discipline_id.exists' => 'Disciplina não encntrada.'
         ];
     }
 }

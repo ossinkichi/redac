@@ -16,12 +16,9 @@ use Throwable;
 class SecretaryController extends Controller
 {
 
-    public function __construct(private SecretaryService $service)
-    {
-        $this->service = $service;
-    }
+    public function __construct(private SecretaryService $service) {}
 
-    public function findAll(): JsonResource
+    public function index(): JsonResource
     {
         try {
             return SecretaryResource::collection($this->service->findAll());
@@ -30,7 +27,7 @@ class SecretaryController extends Controller
         }
     }
 
-    public function find(string $cpf): JsonResource
+    public function show(string $cpf): JsonResource
     {
         try {
             $response = $this->service->find($cpf);
@@ -40,7 +37,7 @@ class SecretaryController extends Controller
         }
     }
 
-    public function register(CreatesecretaryEmployerRequest $data): Response
+    public function store(CreatesecretaryEmployerRequest $data): Response
     {
         try {
             $dto = CreateSecretaryEmployeDto::make($data->toArray());

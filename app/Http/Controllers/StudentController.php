@@ -20,11 +20,9 @@ class StudentController extends Controller
 
     public function __construct(
         private StudentService $service
-    ) {
-        $this->service = $service;
-    }
+    ) {}
 
-    public function findAll(): JsonResource
+    public function index(): JsonResource
     {
         try {
             return
@@ -36,7 +34,7 @@ class StudentController extends Controller
         }
     }
 
-    public function find(string $cpf): JsonResource
+    public function show(string $cpf): JsonResource
     {
         try {
             return new StudentResource($this->service->find($cpf));
@@ -45,7 +43,7 @@ class StudentController extends Controller
         }
     }
 
-    public function register(CreateStudentRequest $request): Response
+    public function store(CreateStudentRequest $request): Response
     {
         $dto = NewStudentDto::make(($request->toArray()));
 

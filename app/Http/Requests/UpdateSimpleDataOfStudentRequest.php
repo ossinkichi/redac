@@ -22,6 +22,7 @@ class UpdateSimpleDataOfStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'cpf' => 'required|integer|exists:students,cpf',
             'full_name' => 'required|string|max:255|min:15',
             'date_of_birth' => 'required|date',
             'address' => 'required|string|max:255|min:10',
@@ -33,6 +34,9 @@ class UpdateSimpleDataOfStudentRequest extends FormRequest
     public function messages()
     {
         return [
+            'cpf.required' => 'Aluno não informado',
+            'cpf.exists' => 'Aluno não encontrado',
+
             'full_name.required' => 'Campo nome é obrigatório.',
             'full_name.string' => 'Campo nome deve ser um texto válido.',
             'full_name.max' => 'Campo nome deve ter no máximo 255 caracteres.',

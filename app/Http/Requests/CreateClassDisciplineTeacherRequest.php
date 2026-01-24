@@ -22,7 +22,23 @@ class CreateClassDisciplineTeacherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'teacher_id' => 'required|integer|exists:teachers',
+            'class_id' => 'required|integer|exists:classes',
+            'discipline_id' => 'required|integer|exists:subjects',
+        ];
+    }
+
+    public function message(): array
+    {
+        return [
+            'teacher_id.required' => 'Professor não informado.',
+            'teacher_id.exists' => 'Professor não encontrado.',
+
+            'class_id.required' => 'classe não informado.',
+            'class_id.required' => 'classe não encontrada.',
+
+            'discipline_id.required' => 'disciplina não informado.',
+            'discipline_id.exists' => 'disciplina não encontrado.',
         ];
     }
 }

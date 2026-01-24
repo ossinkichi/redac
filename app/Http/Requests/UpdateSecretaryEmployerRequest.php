@@ -22,6 +22,7 @@ class UpdateSecretaryEmployerRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'cpf' => 'required|integer|exists:teachers,cpf',
             'full_name' => 'required|string',
             'gender' => 'required|string|in:male,female,outher',
             'date_of_birth' => 'required|date',
@@ -34,6 +35,9 @@ class UpdateSecretaryEmployerRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'cpf.required' => 'Professor não informado.',
+            'cpf.exists' => 'Professor não encontrado.',
+
             'full_name.required' => 'O nome completo é obrigatório.',
 
             'gender.required' => 'O gênero é obrigatório.',

@@ -23,7 +23,7 @@ class ClassDisciplineTeacherService
     {
         $response = $this->repository->findByClass($id);
 
-        !$response && new ModelNotFoundException('Não foi possivel fazer a busca.');
+        !$response && throw new ModelNotFoundException('Não foi possivel fazer a busca.');
 
         return $response;
     }
@@ -32,7 +32,7 @@ class ClassDisciplineTeacherService
     {
         $response = $this->repository->findByClass($id);
 
-        !$response && new ModelNotFoundException('Não foi possivel fazer a busca.');
+        !$response && throw new ModelNotFoundException('Não foi possivel fazer a busca.');
 
         return $response;
     }
@@ -42,7 +42,7 @@ class ClassDisciplineTeacherService
 
         $response = $this->repository->create($data);
 
-        !$response->exists && new ModelNotFoundException('Não foi possivel salvar a relaçào.');
+        !$response->exists && throw new ModelNotFoundException('Não foi possivel salvar a relaçào.');
 
         return $response;
     }

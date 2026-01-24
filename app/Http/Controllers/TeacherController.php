@@ -18,12 +18,9 @@ use Throwable;
 class TeacherController extends Controller
 {
 
-    public function __construct(private TeacherService $service)
-    {
-        $this->service = $service;
-    }
+    public function __construct(private TeacherService $service) {}
 
-    public function findAll(): JsonResource
+    public function index(): JsonResource
     {
         try {
             return TeacherResource::collection($this->service->findAll());
@@ -32,7 +29,7 @@ class TeacherController extends Controller
         }
     }
 
-    public function find(string $cpf): JsonResource
+    public function show(string $cpf): JsonResource
     {
         try {
             $response = $this->service->find($cpf);
@@ -42,7 +39,7 @@ class TeacherController extends Controller
         }
     }
 
-    public function register(CreateTeacherRequest $teacherData): Response
+    public function store(CreateTeacherRequest $teacherData): Response
     {
         try {
             $dto = CreateTeacherDto::make($teacherData->toArray());

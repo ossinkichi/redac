@@ -30,17 +30,14 @@ class ClassService
     {
         $response = $this->repository->create($data);
 
-        !$response->exists && new ModelNotFoundException('Não foi possivel registrar a classe');
+        !$response->exists && throw new ModelNotFoundException('Não foi possivel registrar a classe');
 
         return $response;
     }
 
     public function update(array $data): ClassModel
     {
-        $room = $this->find($data['id']);
-
-        !$room && new ModelNotFoundException('Classe não encontrado.');
-
+        $room = $this->repository->find($data['id']);
         $room->update($data);
 
         !$room->wasChanged() && new ModelNotFoundException('Nào foi possivel editar a classe.');

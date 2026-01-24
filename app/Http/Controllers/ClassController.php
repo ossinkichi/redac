@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Dtos\CreateClassDto;
+use App\Dtos\UpdateClassDto;
 use App\Exceptions\Exceptions;
+use App\Http\Requests\CreateClassRequest;
+use App\Http\Requests\UpdateClassRequest;
 use App\Http\Resources\ClassResource;
 use App\Services\ClassService;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -14,10 +18,9 @@ class ClassController extends Controller
 
     public function __construct(
         private ClassService $service
-    ) {
-        $this->service = $service;
-    }
-    public function findAll(): JsonResource
+    ) {}
+
+    public function index(): JsonResource
     {
         try {
             return ClassResource::collection($this->service->findAll());
@@ -26,7 +29,7 @@ class ClassController extends Controller
         }
     }
 
-    public function find($id): JsonResource
+    public function show($id): JsonResource
     {
         try {
             return new JsonResource($this->service->find($id));
@@ -35,23 +38,11 @@ class ClassController extends Controller
         }
     }
 
-    public function register(array $data): Response
+    public function store(CreateClassRequest $data): Response
     {
         try {
-            $dto = $data;
-            $this->service->register($dto);
-
-            return response()->noContent();
-        } catch (Throwable $th) {
-            throw Exceptions::fromMessage($th);
-        }
-    }
-
-    public function updateAllData(array $data): Response
-    {
-        try {
-            $dto = $data;
-            $this->service->update($dto);
+            $dto = CreateClassDto::make($data->toArray());
+            $this->service->register($dto->toArray());
 
             return response()->noContent();
         } catch (Throwable $th) {
@@ -60,32 +51,30 @@ class ClassController extends Controller
     }
 
     public function active($id)
-    { {
-            try {
-                $this->service->update([
-                    'id' => $id,
-                    'status' => true
-                ]);
+    {
+        try {
+            $this->service->update([
+                'id' => $id,
+                'status' => true
+            ]);
 
-                return response()->noContent();
-            } catch (Throwable $th) {
-                throw Exceptions::fromMessage($th);
-            }
+            return response()->noContent();
+        } catch (Throwable $th) {
+            throw Exceptions::fromMessage($th);
         }
     }
 
     public function desactive($id)
-    { {
-            try {
-                $this->service->update([
-                    'id' => $id,
-                    'status' => false
-                ]);
+    {
+        try {
+            $this->service->update([
+                'id' => $id,
+                'status' => false
+            ]);
 
-                return response()->noContent();
-            } catch (Throwable $th) {
-                throw Exceptions::fromMessage($th);
-            }
+            return response()->noContent();
+        } catch (Throwable $th) {
+            throw Exceptions::fromMessage($th);
         }
     }
 }

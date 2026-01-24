@@ -10,7 +10,7 @@ class ClassDisciplineTeacher extends Model
 
     use HasFactory;
 
-    protected $table = 'classes_disciplines_teachers';
+    protected $table = 'class_discipline_teacher';
 
     protected $fillable = [
         'id',

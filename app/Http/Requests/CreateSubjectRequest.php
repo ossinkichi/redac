@@ -22,7 +22,16 @@ class CreateSubjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|unique:subjects,name',
+            'description' => 'sometimes|string'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Nome não informado.',
+            'name.unique' => 'Materia já existe.'
         ];
     }
 }

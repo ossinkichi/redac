@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAllDataOfSubjectRequest extends FormRequest
+class CreateClassRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,16 +22,24 @@ class UpdateAllDataOfSubjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique:subjects,name',
-            'description' => 'sometimes|string'
+            'series' => 'required|integer',
+            'course' => 'required|string',
+            'shift' => 'required|string|in:morning,afternoon,night',
+            'room' => 'required|string'
         ];
     }
 
     public function messages(): array
     {
         return [
-            'name.required' => 'Nome não informado.',
-            'name.unique' => 'Materia já existe.'
+            'series.required' => 'Serie nào informada.',
+
+            'course.required' => 'Curso nào informado.',
+
+            'shif.required' => 'Turno nào informado.',
+            'shif.in' => 'Turno nào informado.',
+
+            'room.required' => 'sala nào informado.',
         ];
     }
 }

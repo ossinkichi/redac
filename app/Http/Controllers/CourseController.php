@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Dtos\CreateCourseDto;
+use App\Dtos\UpdateCourseDto;
 use App\Exceptions\Exceptions;
 use App\Http\Requests\CreateCourseRequest;
+use App\Http\Requests\UpdateCourseRequest;
 use App\Http\Resources\CourseResource;
 use App\Services\CourseService;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -39,10 +41,10 @@ class CourseController extends Controller
         }
     }
 
-    public function register(CreateCourseRequest $data): Response
+    public function store(CreateCourseRequest $request): Response
     {
         try {
-            $dto = CreateCourseDto::make($data->toArray());
+            $dto = CreateCourseDto::make($request->toArray());
             $this->service->register($dto->toArray());
 
             return response()->noContent();
@@ -51,10 +53,11 @@ class CourseController extends Controller
         }
     }
 
-    public function updateAllData(array $data): Response
+    public function updateAllData(UpdateCourseRequest $request): Response
     {
         try {
-            $this->service->update($data);
+            $dto = UpdateCourseDto::make($request->toArray());
+            $this->service->update($dto->toArray());
 
             return response()->noContent();
         } catch (Throwable $th) {

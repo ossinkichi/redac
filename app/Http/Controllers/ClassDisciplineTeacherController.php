@@ -18,7 +18,7 @@ class ClassDisciplineTeacherController extends Controller
         private ClassDisciplineTeacherService $service
     ) {}
 
-    public function findAll(): JsonResource
+    public function index(): JsonResource
     {
         try {
             return ClassDisciplineTeacherResource::collection($this->service->findAll());
@@ -27,7 +27,7 @@ class ClassDisciplineTeacherController extends Controller
         }
     }
 
-    public function findByTeacher(int $id): JsonResource
+    public function showByTeacher(int $id): JsonResource
     {
         try {
             $reponse = $this->service->findByTeacher($id);
@@ -38,7 +38,7 @@ class ClassDisciplineTeacherController extends Controller
         }
     }
 
-    public function findByClass(int $id): JsonResource
+    public function showByClass(int $id): JsonResource
     {
         try {
             $reponse = $this->service->findByClass($id);
@@ -49,7 +49,7 @@ class ClassDisciplineTeacherController extends Controller
         }
     }
 
-    public function register(CreateClassDisciplineTeacherRequest $data): Response
+    public function store(CreateClassDisciplineTeacherRequest $data): Response
     {
         try {
             $dto = CreateClassDisciplineTeacherDto::make($data->toArray());

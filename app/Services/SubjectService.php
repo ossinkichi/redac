@@ -31,11 +31,11 @@ class SubjectService
     public function update(array $data): Subject
     {
         $response = $this->repository->find($data['id']);
-
-        !$response && new ModelNotFoundException('Não foi possivel atualizar.');
-
         unset($data['id']);
         $response->update($data);
+
+        !$response->wasChanged()
+            && throw new ModelNotFoundException('Não foi possivel atualizar.');
 
         return $response;
     }

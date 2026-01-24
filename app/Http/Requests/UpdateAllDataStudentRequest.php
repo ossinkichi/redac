@@ -22,6 +22,7 @@ class UpdateAllDataStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'cpf' => 'required|integer|exists:students,cpf',
             'full_name' => 'required|string|max:255|min:15',
             'registration' => 'required|string|min:10,unique:students,registration',
             'gender' => 'required|string|in:male,female,outher',
@@ -39,6 +40,9 @@ class UpdateAllDataStudentRequest extends FormRequest
     public function messages()
     {
         return [
+            'cpf.required' => 'Aluno não informado',
+            'cpf.exists' => 'Aluno não encontrado',
+
             'full_name.required' => 'Campo nome é obrigatório.',
             'full_name.string' => 'Campo nome deve ser um texto válido.',
             'full_name.max' => 'Campo nome deve ter no máximo 255 caracteres.',

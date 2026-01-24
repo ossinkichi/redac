@@ -5,6 +5,7 @@ namespace App\Dtos;
 class UpdateSimpleDataOfStudentDto
 {
     public function __construct(
+        public int $cpf,
         public string $full_name,
         public string $registration,
         public string $gender,
@@ -17,6 +18,7 @@ class UpdateSimpleDataOfStudentDto
     public static function make(array $data): self
     {
         return new self(
+            cpf: $data['cpf'],
             full_name: $data['full_name'],
             registration: $data['registration'],
             gender: $data['gender'],

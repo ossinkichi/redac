@@ -15,7 +15,7 @@ class ClassRepository
 
     public function find($id): ClassModel
     {
-        return ClassModel::where('id', $id)->first();
+        return ClassModel::findOrFail($id);
     }
 
     public function create(array $data): ClassModel

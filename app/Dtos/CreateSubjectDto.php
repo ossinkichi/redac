@@ -2,25 +2,23 @@
 
 namespace App\Dtos;
 
-class CreateCourseDto
+class CreateSubjectDto
 {
     public function __construct(
         public string $name,
-        public ?string $description = ''
+        public ?string $description = '',
     ) {}
 
     public static function make(array $data): self
     {
         return new self(
             name: $data['name'],
-            description: $data['description'],
+            description: $data['description']
         );
     }
 
     public function toArray(): array
     {
-        return [
-            get_object_vars($this)
-        ];
+        return get_object_vars($this);
     }
 }

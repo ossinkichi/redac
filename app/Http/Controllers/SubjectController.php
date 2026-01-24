@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Dtos\CreateSubjectDto;
+use App\Dtos\UpdateSubjectDto;
 use App\Exceptions\Exceptions;
 use App\Http\Requests\CreateSubjectRequest;
 use App\Http\Requests\UpdateAllDataOfSubjectRequest;
@@ -29,7 +31,8 @@ class SubjectController extends Controller
     public function store(CreateSubjectRequest $request): Response
     {
         try {
-            $this->service->register($request->toArray());
+            $dto = CreateSubjectDto::make($request->toArray());
+            $this->service->register($dto->toArray());
 
             return response()->noContent();
         } catch (\Throwable $th) {
@@ -40,7 +43,8 @@ class SubjectController extends Controller
     public function update(UpdateAllDataOfSubjectRequest $request): Response
     {
         try {
-            $this->service->update($request->toArray());
+            $dto = UpdateSubjectDto::make($request->toArray());
+            $this->service->update($dto->toArray());
 
             return \response()->noContent();
         } catch (\Throwable $th) {
