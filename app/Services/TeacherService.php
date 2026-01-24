@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Teacher;
+use App\Repositories\SubjectRepository;
 use App\Repositories\TeacherRepository;
 use DomainException;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,12 +14,10 @@ use InvalidArgumentException;
 class TeacherService
 {
 
-    private TeacherRepository $repository;
-
-    public function __construct(TeacherRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+    public function __construct(
+        private TeacherRepository $repository,
+        private SubjectRepository $subjectRepository
+    ) {}
 
     public function findAll(): Collection
     {
@@ -27,6 +26,8 @@ class TeacherService
         if ($teachers->isEmpty()) {
             throw new ModelNotFoundException("Nenhum professor encontrado.");
         }
+
+        $teachers->map(fn($teacher) => $teacher['discipline_specializate'] = $this->aditionalInfo($teacher['discipline_specializate']));
 
         return $teachers;
     }
@@ -39,7 +40,14 @@ class TeacherService
             throw new ModelNotFoundException("Professor não encontrado.");
         }
 
+        $teacher['discipline_specializate'] = $this->aditionalInfo($teacher['discipline_specializate']);
+
         return $teacher;
+    }
+
+    private function aditionalInfo(int $subject)
+    {
+        return $this->subjectRepository->find($subject);
     }
 
     public function create(array $data): ?Teacher
