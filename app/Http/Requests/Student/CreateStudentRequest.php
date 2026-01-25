@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Student;
 
-use App\Dtos\NewStudentDto;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateStudentRequest extends FormRequest

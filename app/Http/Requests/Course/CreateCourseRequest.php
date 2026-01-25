@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Course;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCourseRequest extends FormRequest
+class CreateCourseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,17 +22,15 @@ class UpdateCourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|integer',
             'name' => 'required|string',
             'description' => 'sometimes|string',
         ];
     }
 
-    public function messages(): array
+    public function message(): array
     {
         return [
-            'id.required' => 'Curso a ser atualizado não informada.',
-            'name.required' => 'Descrição não informada.'
+            'name.required' => 'Nome do curso não informado.'
         ];
     }
 }

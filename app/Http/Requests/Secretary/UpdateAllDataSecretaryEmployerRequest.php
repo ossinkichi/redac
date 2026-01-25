@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Secretary;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreatesecretaryEmployerRequest extends FormRequest
+class UpdateAllDataSecretaryEmployerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,25 +22,23 @@ class CreatesecretaryEmployerRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'cpf' => 'required|integer|exists:teachers,cpf',
             'full_name' => 'required|string',
-            'cpf' => 'required|string|size:11|unique:secretaries,cpf',
             'gender' => 'required|string|in:male,female,outher',
             'date_of_birth' => 'required|date',
             'email' => 'required|string|email|max:255|unique:secretaries,email',
             'phone_number' => 'required|string|max:15',
             'address' => 'required|string|max:500',
-            'status' => 'sometimes|boolean',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'full_name.required' => 'O nome completo é obrigatório.',
+            'cpf.required' => 'Professor não informado.',
+            'cpf.exists' => 'Professor não encontrado.',
 
-            'cpf.required' => 'O CPF é obrigatório.',
-            'cpf.size' => 'O CPF deve ter exatamente 11 caracteres.',
-            'cpf.unique' => 'O CPF inválido.',
+            'full_name.required' => 'O nome completo é obrigatório.',
 
             'gender.required' => 'O gênero é obrigatório.',
             'gender.in' => 'Selecione um gênero.',
@@ -58,8 +56,6 @@ class CreatesecretaryEmployerRequest extends FormRequest
 
             'address.required' => 'O endereço é obrigatório.',
             'address.max' => 'O endereço não pode exceder 500 caracteres.',
-
-            'status.boolean' => 'O status deve ser verdadeiro ou falso.',
         ];
     }
 }

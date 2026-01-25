@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Teacher;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditAllDataOfTeacherRequest extends FormRequest
+class UpdatAllDataOfTeacherRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
