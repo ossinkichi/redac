@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ClassModel extends Model
+class Room extends Model
 {
 
     use HasFactory;
 
-    protected $table = 'classes';
+    protected $table = 'Room';
 
     protected $fillable = [
         'id',

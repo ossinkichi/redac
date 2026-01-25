@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Dtos\CreateRoomDisciplineTeacherDto;
 use App\Repositories\ClassDisciplineTeacherRepository;
+use App\Repositories\RoomDisciplineTeacherRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ClassDisciplineTeacherService
 {
 
     public function __construct(
-        private readonly  ClassDisciplineTeacherRepository $repository
+        private readonly  RoomDisciplineTeacherRepository $repository
     ) {}
 
     public function findAll()
@@ -37,37 +39,23 @@ class ClassDisciplineTeacherService
         return $response;
     }
 
-    public function register(array $data)
+    public function register(CreateRoomDisciplineTeacherDto $dto)
     {
 
-        $response = $this->repository->create($data);
+        $response = $this->repository->create($dto->toArray());
 
         !$response->exists && throw new ModelNotFoundException('Não foi possivel salvar a relaçào.');
 
         return $response;
     }
 
-    // public function off(int $id)
-    // {
-    //     $response = $this->findByTeacher($id);
+    public function delete(int $id): void
+    {
+        $response = $this->repository->find($id);
 
-    //     !$response && new ModelNotFoundException('Não foi possivel desligar o professor(a) da Classe.');
+        !$response &&
+            throw new ModelNotFoundException("Relação não encontrada.");
 
-    //     foreach ($$response->toArray() as $data) {
-    //         $data->update([
-    //             'status' => false
-    //         ]);
-    //     }
-    // }
-
-    // public function on(int $id)
-    // {
-    //     $response = $this->findByid($id);
-
-    //     !$response && new ModelNotFoundException('Não foi possivel desligar o professor(a) da Classe.');
-
-    //     $data->update([
-    //         'status' => true
-    //     ]);
-    // }
+        $response->delete();
+    }
 }

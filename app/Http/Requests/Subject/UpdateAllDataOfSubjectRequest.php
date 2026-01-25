@@ -11,7 +11,7 @@ class UpdateAllDataOfSubjectRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,6 +22,7 @@ class UpdateAllDataOfSubjectRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id' => 'required|int|exists:subjects,id',
             'name' => 'required|string|unique:subjects,name',
             'description' => 'sometimes|string'
         ];
@@ -30,6 +31,9 @@ class UpdateAllDataOfSubjectRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'id.required' => 'Materia não informado',
+            'id.exists' => 'Materia nào existe',
+
             'name.required' => 'Nome não informado.',
             'name.unique' => 'Materia já existe.'
         ];

@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Dtos\NewStudentDto;
-use App\Dtos\UpdateAllDataStudentDto;
-use App\Dtos\UpdateSimpleDataOfStudentDto;
-use App\Exceptions\Exceptions;
-use App\Http\Requests\CreateStudentRequest;
-use App\Http\Requests\UpdateAllDataStudentRequest;
-use App\Http\Requests\UpdateSimpleDataOfStudentRequest;
-use App\Http\Resources\StudentResource;
-use App\Services\StudentService;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Symfony\Component\HttpFoundation\Response;
 use Throwable;
+use App\Exceptions\Exceptions;
+use App\Services\StudentService;
+use App\Dtos\Student\UpdateAllDataStudentDto;
+use App\Dtos\Student\CreateStudentDto;
+use App\Http\Resources\StudentResource;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Resources\Json\JsonResource;
+use App\Dtos\Student\UpdateSimpleDataOfStudentDto;
+use App\Http\Requests\Student\UpdateAllDataStudentRequest;
+use App\Http\Requests\Student\CreateStudentRequest;
+use App\Http\Requests\Student\UpdateSimpleDataOfStudentRequest;
+use App\Http\Controllers\Controller;
 
 class StudentController extends Controller
 {
@@ -45,24 +46,20 @@ class StudentController extends Controller
 
     public function store(CreateStudentRequest $request): Response
     {
-        $dto = NewStudentDto::make(($request->toArray()));
+        $dto = CreateStudentDto::make(($request->toArray()));
 
-        $this
-            ->service
-            ->create(
-                $dto->toArray()
-            );
+        $this->service->create($dto);
 
         return response()->noContent();
     }
 
-    public function updateAllData(UpdateAllDataStudentRequest $data): Response
+    public function updateAllData(UpdateAllDataStudentRequest $request): Response
     {
         try {
-            $dto = UpdateAllDataStudentDto::make($data->toArray());
+            $dto = UpdateAllDataStudentDto::make($request->toArray());
 
             $this->service->update(
-                $dto->toArray()
+                $dto
             );
 
             return response()->noContent();
@@ -71,13 +68,13 @@ class StudentController extends Controller
         }
     }
 
-    public function simpleUpdate(UpdateSimpleDataOfStudentRequest $data)
+    public function simpleUpdate(UpdateSimpleDataOfStudentRequest $request)
     {
         try {
-            $dto = UpdateSimpleDataOfStudentDto::make($data->toArray());
+            $dto = UpdateSimpleDataOfStudentDto::make($request->toArray());
 
-            $this->service->update(
-                $dto->toArray()
+            $this->service->SimpleUpdate(
+                $dto
             );
 
             return response()->noContent();
@@ -89,7 +86,7 @@ class StudentController extends Controller
     public function active(string $cpf)
     {
         try {
-            $this->service->update([
+            $this->service->updateStatus([
                 'cpf' => $cpf,
                 'is_active' => true,
             ]);
@@ -103,7 +100,7 @@ class StudentController extends Controller
     public function desactive(string $cpf)
     {
         try {
-            $this->service->update([
+            $this->service->updateStatus([
                 'cpf' => $cpf,
                 'is_active' => true,
             ]);
@@ -117,7 +114,7 @@ class StudentController extends Controller
     public function formed(string $cpf)
     {
         try {
-            $this->service->update([
+            $this->service->updateStatus([
                 'cpf' => $cpf,
                 'formed' => true,
             ]);

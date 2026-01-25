@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Dtos\CreateSecretaryEmployeDto;
-use App\Dtos\UpdateSecretaryEmployerDto;
-use App\Exceptions\Exceptions;
-use App\Http\Requests\createsecretaryEmployerRequest;
-use App\Http\Requests\UpdateSecretaryEmployerRequest;
-use App\Http\Resources\SecretaryResource;
-use App\Services\SecretaryService;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Response;
 use Throwable;
+use Illuminate\Http\Response;
+use App\Exceptions\Exceptions;
+use App\Services\SecretaryService;
+use App\Http\Resources\SecretaryResource;
+use Illuminate\Http\Resources\Json\JsonResource;
+use App\Dtos\Secretary\CreateSecretaryEmployeDto;
+use App\Dtos\Secretary\UpdateSecretaryEmployerDto;
+use App\Http\Requests\Secretary\createsecretaryEmployerRequest;
+use App\Http\Requests\Secretary\UpdateAllDataSecretaryEmployerRequest;
+use App\Http\Requests\Secretary\UpdateSecretaryEmployerRequest;
 
 class SecretaryController extends Controller
 {
@@ -37,11 +38,11 @@ class SecretaryController extends Controller
         }
     }
 
-    public function store(CreatesecretaryEmployerRequest $data): Response
+    public function store(CreatesecretaryEmployerRequest $request): Response
     {
         try {
-            $dto = CreateSecretaryEmployeDto::make($data->toArray());
-            $this->service->create($dto->toArray());
+            $dto = CreateSecretaryEmployeDto::make($request->toArray());
+            $this->service->create($dto);
 
             return \response()->noContent();
         } catch (Throwable $th) {
@@ -49,11 +50,11 @@ class SecretaryController extends Controller
         }
     }
 
-    public function update(UpdateSecretaryEmployerRequest $data)
+    public function update(UpdateAllDataSecretaryEmployerRequest $request)
     {
         try {
-            $dto = UpdateSecretaryEmployerDto::make($data->toArray());
-            $this->service->update($dto->toArray());
+            $dto = UpdateSecretaryEmployerDto::make($request->toArray());
+            $this->service->update($dto);
 
             return \response()->noContent();
         } catch (Throwable $th) {
@@ -64,7 +65,12 @@ class SecretaryController extends Controller
     public function desactive(string $cpf): Response
     {
         try {
-            $this->service->desactive($cpf);
+            $this->service->updateStatus(
+                [
+                    'cpf' => $cpf,
+                    'status' => false
+                ]
+            );
             return \response()->noContent();
         } catch (Throwable $th) {
             throw Exceptions::fromMessage($th);
@@ -74,7 +80,10 @@ class SecretaryController extends Controller
     public function active(string $cpf): Response
     {
         try {
-            $this->service->active($cpf);
+            $this->service->updateStatus([
+                'cpf' => $cpf,
+                'status' => true
+            ]);
 
             return \response()->noContent();
         } catch (Throwable $th) {

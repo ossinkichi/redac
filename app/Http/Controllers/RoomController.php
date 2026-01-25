@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Dtos\CreateClassDto;
-use App\Dtos\UpdateClassDto;
+use App\Dtos\Room\CreateRoomDto;
 use App\Exceptions\Exceptions;
-use App\Http\Requests\CreateClassRequest;
-use App\Http\Requests\UpdateClassRequest;
+use App\Http\Requests\Room\CreateRoomRequest;
 use App\Http\Resources\ClassResource;
-use App\Services\ClassService;
+use App\Services\RoomService;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 use Throwable;
 
-class ClassController extends Controller
+class RoomController extends Controller
 {
 
     public function __construct(
-        private ClassService $service
+        private readonly RoomService $service
     ) {}
 
     public function index(): JsonResource
@@ -38,11 +36,11 @@ class ClassController extends Controller
         }
     }
 
-    public function store(CreateClassRequest $data): Response
+    public function store(CreateRoomRequest $data): Response
     {
         try {
-            $dto = CreateClassDto::make($data->toArray());
-            $this->service->register($dto->toArray());
+            $dto = CreateRoomDto::make($data->toArray());
+            $this->service->register($dto);
 
             return response()->noContent();
         } catch (Throwable $th) {
@@ -50,10 +48,10 @@ class ClassController extends Controller
         }
     }
 
-    public function active($id)
+    public function active(int $id)
     {
         try {
-            $this->service->update([
+            $this->service->updateStatus([
                 'id' => $id,
                 'status' => true
             ]);
@@ -64,10 +62,10 @@ class ClassController extends Controller
         }
     }
 
-    public function desactive($id)
+    public function desactive(int $id)
     {
         try {
-            $this->service->update([
+            $this->service->updateStatus([
                 'id' => $id,
                 'status' => false
             ]);

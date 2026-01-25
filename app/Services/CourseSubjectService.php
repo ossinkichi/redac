@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Dtos\Course\CreateCourseSubjectDto;
 use App\Models\CourseSubject;
 use App\Repositories\CourseSubjectRepository;
 use Illuminate\Database\Eloquent\Collection;
@@ -33,9 +34,9 @@ class CourseSubjectService
         return $this->repository->findByCourse($id);
     }
 
-    public function register(array $data): CourseSubject
+    public function register(CreateCourseSubjectDto $dto): CourseSubject
     {
-        $response = $this->repository->create($data);
+        $response = $this->repository->create($dto->toArray());
 
         !$response->exists && throw new ModelNotFoundException('Nào foi possivel salvar a relaçào.');
 

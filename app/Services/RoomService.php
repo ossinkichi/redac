@@ -2,16 +2,17 @@
 
 namespace App\Services;
 
+use App\Dtos\Room\CreateRoomDto;
 use App\Models\ClassModel;
-use App\Repositories\ClassRepository;
+use App\Repositories\RoomRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class ClassService
+class RoomService
 {
 
     public function __construct(
-        private ClassRepository $repository
+        private RoomRepository $repository
     ) {
         $this->repository = $repository;
     }
@@ -26,16 +27,16 @@ class ClassService
         return $this->repository->find($id);
     }
 
-    public function register(array $data): ClassModel
+    public function register(CreateRoomDto $data): ClassModel
     {
-        $response = $this->repository->create($data);
+        $response = $this->repository->create($data->toArray());
 
         !$response->exists && throw new ModelNotFoundException('Não foi possivel registrar a classe');
 
         return $response;
     }
 
-    public function update(array $data): ClassModel
+    public function updateStatus(array $data): ClassModel
     {
         $room = $this->repository->find($data['id']);
         $room->update($data);

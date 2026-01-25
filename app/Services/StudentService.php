@@ -2,6 +2,11 @@
 
 namespace App\Services;
 
+use App\Dtos\Student\CreateStudentDto;
+use App\Dtos\Student\UpdateAllDataStudentDto;
+use App\Dtos\Student\UpdateSimpleDataOfStudentDto;
+use App\Dtos\Student\UpdateStudentDataDto;
+use App\Http\Requests\Course\UpdateAllDataCourseRequest;
 use App\Models\Student;
 use App\Repositories\ClassRepository;
 use App\Repositories\StudentRepository;
@@ -51,34 +56,57 @@ class StudentService
         return $student;
     }
 
-    public function create(array $student): ?Student
+    public function create(CreateStudentDto $dto): ?Student
     {
 
-        DB::transaction(function () use ($student, &$response) {
+        return  DB::transaction(function () use ($dto) {
 
-            $response =  $this->studentRepository->create($student);
+            $response =  $this->studentRepository->create($dto->toArray());
 
             $response->exists() || throw new RuntimeException('Erro ao criar estudante.');
 
             UserService::newUser(
                 [
-                    'user' => $student['cpf'],
-                    'password' => $student['date_of_birth'],
+                    'user' => $dto->cpf,
+                    'password' => $dto->date_of_birth,
                     'role' => 'student',
                 ]
             );
         });
-
-        return $response;
     }
 
-    public function update(array $data)
+    public function update(UpdateAllDataStudentDto $dto)
+    {
+        $student = $this->studentRepository->findByCpf($dto->cpf);
+
+        !$student && throw new ModelNotFoundException('Estudante não encontrado');
+
+        $student->update($dto->toArray());
+
+        !$student->wasChanged() && throw new RuntimeException('Nenhum dado foi alterado.');
+
+        return $student;
+    }
+
+    public function simpleUpdate(UpdateSimpleDataOfStudentDto $dto)
+    {
+        $student = $this->studentRepository->findByCpf($dto->cpf);
+
+        !$student && throw new ModelNotFoundException('Estudante não encontrado');
+
+        $student->update($dto->toArray());
+
+        !$student->wasChanged() && throw new RuntimeException('Nenhum dado foi alterado.');
+
+        return $student;
+    }
+
+    public function updateStatus(array $data)
     {
         $student = $this->studentRepository->findByCpf($data['cpf']);
 
         !$student && throw new ModelNotFoundException('Estudante não encontrado');
 
-        unset($data['cpf']);
         $student->update($data);
 
         !$student->wasChanged() && throw new RuntimeException('Nenhum dado foi alterado.');

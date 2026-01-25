@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Dtos\Subject\CreateSubjectDto;
 use App\Models\Subject;
+use App\Dtos\Subject\UpdateSubjectDto;
 use App\Repositories\SubjectRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -11,7 +13,7 @@ class SubjectService
 {
 
     public function __construct(
-        private SubjectRepository $repository
+        private readonly SubjectRepository $repository
     ) {}
 
     public function findAll(): Collection
@@ -19,23 +21,27 @@ class SubjectService
         return $this->repository->findAll();
     }
 
-    public function register(array $data): Subject
+    public function register(CreateSubjectDto $data): Subject
     {
-        $response = $this->repository->create($data);
+        $response = $this->repository->create($data->toArray());
 
-        !$response->exists && new ModelNotFoundException('Não foi possivel criar a disciplina.');
+        !$response->exists &&
+            throw new ModelNotFoundException('Não foi possivel criar a disciplina.');
 
         return $response;
     }
 
-    public function update(array $data): Subject
+    public function update(UpdateSubjectDto $dto): Subject
     {
-        $response = $this->repository->find($data['id']);
-        unset($data['id']);
-        $response->update($data);
+        $response = $this->repository->find($dto->id);
 
-        !$response->wasChanged()
-            && throw new ModelNotFoundException('Não foi possivel atualizar.');
+        !$response &&
+            throw new ModelNotFoundException('Disciplina não encontrada.');
+
+        $response->update($dto->toArray());
+
+        !$response->wasChanged() &&
+            throw new ModelNotFoundException('Não foi possivel atualizar.');
 
         return $response;
     }

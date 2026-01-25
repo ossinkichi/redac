@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Dtos\Secretary\CreateSecretaryEmployeDto;
+use App\Dtos\Secretary\UpdateSecretaryEmployerDto;
+use App\Http\Requests\Secretary\UpdateAllDataSecretaryEmployerRequest;
 use App\Models\Secretary;
 use App\Repositories\SecretaryRepository;
 use Illuminate\Support\Facades\DB;
@@ -33,36 +36,31 @@ class SecretaryService
         return $this->repository->findAll();
     }
 
-    public function create(array $data)
+    public function create(CreateSecretaryEmployeDto $dto)
     {
-        DB::transaction(function () use ($data, &$response) {
+        return DB::transaction(function () use ($dto) {
 
-            $response = $this->repository->create($data);
+            $response = $this->repository->create($dto->toArray());
 
             (!$response instanceof Secretary || !$response->exists) &&
                 throw new \DomainException("Erro ao criar secretário(a).");
 
             UserService::newUser([
-                'user' => $data['cpf'],
-                'password' => $data['date_of_birth'],
+                'user' => $dto->cpf,
+                'password' => $dto->date_of_birth,
                 'role' => 'secretary'
             ]);
         });
-
-        return $response;
     }
 
-    public function update(array $data)
+    public function update(UpdateSecretaryEmployerDto $dto)
     {
-        !$data['cpf'] &&
-            throw new \InvalidArgumentException("CPF é obrigatório para atualização.");
-
-        $secretary = $this->find($data['cpf']);
+        $secretary = $this->find($dto->cpf);
 
         (!$secretary) &&
             throw new ModelNotFoundException("Secretário(a) não encontrado para atualização.");
 
-        $secretary->update($data);
+        $secretary->update($dto->toArray());
 
         !$secretary->wasChanged() &&
             throw new \DomainException("Nenhum dado foi alterado para o(a) secretário(a).");
@@ -70,28 +68,15 @@ class SecretaryService
         return $secretary;
     }
 
-    public function desactive(string $cpf): Secretary
+    public function updateStatus(array $data): Secretary
     {
-        $secretary = $this->find($cpf);
+        $secretary = $this->find($data['cpf']);
 
-        if ($secretary['status'] === false) {
-            throw new \DomainException("Secretário(a) já está inativo(a).");
-        }
+        !$secretary && throw new ModelNotFoundException('Funcionario(a) da secretaria não encontrado');
 
-        $secretary->update(['status' => false]);
+        $secretary->update($data);
 
-        return $secretary;
-    }
-
-    public function active(string $cpf): Secretary
-    {
-        $secretary = $this->find($cpf);
-
-        if ($secretary['status'] === false) {
-            throw new \DomainException("Secretário(a) já está inativo(a).");
-        }
-
-        $secretary->update(['status' => false]);
+        !$secretary->wasChanged() && throw new ModelNotFoundException('Nào foi possivel atualizar o(a) funcionario(a)');
 
         return $secretary;
     }

@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Dtos\CreateCourseSubjectDto;
-use App\Http\Requests\CreateCourseSubjectRequest;
-use App\Http\Requests\CreateSubjectRequest;
+use App\Dtos\Course\CreateCourseSubjectDto;
+use App\Http\Requests\Course\CreateCourseSubjectRequest;
 use App\Http\Resources\CourseSubjectResource;
 use App\Services\CourseSubjectService;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -26,7 +25,7 @@ class CourseSubjectController extends Controller
     {
         $dto = CreateCourseSubjectDto::make($request->toArray());
 
-        $this->service->register($dto->toArray());
+        $this->service->register($dto);
 
         return \response()->noContent();
     }

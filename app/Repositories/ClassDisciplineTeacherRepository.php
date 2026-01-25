@@ -3,28 +3,34 @@
 namespace App\Repositories;
 
 use App\Models\ClassDisciplineTeacher;
+use App\Models\RoomDisciplineTeacher;
 use Illuminate\Database\Eloquent\Collection;
 
-class ClassDisciplineTeacherRepository
+class RoomDisciplineTeacherRepository
 {
+
+    public function find(int $id): RoomDisciplineTeacher
+    {
+        return RoomDisciplineTeacher::findOrFail($id);
+    }
 
     public function findByClass(int $classId): Collection
     {
-        return ClassDisciplineTeacher::where('class_id', $classId)->get();
+        return RoomDisciplineTeacher::where('class_id', $classId)->get();
     }
 
     public function findByTeacher(int $TeacherId): Collection
     {
-        return ClassDisciplineTeacher::where('teacher_id', $TeacherId)->get();
+        return RoomDisciplineTeacher::where('teacher_id', $TeacherId)->get();
     }
 
     public function findAll(): Collection
     {
-        return ClassDisciplineTeacher::all();
+        return RoomDisciplineTeacher::all();
     }
 
-    public function create(array $data): ClassDisciplineTeacher
+    public function create(array $data): RoomDisciplineTeacher
     {
-        return ClassDisciplineTeacher::create($data);
+        return RoomDisciplineTeacher::create($data);
     }
 }

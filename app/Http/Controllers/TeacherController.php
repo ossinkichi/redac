@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Dtos\CreateTeacherDto;
-use App\Dtos\UpdateAllDataOfTeacherDto;
-use App\Dtos\UpdateSimpleDataOfTeacherDto;
-use App\Exceptions\Exceptions;
-use App\Http\Requests\CreateTeacherRequest;
-use App\Http\Requests\EditAllDataOfTeacherRequest;
-use App\Http\Requests\SimpleUpdateDataOfTeacher;
-use App\Http\Resources\TeacherResource;
-use App\Services\TeacherService;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Response;
 use Throwable;
+use Illuminate\Http\Response;
+use App\Exceptions\Exceptions;
+use App\Services\TeacherService;
+use App\Dtos\Teacher\CreateTeacherDto;
+use App\Http\Resources\TeacherResource;
+use App\Dtos\Teacher\UpdateAllDataOfTeacherDto;
+use Illuminate\Http\Resources\Json\JsonResource;
+use App\Dtos\Teacher\UpdateSimpleDataOfTeacherDto;
+use App\Http\Requests\Teacher\CreateTeacherRequest;
+use App\Http\Requests\Teacher\SimpleUpdateDataOfTeacher;
 
 class TeacherController extends Controller
 {
@@ -43,7 +42,7 @@ class TeacherController extends Controller
     {
         try {
             $dto = CreateTeacherDto::make($teacherData->toArray());
-            $this->service->create($dto->toArray());
+            $this->service->create($dto);
 
             return response()->noContent();
         } catch (\Throwable $th) {
@@ -51,11 +50,11 @@ class TeacherController extends Controller
         }
     }
 
-    public function update(EditAllDataOfTeacherRequest $data): Response
+    public function update(UpdateAllDataOfTeacherDto $data): Response
     {
         try {
             $dto = UpdateAllDataOfTeacherDto::make($data->toArray());
-            $this->service->update($dto->toArray());
+            $this->service->update($dto);
 
             return \response()->noContent();
         } catch (\Throwable $th) {
@@ -67,7 +66,7 @@ class TeacherController extends Controller
     {
         try {
             $dto = UpdateSimpleDataOfTeacherDto::make($data->toArray());
-            $response = $this->service->update($dto->toArray());
+            $response = $this->service->simpleUpdate($dto);
 
             return response(content: [
                 'message' => 'Dados simples do professor atualizados com sucesso.',
@@ -81,7 +80,7 @@ class TeacherController extends Controller
     public function desactive(string $cpf): Response
     {
         try {
-            $this->service->update([
+            $this->service->updateStatus([
                 'cpf' => $cpf,
                 'is_active' => false
             ]);
@@ -97,7 +96,7 @@ class TeacherController extends Controller
     public function active(string $cpf): Response
     {
         try {
-            $this->service->update([
+            $this->service->updateStatus([
                 'cpf' => $cpf,
                 'is_active' => true
             ]);

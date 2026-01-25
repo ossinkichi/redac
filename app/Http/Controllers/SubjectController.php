@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Dtos\CreateSubjectDto;
-use App\Dtos\UpdateSubjectDto;
 use App\Exceptions\Exceptions;
-use App\Http\Requests\CreateSubjectRequest;
-use App\Http\Requests\UpdateAllDataOfSubjectRequest;
-use App\Http\Resources\SubjectResource;
 use App\Services\SubjectService;
-use Illuminate\Http\Resources\Json\JsonResource;
+use App\Dtos\Subject\CreateSubjectDto;
+use App\Dtos\Subject\UpdateSubjectDto;
+use App\Http\Resources\SubjectResource;
+use App\Http\Requests\Subject\CreateSubjectRequest;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Requests\Subject\UpdateAllDataOfSubjectRequest;
 
 class SubjectController extends Controller
 {
 
     public function __construct(
-        private SubjectService $service
+        private readonly SubjectService $service
     ) {}
 
     public function index(): JsonResource
@@ -32,7 +32,7 @@ class SubjectController extends Controller
     {
         try {
             $dto = CreateSubjectDto::make($request->toArray());
-            $this->service->register($dto->toArray());
+            $this->service->register($dto);
 
             return response()->noContent();
         } catch (\Throwable $th) {
@@ -44,7 +44,7 @@ class SubjectController extends Controller
     {
         try {
             $dto = UpdateSubjectDto::make($request->toArray());
-            $this->service->update($dto->toArray());
+            $this->service->update($dto);
 
             return \response()->noContent();
         } catch (\Throwable $th) {

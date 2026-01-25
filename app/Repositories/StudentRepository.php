@@ -7,11 +7,6 @@ use App\Models\Student;
 class StudentRepository
 {
 
-    public function __construct(private Student $model)
-    {
-        $this->model = $model;
-    }
-
     public function create(array $data): Student
     {
         return Student::create($data);
@@ -19,11 +14,11 @@ class StudentRepository
 
     public function findAll()
     {
-        return $this->model->all();
+        return Student::all();
     }
 
     public function findByCpf(string $cpf): ?Student
     {
-        return $this->model->where('cpf', $cpf)->first();
+        return Student::where('cpf', $cpf)->first();
     }
 }

@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\ClassModel;
 use Illuminate\Support\Collection;
 
-class ClassRepository
+class RoomRepository
 {
 
     public function findAll(): Collection

@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Dtos\Teacher\CreateTeacherDto;
+use App\Dtos\Teacher\UpdateAllDataOfTeacherDto;
+use App\Dtos\Teacher\UpdateSimpleDataOfTeacherDto;
 use App\Models\Teacher;
 use App\Repositories\SubjectRepository;
 use App\Repositories\TeacherRepository;
@@ -36,9 +39,7 @@ class TeacherService
     {
         $teacher = $this->repository->findByCpf($cpf);
 
-        if (!$teacher) {
-            throw new ModelNotFoundException("Professor não encontrado.");
-        }
+        !$teacher && throw new ModelNotFoundException("Professor não encontrado.");
 
         $teacher['discipline_specializate'] = $this->aditionalInfo($teacher['discipline_specializate']);
 
@@ -50,25 +51,52 @@ class TeacherService
         return $this->subjectRepository->find($subject);
     }
 
-    public function create(array $data): ?Teacher
+    public function create(CreateTeacherDto $data): ?Teacher
     {
-        DB::transaction(function () use ($data, &$createdTeacher) {
-            $createdTeacher = $this->repository->newTeacher($data);
+        return DB::transaction(function () use ($data, &$createdTeacher) {
+            $createdTeacher = $this->repository->newTeacher($data->toArray());
 
             (!$createdTeacher instanceof Teacher || !$createdTeacher->exists) && throw new DomainException("Erro ao criar professor.");
 
             UserService::newUser([
-                'user' => $data['cpf'],
-                'password' => $data['date_of_birth'],
+                'user' => $data->cpf,
+                'password' => $data->date_of_birth,
                 'role' => 'teacher'
             ]);
         });
-
-
-        return $createdTeacher;
     }
 
-    public function update(array $data): Teacher
+    public function update(UpdateAllDataOfTeacherDto $data): Teacher
+    {
+        !$data['cpf'] && throw new \InvalidArgumentException("CPF é obrigatório para editar um professor.");
+
+        $teacher = $this->find($data->cpf);
+
+        !$teacher && throw new ModelNotFoundException("Professor não encontrado.");
+
+        $teacher->update($data->toArray());
+
+        !$teacher->wasChanged() && throw new \RuntimeException("Nenhum dado foi alterado.");
+
+        return $teacher;
+    }
+
+    public function simpleUpdate(UpdateSimpleDataOfTeacherDto $data): Teacher
+    {
+        !$data['cpf'] && throw new \InvalidArgumentException("CPF é obrigatório para editar um professor.");
+
+        $teacher = $this->find($data->cpf);
+
+        !$teacher && throw new ModelNotFoundException("Professor não encontrado.");
+
+        $teacher->update($data->toArray());
+
+        !$teacher->wasChanged() && throw new \RuntimeException("Nenhum dado foi alterado.");
+
+        return $teacher;
+    }
+
+    public function updateStatus(array $data): Teacher
     {
         !$data['cpf'] && throw new \InvalidArgumentException("CPF é obrigatório para editar um professor.");
 
@@ -76,7 +104,6 @@ class TeacherService
 
         !$teacher && throw new ModelNotFoundException("Professor não encontrado.");
 
-        unset($data['cpf']);
         $teacher->update($data);
 
         !$teacher->wasChanged() && throw new \RuntimeException("Nenhum dado foi alterado.");

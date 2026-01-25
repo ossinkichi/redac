@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ClassDisciplineTeacher extends Model
+class RoomDisciplineTeacher extends Model
 {
 
     use HasFactory;
 
-    protected $table = 'class_discipline_teacher';
+    protected $table = 'romm_discipline_teacher';
 
     protected $fillable = [
         'id',
@@ -26,6 +26,16 @@ class ClassDisciplineTeacher extends Model
 
     protected function classId()
     {
-        return $this->belongsTo(ClassModel::class, 'class_id');
+        return $this->belongsTo(Room::class, 'class_id');
+    }
+
+    protected function disciplineId()
+    {
+        return $this->belongsTo(Subject::class, 'discipline_id');
+    }
+
+    protected function teacherId()
+    {
+        return $this->belongsTo(Teacher::class, 'teacher_id');
     }
 }

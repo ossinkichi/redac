@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Dtos\CreateCourseDto;
-use App\Dtos\UpdateCourseDto;
-use App\Exceptions\Exceptions;
-use App\Http\Requests\CreateCourseRequest;
-use App\Http\Requests\UpdateCourseRequest;
-use App\Http\Resources\CourseResource;
-use App\Services\CourseService;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Response;
 use Throwable;
+use Illuminate\Http\Response;
+use App\Exceptions\Exceptions;
+use App\Services\CourseService;
+use App\Dtos\Course\CreateCourseDto;
+use App\Dtos\Course\UpdateCourseDto;
+use App\Http\Resources\CourseResource;
+use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Requests\Course\CreateCourseRequest;
+use App\Http\Requests\Course\UpdateAllDataCourseRequest;
+use App\Http\Requests\Course\UpdateCourseRequest;
 
 class CourseController extends Controller
 {
@@ -45,7 +46,7 @@ class CourseController extends Controller
     {
         try {
             $dto = CreateCourseDto::make($request->toArray());
-            $this->service->register($dto->toArray());
+            $this->service->register($dto);
 
             return response()->noContent();
         } catch (Throwable $th) {
@@ -53,11 +54,11 @@ class CourseController extends Controller
         }
     }
 
-    public function updateAllData(UpdateCourseRequest $request): Response
+    public function updateAllData(UpdateAllDataCourseRequest $request): Response
     {
         try {
             $dto = UpdateCourseDto::make($request->toArray());
-            $this->service->update($dto->toArray());
+            $this->service->update($dto);
 
             return response()->noContent();
         } catch (Throwable $th) {
@@ -68,7 +69,7 @@ class CourseController extends Controller
     public function active(int $id): Response
     {
         try {
-            $this->service->update([
+            $this->service->updateStatus([
                 'id' => $id,
                 'status' => true
             ]);
@@ -82,7 +83,7 @@ class CourseController extends Controller
     public function desactive(int $id): Response
     {
         try {
-            $this->service->update([
+            $this->service->updateStatus([
                 'id' => $id,
                 'status' => false
             ]);

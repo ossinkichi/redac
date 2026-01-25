@@ -2,7 +2,7 @@
 
 namespace App\Dtos;
 
-class CreateClassDisciplineTeacherDto
+class CreateRoomDisciplineTeacherDto
 {
     public function __construct(
         public int $teacher_id,

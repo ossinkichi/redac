@@ -5,6 +5,7 @@ namespace App\Dtos\Subject;
 class UpdateSubjectDto
 {
     public function __construct(
+        public int $id,
         public string $name,
         public ?string $description = '',
     ) {}
@@ -12,6 +13,7 @@ class UpdateSubjectDto
     public static function make(array $data): self
     {
         return new self(
+            id: $data['id'],
             name: $data['name'],
             description: $data['description']
         );
@@ -19,6 +21,8 @@ class UpdateSubjectDto
 
     public function toArray(): array
     {
-        return get_object_vars($this);
+        $data = \get_object_vars($this);
+        unset($data['id']);
+        return $data;
     }
 }

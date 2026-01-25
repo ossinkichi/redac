@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Dtos\CreateClassDisciplineTeacherDto;
+use App\Dtos\CreateRoomDisciplineTeacherDto;
 use App\Exceptions\Exceptions;
-use App\Http\Requests\CreateClassDisciplineTeacherRequest;
+use App\Http\Requests\CreateRoomDisciplineTeacherRequest;
 use App\Http\Resources\ClassDisciplineTeacherResource;
 use App\Services\ClassDisciplineTeacherService;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Symfony\Component\HttpFoundation\Response;
 
-class ClassDisciplineTeacherController extends Controller
+class RoomDisciplineTeacherController extends Controller
 {
     public function __construct(
         private ClassDisciplineTeacherService $service
@@ -49,13 +49,24 @@ class ClassDisciplineTeacherController extends Controller
         }
     }
 
-    public function store(CreateClassDisciplineTeacherRequest $data): Response
+    public function store(CreateRoomDisciplineTeacherRequest $data): Response
     {
         try {
-            $dto = CreateClassDisciplineTeacherDto::make($data->toArray());
-            $this->service->register($dto->toArray());
+            $dto = CreateRoomDisciplineTeacherDto::make($data->toArray());
+            $this->service->register($dto);
 
             return response()->noContent();
+        } catch (\Throwable $th) {
+            throw Exceptions::fromMessage($th);
+        }
+    }
+
+    public function destroy(int $id): Response
+    {
+        try {
+            $this->service->delete($id);
+
+            return \response()->noContent();
         } catch (\Throwable $th) {
             throw Exceptions::fromMessage($th);
         }
