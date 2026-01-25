@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Dtos;
+namespace App\Dtos\Teacher;
 
-class UpdateSecretaryEmployerDto
+class UpdateSimpleDataOfTeacherDto
 {
     public function __construct(
         public string $cpf,
         public string $full_name,
-        public string $gender,
-        public string $date_of_birth,
         public string $email,
         public string $phone_number,
         public string $address,
@@ -19,8 +17,6 @@ class UpdateSecretaryEmployerDto
         return new self(
             cpf: $data['cpf'],
             full_name: $data['full_name'],
-            gender: $data['gender'],
-            date_of_birth: $data['date_of_birth'],
             email: $data['email'],
             phone_number: $data['phone_number'],
             address: $data['address'],

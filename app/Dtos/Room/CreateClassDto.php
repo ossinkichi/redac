@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Dtos;
+namespace App\Dtos\Room;
 
-class CreateClassDto
+class CreateRoomDto
 {
     public function __construct(
         public int $series,
         public string $course,
         public string $shift,
-        public string $room,
+        public string $identification,
     ) {}
 
     public static function make(array $data): self
@@ -17,7 +17,7 @@ class CreateClassDto
             series: $data['series'],
             course: $data['course'],
             shift: $data['shift'],
-            room: $data['room'],
+            identification: $data['identification'],
         );
     }
 

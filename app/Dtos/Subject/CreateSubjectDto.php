@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Dtos;
+namespace App\Dtos\Subject;
 
-class UpdateSubjectDto
+class CreateSubjectDto
 {
     public function __construct(
         public string $name,
@@ -19,8 +19,6 @@ class UpdateSubjectDto
 
     public function toArray(): array
     {
-        return [
-            get_object_vars($this)
-        ];
+        return get_object_vars($this);
     }
 }

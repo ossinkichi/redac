@@ -1,21 +1,19 @@
 <?php
 
-namespace App\Dtos;
+namespace App\Dtos\Course;
 
-class UpdateCourseDto
+class CreateCourseSubjectDto
 {
     public function __construct(
-        public int $id,
-        public string $name,
-        public ?string $description
+        public int $course_id,
+        public int $discipline_id,
     ) {}
 
     public static function make(array $data): self
     {
         return new self(
-            id: $data['id'],
-            name: $data['name'],
-            description: $data['description'],
+            course_id: $data['course_id'],
+            discipline_id: $data['discipline_id']
         );
     }
 

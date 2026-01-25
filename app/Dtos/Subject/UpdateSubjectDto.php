@@ -1,16 +1,19 @@
 <?php
-namespace App\Dtos;
 
-class ActiveStudentDto
+namespace App\Dtos\Subject;
+
+class UpdateSubjectDto
 {
     public function __construct(
-        // Define your DTO properties here
+        public string $name,
+        public ?string $description = '',
     ) {}
 
     public static function make(array $data): self
     {
         return new self(
-            // Map array data to DTO properties here
+            name: $data['name'],
+            description: $data['description']
         );
     }
 
