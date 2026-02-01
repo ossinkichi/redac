@@ -15,6 +15,16 @@ class EnsureIsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $user = $request->user();
+
+        if (!$user) {
+            return \abort(403, 'Sem permissão para prosseguir!');
+        }
+
+        if ($user->role !== 'admin') {
+            return \abort(403, 'Sem permissão para prosseguir!');
+        }
+
         return $next($request);
     }
 }

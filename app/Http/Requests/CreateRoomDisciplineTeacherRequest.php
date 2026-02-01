@@ -28,7 +28,7 @@ class CreateRoomDisciplineTeacherRequest extends FormRequest
         ];
     }
 
-    public function message(): array
+    public function messages(): array
     {
         return [
             'teacher_id.required' => 'Professor não informado.',

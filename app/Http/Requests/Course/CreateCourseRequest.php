@@ -27,7 +27,7 @@ class CreateCourseRequest extends FormRequest
         ];
     }
 
-    public function message(): array
+    public function messages(): array
     {
         return [
             'name.required' => 'Nome do curso não informado.'

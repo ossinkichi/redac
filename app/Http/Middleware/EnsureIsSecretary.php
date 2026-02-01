@@ -18,7 +18,7 @@ class EnsureIsSecretary
         $user = $request->user();
 
         if (!$user) {
-            return \redirect()->route('login.page')->with('error', 'Sem permissão para prosseguir!');
+            return \abort(403, 'Sem permissão para prosseguir!');
         }
 
         if ($user->role !== 'secretary') {
