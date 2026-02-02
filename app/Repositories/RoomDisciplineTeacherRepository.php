@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\ClassDisciplineTeacher;
 use App\Models\RoomDisciplineTeacher;
 use Illuminate\Database\Eloquent\Collection;
 

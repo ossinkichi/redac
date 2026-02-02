@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\UserRegisterRequest;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,6 +13,7 @@ class UserController extends Controller
     {
         return view('login');
     }
+
     public function authenticateLogin(LoginRequest $request)
     {
         $credentials = $request->only('user', 'password');

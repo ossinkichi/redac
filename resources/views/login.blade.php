@@ -1,25 +1,24 @@
-<x-layout titlePage="Entrar">
+<x-layout>
     <main>
         <section>
-            <div class="container">
-                <form method="POST" action="{{ route('login.auth')}}">
+            <div class="mt-40">
+                <form method="POST" action="{{ route('login.auth')}}" class="flex flex-col gap-6 m-auto fieldset bg-base-200 border-base-300 rounded-box w-xs border p-6">
                     @csrf
+                    <p class="text-center text-2xl font-bold text-warning">Entre em sua conta</p>
                     <div>
-                        <label for="user">Insira seu usuário</label>
-                        <input id="user" type="number" class="border-2">
+                        <x-form.user-input />
                         @error('user')
                             <x-form.error message={{ $message }}/>
                         @enderror
                     </div>
                     <div>
-                        <label for="password">Insira sua senha</label>
-                        <input id="password" type="text" class="border-2">
+                        <x-form.password-input/>
                         @error('password')
                             <x-form.error message={{ $message }}/>
                         @enderror
                     </div>
 
-                    <button type="submit" class="border cursor-pointer">Entrar</button>
+                    <button type="submit" class="btn btn-warning">Entrar</button>
                 </form>
             </div>
         </section>
