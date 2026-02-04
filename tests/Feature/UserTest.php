@@ -25,10 +25,9 @@ class UserTest extends TestCase
     {
         $this->test_register();
 
-        $this->post('/login', [
+        $this->post('/auth', [
             'user' => '00100000001',
             'password' => 'passwordHashed',
-            'password_confirmation' => 'passwordHashed',
         ])
             ->assertJson([])
             ->assertStatus(201);
