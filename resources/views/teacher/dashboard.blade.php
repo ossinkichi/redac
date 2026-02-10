@@ -1,16 +1,35 @@
+@props([
+    'rooms' => [
+        [
+            'course' => 'Tecnico de enfermagem',
+            'serie' => '1',
+            'shift' => 'Vespertino',
+            'identification' => '3',
+        ],
+        [
+            'course' => 'Tecnico de enfermagem',
+            'serie' => '1',
+            'shift' => 'Vespertino',
+            'identification' => '1',
+        ],
+        [
+            'course' => 'Tecnico de enfermagem',
+            'serie' => '1',
+            'shift' => 'Vespertino',
+            'identification' => '2',
+        ],
+    ],
+])
 <x-layout>
-    <main>
+    <x-header />
+    <main class="p-4">
+        <div class="">
 
-        @foreach ($rooms as $room)
-            <div class="card">
-                <ul>
-                    <li>Ano:</li>
-                    <li>Curso:</li>
-                    <li>Turno:</li>
-                    <li>Sala:</li>
-                </ul>
-            </div>
-        @endforeach
+            @foreach ($rooms as $room)
+                <x-card />
+            @endforeach
+
+        </div>
 
     </main>
 </x-layout>

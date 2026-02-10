@@ -5,7 +5,7 @@
 
     <main>
         <section>
-            <div class="mt-40">
+            <div class="mt-20">
                 <form method="POST" action="{{ route('login.auth') }}"
                     class="flex flex-col gap-6 m-auto fieldset bg-base-200 border-base-300 rounded-box w-xs border p-6">
                     @csrf
@@ -13,13 +13,19 @@
                     <div>
                         <x-form.user-input />
                         @error('user')
-                            <x-form.error message={{ $message }} />
+                            <x-form.error :message="$message" />
                         @enderror
                     </div>
                     <div>
                         <x-form.password-input />
                         @error('password')
-                            <x-form.error message={{ $message }} />
+                            <x-form.error :message="$message" />
+                        @enderror
+                    </div>
+
+                    <div class="mx-auto">
+                        @error('auth')
+                            <x-form.error :message="$message" />
                         @enderror
                     </div>
 

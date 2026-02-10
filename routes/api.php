@@ -10,13 +10,6 @@ use App\Http\Middleware\EnsureIsSecretary;
 use App\Http\Middleware\EnsureIsStudent;
 use App\Http\Middleware\EnsureIsTeacher;
 
-
-Route::post('/auth', [
-    UserController::class,
-    'authenticateLogin'
-])->name('login.auth');
-
-
 Route::get('/secretary/{cpf}', [SecretaryController::class, 'show'])->name('secretary.find');
 Route::put('/secretary/update', [SecretaryController::class, 'update'])->name('secretary.update');
 Route::get('/secretaries', [SecretaryController::class, 'index'])->name('secretaries.all');

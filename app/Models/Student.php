@@ -42,6 +42,6 @@ class Student extends Model
 
     protected function studentClass()
     {
-        return $this->belongsTo(ClassModel::class, 'class_id');
+        return $this->belongsTo(Room::class, 'class_id');
     }
 }

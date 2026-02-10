@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Services\UserService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -16,17 +17,17 @@ class UserController extends Controller
 
     public function authenticateLogin(LoginRequest $request)
     {
-        $credentials = $request->only('user', 'password');
+        $credentials = $request->validated();
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/home');
+            return redirect('/student/dashboard');
         }
 
-        return \back()->withErrors([
-            'user' => 'Usuario ou senha inválidos.',
-        ])->withInput();
+        return back()->withErrors([
+            'auth' => 'Usuario ou senha inválidos.',
+        ]);
     }
 
     public function registerView()

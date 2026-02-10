@@ -1,153 +1,146 @@
-# TODO - Projeto REDAC (Sistema de Gerenciamento Escolar)
+﻿# TODO - Projeto REDAC (Sistema de Gerenciamento Escolar)
 
-## Visão Geral
+## Visao Geral
 
-Este projeto é um sistema de gerenciamento escolar desenvolvido em Laravel, visando substituir um sistema legado em PHP puro. Inclui funcionalidades para alunos, professores, secretária, cursos, classes, notas, frequência e conteúdos.
+Este projeto e um sistema de gerenciamento escolar em Laravel para substituir um sistema legado em PHP puro. Inclui funcionalidades para alunos, professores, secretaria, cursos, disciplinas, turmas, notas, frequencia e conteudos.
 
-## Status Atual
+## Status Atual (06/02/2026)
 
-- ✅ Estrutura Laravel configurada
-- ✅ Models e Migrations criadas para todas as entidades principais (User, Student, Teacher, Secretary, Course, Subject, Class, Note, Frequency, Content, etc.)
-- ✅ Repositories implementados (Student, Teacher, Secretary, User, Course, Class)
-- ✅ Services implementados (Student, Teacher, Secretary, User, Course, Class)
-- ✅ Controllers criados (TeacherController com CRUD completo via API, StudentController com CRUD completo via API, SecretaryController com CRUD via API, UserController com autenticação, CourseController parcialmente implementado, ClassController parcialmente implementado)
-- ✅ Autenticação básica (login, logout) implementada
-- ✅ API implementada com rotas para Professores, Secretária, Alunos e parcialmente para Cursos e Classes
-- ✅ Views básicas (login, register, home, welcome)
-- ✅ Middlewares para roles implementados (EnsureIsAdmin, EnsureIsSecretary, EnsureIsTeacher, EnsureIsStudent)
-- ✅ DTOs criados para criação e atualização de entidades
+- [x] Estrutura Laravel configurada
+- [x] Models Teacher, Secretary, Course, Subject, Room (turmas), Note, Frequency, Content, ContentResponse, CourseSubject, RoomDisciplineTeacher
+- [x] Repositories implementados para User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher
+- [x] Services implementados para User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher
+- [x] Controllers criados para Student, Teacher, Secretary (CRUD via API)
+- [x] Controllers criados para Course, Subject, Room, CourseSubject, RoomDisciplineTeacher (parcial, sem rotas expostas)
+- [x] Autenticacao web basica (login/logout) implementada
+- [x] Views basicas: login, register, dashboards (student, teacher, secretary), feed/profile do aluno, componentes de layout
+- [x] Middlewares de roles implementados (EnsureIsAdmin, EnsureIsSecretary, EnsureIsTeacher, EnsureIsStudent)
+- [x] DTOs criados para Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher
 
 ## TODOs Pendentes
 
-### 1. Autenticação e Autorização
+### 1. Autenticacao e Autorizacao
 
-- [x] Completar implementação do registro de usuários (UserController::register)
-- [x] Implementar logout completo
-- [x] Adicionar middleware para proteção de rotas
-- [ ] Implementar recuperação de senha
-- [x] Adicionar roles e permissões (admin, professor, aluno, secretária)
-- [ ] Implementar autenticação via API (JWT ou Sanctum)
+- [x] Login e logout web
+- [ ] Expor rotas web para register e logout (e fluxo completo de registro)
+- [ ] Implementar recuperacao de senha
+- [ ] Implementar autenticacao via API (JWT ou Sanctum)
+- [ ] Aplicar middlewares de roles nas rotas e definir regras de acesso por perfil
 
-### 2. CRUD de Usuários
+### 2. CRUD de Usuarios
 
-- [x] Implementar CRUD completo para Alunos (StudentController) - ✅ CRUD completo via API (findAll, find, register, updateAllData, simpleUpdate, active, desactive, formed)
-- [x] Implementar CRUD completo para Professores (TeacherController) - ✅ CRUD completo via API (findAll, find, newTeacher, update, desactive, active)
-- [x] Implementar CRUD completo para Secretária (SecretaryController) - ✅ CRUD via API (findAll, find, create, update, desactive, active)
-- [ ] Implementar CRUD completo para Usuários (UserController) - adicionar métodos além de login (register, update, delete)
-- [ ] Adicionar validação de CPF único
+- [x] CRUD completo para Alunos (StudentController) via API
+- [x] CRUD completo para Professores (TeacherController) via API
+- [x] CRUD completo para Secretaria (SecretaryController) via API
+- [ ] CRUD completo para Usuarios (UserController)
+- [x] Validacao de CPF unico no banco (migrations com unique)
 - [ ] Implementar upload de fotos de perfil
 
-### 3. Gestão de Cursos e Disciplinas
+### 3. Gestao de Cursos e Disciplinas
 
-- [ ] Implementar CRUD completo para Cursos (CourseController) - findAll e find implementados, adicionar register, updateAllData e outros métodos
-- [ ] Criar SubjectController e implementar CRUD para Disciplinas
-- [ ] Implementar associação Curso-Disciplina (CourseSubject)
-- [ ] Implementar listagem de disciplinas por curso
+- [x] CourseController com findAll, find, store, updateAllData, active, desactive
+- [x] SubjectController com index, store, update
+- [x] Associacao Curso-Disciplina (CourseSubject) com controller/service/repo
+- [ ] Expor rotas API para Course, Subject e CourseSubject
+- [ ] Adicionar endpoints faltantes em Subject (show, delete, active/desactive se necessario)
 
-### 4. Gestão de Classes
+### 4. Gestao de Turmas (Room)
 
-- [ ] Implementar CRUD completo para Classes (ClassController) - findAll implementado, adicionar find, register, updateAllData
-- [ ] Implementar associação Classe-Disciplina-Professor (ClassDisciplineTeacher)
-- [ ] Implementar matrícula de alunos em classes
-- [ ] Adicionar validação de conflitos de horário
+- [x] RoomController com index, show, store, active, desactive
+- [x] Associacao Turma-Disciplina-Professor (RoomDisciplineTeacher) com controller/service/repo
+- [ ] Expor rotas API para Room e RoomDisciplineTeacher
+- [ ] Adicionar update de turma (Room) e validacao de conflitos de horario
+- [ ] Implementar matricula de alunos em turmas
 
-### 5. Sistema de Notas e Frequência
+### 5. Sistema de Notas e Frequencia
 
-- [ ] Criar NoteController e implementar CRUD para Notas
-- [ ] Criar FrequencyController e implementar CRUD para Frequência
-- [ ] Implementar cálculo de médias
-- [ ] Implementar relatórios de desempenho
-- [ ] Adicionar validação de notas (0-10)
+- [x] Models e Migrations para Note e Frequency
+- [ ] Criar Services/Repositories/DTOs para Note e Frequency
+- [ ] Criar Controllers e rotas API para Note e Frequency
+- [ ] Implementar calculo de medias
+- [ ] Implementar relatorios de desempenho
+- [ ] Adicionar validacao de notas (0-10)
 
-### 6. Sistema de Conteúdos
+### 6. Sistema de Conteudos
 
-- [ ] Criar ContentController e implementar CRUD para Conteúdos
-- [ ] Criar ContentResponseController e implementar CRUD para Respostas de Conteúdo
+- [x] Models e Migrations para Content e ContentResponse
+- [ ] Criar Services/Repositories/DTOs para Content e ContentResponse
+- [ ] Criar Controllers e rotas API para Content e ContentResponse
 - [ ] Implementar upload de arquivos
-- [ ] Adicionar tipos de conteúdo (texto, vídeo, PDF)
+- [ ] Adicionar tipos de conteudo (texto, video, PDF)
 
 ### 7. Interface Frontend
 
-- [ ] Criar layout base com header/footer
-- [ ] Implementar dashboard para cada tipo de usuário
-- [ ] Criar formulários para CRUD de todas as entidades
-- [ ] Implementar tabelas de listagem com paginação
-- [ ] Adicionar navegação responsiva
-- [ ] Implementar modais para ações rápidas
-- [ ] Criar páginas de perfil para usuários
+- [x] Componentes base de layout e formularios
+- [x] Paginas basicas de login, register e dashboards
+- [ ] Criar layout base completo com header/footer e navegacao consistente
+- [ ] Implementar CRUDs no frontend (formularios e listagens)
+- [ ] Implementar tabelas com paginacao, filtros e ordenacao
+- [ ] Adicionar navegacao responsiva e modais para acoes rapidas
+- [ ] Criar paginas de perfil completas para usuarios
 
-### 8. Rotas e Navegação
+### 8. Rotas e Navegacao
 
-- [x] Implementar rotas API para Professores (findAll, find, create, update, desactive, active)
-- [x] Implementar rotas API para Secretária (find, update, create, desactive, active, findAll)
-- [x] Implementar rotas API para Alunos (findAll, find, create, update, active, desactive, formed, simpleUpdate)
-- [ ] Implementar rotas API para Cursos (findAll, find, register, update)
-- [ ] Implementar rotas API para Classes (findAll, find, register, update)
-- [ ] Completar rotas web para todas as funcionalidades
-- [ ] Organizar rotas por prefixos (admin, student, teacher)
+- [x] Rotas API para Professores, Secretaria e Alunos
+- [ ] Rotas API para Cursos, Disciplinas, Turmas, CourseSubject e RoomDisciplineTeacher
+- [ ] Completar rotas web (register, logout, home/secretary, etc.)
+- [ ] Organizar rotas por prefixos (admin, student, teacher) e aplicar middlewares
 - [ ] Implementar breadcrumbs
-- [ ] Adicionar proteção de rotas por role
 
-### 9. Validação e Segurança
+### 9. Validacao e Seguranca
 
-- [ ] Implementar Form Requests para todas as operações
-- [ ] Adicionar validação de entrada em todos os controllers
-- [ ] Implementar sanitização de dados
-- [ ] Adicionar proteção CSRF
+- [x] Form Requests para criacao/atualizacao de Student, Teacher, Secretary, Course, Subject, Room
+- [ ] Form Requests para demais entidades e endpoints (Note, Frequency, Content, associacoes, etc.)
+- [ ] Implementar sanitizacao de dados
 - [ ] Implementar rate limiting
 
 ### 10. Testes
 
-- [ ] Criar testes unitários para Services
-- [ ] Criar testes de integração para Controllers
+- [ ] Criar testes unitarios para Services
+- [ ] Criar testes de integracao para Controllers
 - [ ] Criar testes de feature para rotas
 - [ ] Implementar testes de API
-- [ ] Adicionar testes para validações
+- [ ] Adicionar testes para validacoes
 
-### 11. Migração do Sistema Legado
+### 11. Migracao do Sistema Legado
 
 - [ ] Analisar estrutura do banco legado (backup/)
-- [ ] Criar script de migração de dados
-- [ ] Migrar usuários existentes
-- [ ] Migrar dados de cursos, classes, notas
+- [ ] Criar script de migracao de dados
+- [ ] Migrar usuarios existentes
+- [ ] Migrar dados de cursos, turmas e notas
 - [ ] Testar compatibilidade de dados
 
-### 12. Configuração e Deploy
+### 12. Configuracao e Deploy
 
 - [ ] Configurar ambiente de desenvolvimento (Docker/Sail)
 - [ ] Configurar CI/CD
 - [ ] Implementar logging adequado
-- [ ] Configurar cache e otimização
-- [ ] Preparar documentação de deploy
+- [ ] Configurar cache e otimizacao
+- [ ] Preparar documentacao de deploy
 
 ### 13. Melhorias Gerais
 
-- [ ] Implementar internacionalização (PT-BR)
-- [ ] Adicionar notificações por email
+- [ ] Implementar internacionalizacao (PT-BR)
+- [ ] Adicionar notificacoes por email
 - [ ] Implementar busca global
-- [ ] Adicionar filtros e ordenação em listagens
 - [ ] Implementar tema dark/light
-- [ ] Adicionar gráficos e estatísticas no dashboard
+- [ ] Adicionar graficos e estatisticas no dashboard
 
-### 14. Documentação
+### 14. Documentacao
 
-- [ ] Criar documentação da API
+- [ ] Criar documentacao da API
 - [ ] Documentar funcionalidades do sistema
-- [ ] Criar guia de usuário
-- [ ] Documentar processo de migração
+- [ ] Criar guia de usuario
+- [ ] Documentar processo de migracao
 
-## Prioridades
+## Prioridades (Sugeridas)
 
-1. **Alta**: Completar CRUD para CourseController (register, updateAllData), criar SubjectController, completar CRUD para ClassController, implementar rotas API para Cursos e Classes, expandir rotas web
-2. **Média**: Implementar interface frontend completa, gestão de classes, notas e frequência
-3. **Baixa**: Melhorias de UX, testes, migração do legado
+1. **Alta**: Expor rotas API para Course/Subject/Room e associacoes, concluir endpoints faltantes (update de turma, show/delete de subject), aplicar middlewares de roles, organizar rotas por prefixo
+2. **Media**: CRUDs completos de notas/frequencia/conteudos, interface frontend para CRUDs, validacoes faltantes
+3. **Baixa**: Melhorias de UX, testes extensivos, migracao do legado, CI/CD e documentacao
 
 ## Notas
 
-- O sistema legado está localizado na pasta `backup/`
-- API implementada com middleware para roles (secretary, teacher, admin, student)
-- Usar DTOs para transferência de dados
-- Seguir padrões de arquitetura (Repository/Service)
-- Manter consistência com Laravel conventions
-- Próximo foco: Completar CourseController e ClassController, criar SubjectController, implementar rotas API faltantes, expandir views e rotas web</content>
-  <parameter name="filePath">c:\projects\redac\todo.md
+- O sistema legado esta localizado na pasta `backup/`
+- API ja possui controllers e services para varias entidades, mas faltam rotas publicadas e middlewares aplicados
+- Manter consistencia com Laravel conventions e padroes Repository/Service

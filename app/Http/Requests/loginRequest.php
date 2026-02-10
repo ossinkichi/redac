@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class LoginRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class LoginRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,8 +23,8 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user' => 'required|string|unique:users',
-            'password' => 'required|string|min:8|max:60',
+            'user' => 'required|string',
+            'password' => 'required|string',
         ];
     }
 
@@ -32,10 +33,8 @@ class LoginRequest extends FormRequest
         return [
             'user.required' => 'Campo usuário é obrigatório.',
             'user.string' => 'Campo usuário deve ser um texto válido.',
+
             'password.required' => 'Campo senha é obrigatório.',
-            'password.string' => 'Campo senha deve ser um texto válido.',
-            'password.min' => 'Campo senha deve ter no mínimo 8 caracteres.',
-            'password.max' => 'Campo senha deve ter no máximo 60 caracteres.',
         ];
     }
 }
