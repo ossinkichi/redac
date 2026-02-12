@@ -1,9 +1,9 @@
 <x-layout title=" - Entrar em sua conta">
-    <header class="navbar bg-base-200 shadow-sm p-4 row-span-1 h-[70px]">
+    <header class="col-span-2 navbar bg-base-200 shadow-sm p-4 row-span-1 h-[70px]">
         <span class="text-xl font-bold text-warning">Redac</span>
     </header>
 
-    <main>
+    <main class="col-span-2">
         <section>
             <div class="mt-20">
                 <form method="POST" action="{{ route('login.auth') }}"

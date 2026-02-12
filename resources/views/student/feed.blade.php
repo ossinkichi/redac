@@ -1,26 +1,36 @@
 @props([
-    'teachers' => [],
-    'students' => []
+    'teachers' => [
+        [
+            'full_name' => 'Franchesca carvalho',
+        ],
+    ],
+    'students' => [
+        [
+            'full_name' => 'Franchesco carvalho',
+        ],
+    ],
 ])
 
 <x-layout>
+    <x-student.header />
+
     <main>
-        <div></div>
-    </main>
-    <aside>
-        <div class="">
-            <ul>
-                @foreach ($teachers as $teacher)
-                    <li>{{ $teacher['full_name'] }}</li>
-                @endforeach
-            </ul>
+        <div>
+            <div class="card w-96 bg-base-100 shadow-sm">
+                <div class="card-body">
+                    <span class="card-title">Titulo do card</span>
+                </div>
+            </div>
         </div>
-        <div class="">
-            <ul>
-                @foreach ($students as $student)
-                    <li>{{ $student['full_name'] }}</li>
-                @endforeach
-            </ul>
+    </main>
+    <aside class="flex flex-col gap-4">
+        <div>
+            <span class="text-sm font-bold">Professores:</span>
+            <x-list :items="$teachers" key="full_name" />
+        </div>
+        <div>
+            <span class="text-sm font-bold">Alunos:</span>
+            <x-list :items="$students" key="full_name" />
         </div>
     </aside>
 </x-layout>
