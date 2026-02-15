@@ -18,6 +18,7 @@ class Room extends Model
         'course',
         'shift',
         'room',
+        'status',
         'created_at'
     ];
 
@@ -27,5 +28,6 @@ class Room extends Model
 
     protected $casts = [
         'created_at' => 'datetime:Y-m-d H:i:s',
+        'status' => 'bollean',
     ];
 }

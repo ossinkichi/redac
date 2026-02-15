@@ -27,14 +27,14 @@ Route::get('teacher', function () {
 })->name('teacher.dashboard');
 
 // Secretary routes
-Route::get('secretary', function () {
+Route::get('secretaria', function () {
     return view('secretary.secretary.dashboard');
 })->name('secretary.dashboard');
 
-Route::get('secretary/room/{room}', function ($room) {
-    return view('secretary.secretary.room', $room);
-})->name('secretary.dashboard');
+Route::get('secretaria/{curso}/salas', function ($room) {
+    return view('secretary.secretary.room');
+})->name('secretary.rooms');
 
-Route::get('secretary/me', function () {
+Route::get('secretaria/me', function () {
     return view('secretary.secretary.room');
 })->name('secretary.dashboard');

@@ -4,6 +4,6 @@
 
 <div class="card">
     <div class="card-body">
-        <span class="card-title"></span>
+        <p class="card-title">{{ $info['full_name'] }}</p>
     </div>
 </div>

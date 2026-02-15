@@ -7,7 +7,7 @@
         <div class="navbar-center">
             <nav>
                 <ul class="menu menu-horizontal px-1">
-                    <li><a>Salas</a></li>
+                    <li><a>Cursos</a></li>
                     <li><a>Professores</a></li>
                     <li><a>Alunos</a></li>
                 </ul>
