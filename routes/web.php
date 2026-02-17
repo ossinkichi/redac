@@ -29,7 +29,7 @@ Route::get('teacher', function () {
 // Secretary routes
 Route::get('secretaria', function () {
     return view('secretary.secretary.dashboard');
-})->name('secretary.dashboard');
+})->name('secretary.home');
 
 Route::get('secretaria/{curso}/salas', function ($room) {
     return view('secretary.secretary.rooms');
@@ -38,3 +38,11 @@ Route::get('secretaria/{curso}/salas', function ($room) {
 Route::get('secretaria/me', function () {
     return view('secretary.secretary.room');
 })->name('secretary.dashboard');
+
+Route::get('secretaria/lista/professores', function () {
+    return view('secretary.teacher.listenner');
+})->name('secretary.teachers.listenner');
+
+Route::get('secretaria/lista/alunos', function () {
+    return view('secretary.student.listenner');
+})->name('secretary.students.listenner');
