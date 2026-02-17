@@ -32,7 +32,7 @@ Route::get('secretaria', function () {
 })->name('secretary.dashboard');
 
 Route::get('secretaria/{curso}/salas', function ($room) {
-    return view('secretary.secretary.room');
+    return view('secretary.secretary.rooms');
 })->name('secretary.rooms');
 
 Route::get('secretaria/me', function () {

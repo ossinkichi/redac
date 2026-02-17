@@ -1,7 +1,16 @@
-<header class="col-span-2">
+<header>
     <div class="navbar bg-base-100 shadow-sm">
         <div class="navbar-start">
             <a class="btn btn-ghost text-xl text-warning">Redac</a>
+        </div>
+
+        <div class="navbar-center">
+            <nav>
+                <ul class="menu menu-horizontal px-1">
+                    <li><a>Atividades</a></li>
+                    <li><a>Forum</a></li>
+                </ul>
+            </nav>
         </div>
 
         <div class="navbar-end">
@@ -12,14 +21,6 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h7" />
                     </svg>
-                </div>
-                <div class="navbar-center">
-                    <nav>
-                        <ul class="menu menu-horizontal px-1">
-                            <li><a>Atividades</a></li>
-                            <li><a>Forum</a></li>
-                        </ul>
-                    </nav>
                 </div>
                 <nav>
                     <ul tabindex="-1"

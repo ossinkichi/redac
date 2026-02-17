@@ -1,7 +1,7 @@
-<header class="col-span-2 text-info">
+<header class="col-span-2">
     <div class="navbar bg-base-100 shadow-sm">
         <div class="navbar-start">
-            <a class="font-bold ml-5 text-xl">Redac</a>
+            <a class="font-bold ml-5 text-xl text-warning">Redac</a>
         </div>
 
         <div class="navbar-center">

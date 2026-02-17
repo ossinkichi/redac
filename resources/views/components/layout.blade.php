@@ -15,7 +15,7 @@
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="grid grid-rows-[70px_1fr] grid-cols-[1fr_300px] gap-12">
+    <body class="grid grid-rows-[70px_1fr] gap-12">
         {{ $slot }}
     </body>
 </html>
