@@ -16,6 +16,9 @@
             <div>
                 <x-form.input label="Telefone" />
             </div>
+            <div>
+                <x-secretary.form.subjects />
+            </div>
             <div class="">
                 <div>
                     <x-secretary.form.gender />
@@ -23,9 +26,6 @@
                 <div>
                     <x-form.date />
                 </div>
-            </div>
-            <div>
-                <span>Turma</span>
             </div>
         </form>
     </main>
