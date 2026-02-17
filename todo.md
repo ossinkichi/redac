@@ -26,18 +26,21 @@ gh issue create --title "Verificar e completar migrations e seeders" --label "ba
 
 ---
 
-## Status Atual (06/02/2026)
+## Status Atual (16/02/2026)
 
 - [x] Estrutura Laravel configurada
 - [x] Models Teacher, Secretary, Course, Subject, Room (turmas), Note, Frequency, Content, ContentResponse, CourseSubject, RoomDisciplineTeacher
 - [x] Repositories implementados para User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher
-- [x] Services implementados para User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher
-- [x] Controllers criados para Student, Teacher, Secretary (CRUD via API)
-- [x] Controllers criados para Course, Subject, Room, CourseSubject, RoomDisciplineTeacher (parcial, sem rotas expostas)
-- [x] Autenticação web básica (login/logout) implementada
-- [x] Views básicas: login, register, dashboards (student, teacher, secretary), feed/profile do aluno, componentes de layout
+- [x] Services implementados para User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher, ClassDisciplineTeacher
+- [x] Controllers criados para Student, Teacher, Secretary (CRUD via API com rotas expostas)
+- [x] Controllers criados para Course, Subject, Room, CourseSubject, RoomDisciplineTeacher (existem, mas sem rotas expostas)
+- [x] Autenticação web básica (login) implementada
+- [ ] Logout web implementado (faltam rotas)
+- [x] Views básicas: login, dashboards (student, teacher, secretary), feed/profile do aluno, componentes de layout
 - [x] Middlewares de roles implementados (EnsureIsAdmin, EnsureIsSecretary, EnsureIsTeacher, EnsureIsStudent)
 - [x] DTOs criados para Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher
+- [ ] DTOs para Note, Frequency, Content, ContentResponse (não criados)
+- [ ] Form Requests para Course, Subject, Room, Content, Frequency, Note (apenas LoginRequest e CreateRoomDisciplineTeacherRequest existem)
 
 ---
 
@@ -48,11 +51,12 @@ Use os detalhes abaixo para navegar por áreas. Cada seção contém as tarefas 
 <details>
 <summary>1. Autenticação e Autorização 🔐</summary>
 
-- [x] Login e logout web
-- [ ] Expor rotas web para register e logout (fluxo completo de registro)
-- [ ] Implementar recuperação de senha
-- [ ] Implementar autenticação via API (JWT ou Sanctum)
-- [ ] Aplicar middlewares de roles nas rotas
+- [x] Login web
+- [ ] Register web com fluxo completo
+- [ ] Logout web (rota mapeada, mas não funciona corretamente)
+- [ ] Recuperação de senha
+- [ ] Autenticação via API (JWT ou Sanctum)
+- [ ] Aplicar middlewares de roles nas rotas (middlewares existem, mas não estão aplicados)
 
 </details>
 
@@ -73,9 +77,11 @@ Use os detalhes abaixo para navegar por áreas. Cada seção contém as tarefas 
 
 - [x] CourseController com findAll, find, store, updateAllData, active, desactive
 - [x] SubjectController com index, store, update
-- [x] Associação Curso-Disciplina (CourseSubject)
+- [x] Associação Curso-Disciplina (CourseSubject) com Controller/Service/Repository
 - [ ] Expor rotas API para Course, Subject e CourseSubject
 - [ ] Adicionar endpoints faltantes em Subject (show, delete)
+- [ ] Criar Form Requests para Course, Subject e CourseSubject
+- [ ] Aplicar middlewares nas rotas
 
 </details>
 
@@ -83,17 +89,23 @@ Use os detalhes abaixo para navegar por áreas. Cada seção contém as tarefas 
 <summary>4. Turmas (Room) 🏫</summary>
 
 - [x] RoomController com index, show, store, active, desactive
-- [x] Associação Turma-Disciplina-Professor (RoomDisciplineTeacher)
+- [x] Associação Turma-Disciplina-Professor (RoomDisciplineTeacher) com Controller/Service/Repository
 - [ ] Expor rotas API para Room e RoomDisciplineTeacher
-- [ ] Adicionar update de turma e validação de conflitos de horário
+- [ ] Criar Form Requests para Room e RoomDisciplineTeacher
+- [ ] Adicionar método update para turema e validação de conflitos de horário
 - [ ] Implementar matrícula de alunos em turmas
+- [ ] Aplicar middlewares nas rotas
 
 </details>
 
 <details>
 <summary>5. Notas e Frequência 📝</summary>
-
-- [x] Models e Migrations para Note e Frequency
+ para Note e Frequency
+- [ ] Criar Repositories para Note e Frequency
+- [ ] Criar DTOs para Note e Frequency
+- [ ] Criar Controllers para Note e Frequency
+- [ ] Expor rotas API para Note e Frequency
+- [ ] Criar Form Requests e Frequency
 - [ ] Criar Services/Repositories/DTOs para Note e Frequency
 - [ ] Criar Controllers e rotas API para Note e Frequency
 - [ ] Implementar cálculo de médias
@@ -102,8 +114,12 @@ Use os detalhes abaixo para navegar por áreas. Cada seção contém as tarefas 
 
 </details>
 
-<details>
-<summary>6. Conteúdos 📎</summary>
+<details> para Content e ContentResponse
+- [ ] Criar Repositories para Content e ContentResponse
+- [ ] Criar DTOs para Content e ContentResponse
+- [ ] Criar Controllers para Content e ContentResponse
+- [ ] Expor rotas API para Content e ContentResponse
+- [ ] Criar Form Requests
 
 - [x] Models e Migrations para Content e ContentResponse
 - [ ] Criar Services/Repositories/DTOs para Content e ContentResponse
@@ -128,20 +144,22 @@ Use os detalhes abaixo para navegar por áreas. Cada seção contém as tarefas 
 <details>
 <summary>8. Rotas e Navegação 🔗</summary>
 
-- [x] Rotas API para Professores, Secretaria e Alunos
-- [ ] Rotas API para Cursos, Disciplinas, Turmas, CourseSubject e RoomDisciplineTeacher
-- [ ] Completar rotas web (register, logout, home/secretary)
-- [ ] Organizar rotas por prefixos e aplicar middlewares
+- [x] Rotas API para Professores, Secretaria e Alunos (com endpoints completos)
+- [ ] Rotas API para Cursos, Disciplinas, Turmas, CourseSubject e RoomDisciplineTeacher (controllers existem)
+- [ ] Completar rotas web (register, logout funcional, home/secretary, etc.)
+- [ ] Organizar rotas por prefixos (admin, student, teacher, secretary) e aplicar middlewares de roles
+- [ ] Implementar breadcrumbs
 
 </details>
 
 <details>
-<summary>9. Segurança & Validação 🔒</summary>
+<summary>9. Validação e Segurança 🔒</summary>
 
-- [x] Form Requests para criação/atualização das entidades principais
-- [ ] Form Requests para demais entidades
-- [ ] Sanitização de dados
-- [ ] Rate limiting
+- [x] Form Requests para Student, Teacher, Secretary (via LoginRequest e controllers)
+- [ ] Form Requests para Course, Subject, Room, CourseSubject, RoomDisciplineTeacher
+- [ ] Form Requests para Note, Frequency, Content, ContentResponse
+- [ ] Implementar sanitização de dados
+- [ ] Implementar rate limiting
 
 </details>
 
@@ -199,21 +217,17 @@ Use os detalhes abaixo para navegar por áreas. Cada seção contém as tarefas 
 
 ## Prioridades (sugestão rápida)
 
-1. **Alta** — Expor rotas API para Course/Subject/Room e associações; aplicar middlewares de roles
-2. **Média** — CRUDs de notas/frequência/conteúdos + frontend
-3. **Baixa** — Testes extensivos, migração e CI/CD
+1. **Alta** — Expor rotas API para Course/Subject/Room e associações (controllers existem); aplicar middlewares de roles nas rotas; criar Form Requests faltantes
+2. **Média** — Services/Repositories/DTOs/Controllers para Note, Frequency, Content; implementar CRUDs de notas/frequência/conteúdos + frontend
+3. **Baixa** — Testes extensivos, migração do legado, CI/CD e documentação
 
 ## Links úteis
 
-- `README.md`
-- `routes/`
-- `app/`
-- `database/migrations`
-- `docker-compose.yml`
-
----
-
-Se quiser, eu posso gerar um `ISSUES.md` com todas essas tasks formatadas, ou criar as issues automaticamente (preciso de confirmação e de que o `gh` CLI esteja autenticado). Atualizo o TODO conforme instruir.
+- [README.md](README.md)
+- [routes/](routes/)
+- [app/](app/)
+- [database/migrations](database/migrations)
+- [docker-compose.yml](docker-compose.yml)
 
 ### 1. Autenticação e Autorização
 
