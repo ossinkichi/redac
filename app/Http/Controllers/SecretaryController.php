@@ -10,9 +10,9 @@ use App\Http\Resources\SecretaryResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Dtos\Secretary\CreateSecretaryEmployeDto;
 use App\Dtos\Secretary\UpdateSecretaryEmployerDto;
-use App\Http\Requests\Secretary\createsecretaryEmployerRequest;
+use App\Http\Requests\Secretary\CreateSecretaryEmployerRequest;
 use App\Http\Requests\Secretary\UpdateAllDataSecretaryEmployerRequest;
-use App\Http\Requests\Secretary\UpdateSecretaryEmployerRequest;
+
 
 class SecretaryController extends Controller
 {
@@ -38,7 +38,7 @@ class SecretaryController extends Controller
         }
     }
 
-    public function store(CreatesecretaryEmployerRequest $request): Response
+    public function store(CreateSecretaryEmployerRequest $request): Response
     {
         try {
             $dto = CreateSecretaryEmployeDto::make($request->toArray());

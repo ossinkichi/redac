@@ -3,57 +3,227 @@
 ## Como usar este TODO
 
 - Marque tarefas como concluídas editando as caixas de seleção (`- [x]`).
-- Use a seção **Ações rápidas** para criar issues via `gh` (quando estiver autenticado).
+- Use a seção **Tarefas por Prioridade** para focar na ordem sugerida.
 - Abra as seções abaixo para ver tarefas por área.
 
 ## Visão Geral
 
-Este é o TODO central do Projeto REDAC — um sistema escolar em Laravel (substituição do legado em PHP). Contém status, prioridades e ações rápidas para criar issues.
+Sistema escolar em Laravel com arquitetura em camadas (Controllers → Services → Repositories). Substitui o sistema legado em PHP. Desenvolvimento contínuo com foco em rotas API, middlewares e frontend.
 
 ---
 
-## Ações rápidas
+## Status Atual (18/02/2026)
 
-Execute localmente (PowerShell/CMD) quando o `gh` CLI estiver autenticado.
+**Backend:**
 
-```bash
-gh issue create --title "Atualizar README e .env-example com instruções de setup" --label "docs,enhancement" --body "Passos: 1) Instalar dependências via Composer\n2) Copiar .env-example para .env e ajustar\n3) Rodar migrations e seeders\nArquivos: README.md, .env-example"
+- [x] Estrutura Laravel com Models, Migrations, Seeders configurados
+- [x] Todas as 12 Models criadas: User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher, Note, Frequency, Content, ContentResponse
+- [x] Repositories para 9 entidades: User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher
+- [ ] Repositories para 4 entidades: Note, Frequency, Content, ContentResponse
+- [x] Services para 9 entidades + ClassDisciplineTeacher
+- [ ] Services para Note, Frequency, Content, ContentResponse
+- [x] DTOs para 9 entidades principais
+- [ ] DTOs para Note, Frequency, Content, ContentResponse
+- [x] Controllers com CRUDs: Student, Teacher, Secretary (rotas expostas)
+- [x] Controllers criados: Course, Subject, Room, CourseSubject, RoomDisciplineTeacher (SEM rotas expostas)
+- [ ] Controllers para Note, Frequency, Content, ContentResponse
+
+**Autenticação:**
+
+- [x] Login web implementado
+- [ ] Logout web funcional (rota existe, mas precisa teste)
+- [ ] Register web completo
+- [ ] Recuperação de senha
+- [ ] API Tokens (Sanctum)
+
+**Frontend:**
+
+- [x] Componentes base de layout
+- [x] Páginas: login, dashboards (student/teacher/secretary), feed/profile
+- [ ] Layout completo com navegação e header/footer
+- [ ] CRUDs no frontend (tabelas, formulários, listagens)
+- [ ] Tabelas com paginação e filtros
+
+**Rotas & Middlewares:**
+
+- [x] Middlewares de roles criados: Admin, Secretary, Teacher, Student
+- [ ] Rotas API expostas para Course, Subject, Room, CourseSubject, RoomDisciplineTeacher
+- [ ] Middlewares aplicados nas rotas
+- [ ] Rotas web completas (register, logout, dashboards)
+- [ ] Organização de rotas por prefixo (admin/, teacher/, secretary/, student/)
+
+
+
+---
+
+## Tarefas por Prioridade
+
+### 🔴 P1 - Expor Rotas API Faltantes
+
+- [ ] Expor rotas API para Course (CourseController já existe)
+- [ ] Expor rotas API para Subject (SubjectController já existe)
+- [ ] Expor rotas API para Room (RoomController já existe)
+- [ ] Expor rotas API para CourseSubject (Controller já existe)
+- [ ] Expor rotas API para RoomDisciplineTeacher (Controller já existe)
+- [ ] Adicionar endpoints faltantes em Subject (show, delete, active/desactive)
+- [ ] Adicionar método update em Room
+- [ ] Aplicar middlewares de roles nas rotas API
+- [ ] Organizar rotas por prefixos (admin/, teacher/, secretary/, student/)
+
+### 🟡 P2 - Implementar Notas, Frequência e Conteúdos
+
+**Notas:**
+- [ ] Criar Repository para Note
+- [ ] Criar Service para Note
+- [ ] Criar DTO para Note
+- [ ] Criar Controller para Note (show, index, store, update, delete)
+- [ ] Criar Form Requests para Note
+- [ ] Expor rotas API para Note
+- [ ] Implementar cálculo de médias por disciplina
+- [ ] Validar notas (0-10)
+
+**Frequência:**
+- [ ] Criar Repository para Frequency
+- [ ] Criar Service para Frequency
+- [ ] Criar DTO para Frequency
+- [ ] Criar Controller para Frequency (show, index, store, update, delete)
+- [ ] Criar Form Requests para Frequency
+- [ ] Expor rotas API para Frequency
+
+**Conteúdos:**
+- [ ] Criar Repository para Content
+- [ ] Criar Service para Content
+- [ ] Criar DTO para Content
+- [ ] Criar Controller para Content (show, index, store, update, delete)
+- [ ] Criar Repository para ContentResponse
+- [ ] Criar Service para ContentResponse
+- [ ] Criar DTO para ContentResponse
+- [ ] Criar Controller para ContentResponse (show, index, store, update, delete)
+- [ ] Implementar upload de arquivos
+- [ ] Adicionar tipos de conteúdo (texto, vídeo, PDF)
+
+### 🟠 P3 - Autenticação e Interface Web
+
+**Autenticação:**
+- [ ] Testar e corrigir rota de logout
+- [ ] Implementar register web com fluxo completo
+- [ ] Implementar recuperação de senha
+- [ ] Implementar API Tokens (Sanctum) para endpoints
+
+**Frontend:**
+- [ ] Criar layout base completo com header/footer
+- [ ] Implementar navegação responsiva
+- [ ] Criar tabelas para CRUDs com paginação e filtros
+- [ ] Criar formulários para Student, Teacher, Secretary, Course, Subject, Room
+- [ ] Criar formulários para Note, Frequency, Content
+- [ ] Implementar modais para ações rápidas
+- [ ] Criar páginas de perfil completas
+
+### 🔵 P4 - Validação, Testes e Documentação
+
+**Validação e Segurança:**
+- [ ] Criar Form Requests para Course, Subject, Room, CourseSubject, RoomDisciplineTeacher
+- [ ] Criar Form Requests para Note, Frequency, Content, ContentResponse
+- [ ] Implementar sanitização de dados
+- [ ] Implementar rate limiting
+- [ ] Validar conflitos de horário em turmas
+- [ ] Implementar matrícula de alunos em turmas
+
+**Testes:**
+- [ ] Criar testes unitários para Services
+- [ ] Criar testes de integração para Controllers
+- [ ] Criar testes de feature para rotas
+- [ ] Criar testes de API
+- [ ] Adicionar testes para validações
+
+**Documentação:**
+- [ ] Criar documentação da API (OpenAPI/Swagger)
+- [ ] Documentar funcionalidades do sistema
+- [ ] Criar guia de usuário
+- [ ] Documentar padrões e convenções do projeto
+
+### 🟣 P5 - Migração do Legado e Deploy
+
+**Migração:**
+- [ ] Analisar estrutura do banco legado (backup/)
+- [ ] Criar script de migração de dados
+- [ ] Migrar usuários existentes
+- [ ] Migrar dados de cursos, turmas e notas
+- [ ] Testar compatibilidade de dados
+
+**Deploy & Infra:**
+- [ ] Configurar ambiente de desenvolvimento (Docker/Sail)
+- [ ] Configurar CI/CD
+- [ ] Implementar logging adequado
+- [ ] Configurar cache e otimização
+- [ ] Preparar documentação de deploy
+
+### ⚪ P6 - Melhorias Futuras
+
+- [ ] Implementar internacionalização (PT-BR)
+- [ ] Adicionar notificações por email
+- [ ] Implementar busca global
+- [ ] Implementar tema dark/light
+- [ ] Adicionar gráficos e estatísticas no dashboard
+- [ ] Implementar relatórios de desempenho
+- [ ] Sistema de permissões granular
+
+---
+
+## Estrutura do Projeto
+
+```
+app/
+├── Models/              ✓ (12 models criadas)
+├── Controllers/         ✓ (5 controllers com rotas, 5 sem rotas)
+├── Services/           ✓ (9 services criadas)
+├── Repositories/       ✓ (9 repositories; faltam Note, Frequency, Content, ContentResponse)
+├── Dtos/               ✓ (9 DTOs; faltam Note, Frequency, Content, ContentResponse)
+├── Http/
+│   ├── Requests/       (LoginRequest, CreateRoomDisciplineTeacherRequest; faltam outros)
+│   ├── Resources/
+│   └── Middleware/     ✓ (Roles: Admin, Secretary, Teacher, Student)
+└── View/Components/    ✓ (Componentes base de layout)
+
+database/
+├── migrations/         ✓ (Tables para todas as Models)
+└── seeders/            (Database seeder)
+
+resources/
+├── css/
+├── js/
+└── views/              ✓ (login, dashboards, feed, components)
+
+routes/
+├── api.php             (Rotas para Student, Teacher, Secretary)
+├── web.php             (Login, rotas web gerais)
+└── console.php
 ```
 
-```bash
-gh issue create --title "Verificar e completar migrations e seeders" --label "backend,bug" --body "Revisar migrations em database/migrations e seeders em database/seeders; garantir rollbacks e seeds para usuários e dados de exemplo."
-```
+---
+
+## Notas Importantes
+
+- Estrutura em camadas: Controller → Service → Repository → Model
+- Padrão DTO para transferência de dados
+- Middlewares de roles implementados, mas não aplicados nas rotas
+- Controllers para Course/Subject/Room/CourseSubject/RoomDisciplineTeacher existem, mas sem rotas publicadas
+- Models Note e Frequency já possuem migrations, mas faltam as demais camadas
+- Sistema legado em `backup/` para possível migração futura
+- Frontend em Vue.js (Inertia) - verificar se está sendo usado
 
 ---
 
-## Status Atual (16/02/2026)
+## Links Úteis
 
-- [x] Estrutura Laravel configurada
-- [x] Models Teacher, Secretary, Course, Subject, Room (turmas), Note, Frequency, Content, ContentResponse, CourseSubject, RoomDisciplineTeacher
-- [x] Repositories implementados para User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher
-- [x] Services implementados para User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher, ClassDisciplineTeacher
-- [x] Controllers criados para Student, Teacher, Secretary (CRUD via API com rotas expostas)
-- [x] Controllers criados para Course, Subject, Room, CourseSubject, RoomDisciplineTeacher (existem, mas sem rotas expostas)
-- [x] Autenticação web básica (login) implementada
-- [ ] Logout web implementado (faltam rotas)
-- [x] Views básicas: login, dashboards (student, teacher, secretary), feed/profile do aluno, componentes de layout
-- [x] Middlewares de roles implementados (EnsureIsAdmin, EnsureIsSecretary, EnsureIsTeacher, EnsureIsStudent)
-- [x] DTOs criados para Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher
-- [ ] DTOs para Note, Frequency, Content, ContentResponse (não criados)
-- [ ] Form Requests para Course, Subject, Room, Content, Frequency, Note (apenas LoginRequest e CreateRoomDisciplineTeacherRequest existem)
-
----
-
-## TODOs Pendentes (Resumo)
-
-Use os detalhes abaixo para navegar por áreas. Cada seção contém as tarefas principais como checklist.
-
-<details>
-<summary>1. Autenticação e Autorização 🔐</summary>
-
-- [x] Login web
-- [ ] Register web com fluxo completo
-- [ ] Logout web (rota mapeada, mas não funciona corretamente)
+- [README.md](README.md)
+- [routes/api.php](routes/api.php)
+- [routes/web.php](routes/web.php)
+- [app/Models](app/Models)
+- [app/Http/Controllers](app/Http/Controllers)
+- [app/Services](app/Services)
+- [app/Repositories](app/Repositories)
+- [docker-compose.yml](docker-compose.yml)
 - [ ] Recuperação de senha
 - [ ] Autenticação via API (JWT ou Sanctum)
 - [ ] Aplicar middlewares de roles nas rotas (middlewares existem, mas não estão aplicados)

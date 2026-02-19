@@ -38,18 +38,6 @@ class UserController extends Controller
         ]);
     }
 
-    public function registerView()
-    {
-        return view('register');
-    }
-
-    public function register(array $data)
-    {
-        $response = UserService::newUser($data);
-
-        return $response;
-    }
-
     public function logout()
     {
         Auth::logout();

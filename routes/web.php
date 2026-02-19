@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\EnsureIsSecretary;
+use App\Http\Middleware\EnsureIsStudent;
+use App\Http\Middleware\EnsureIsTeacher;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(
@@ -20,15 +22,17 @@ Route::middleware('guest')->group(
 
 Route::middleware('auth')->group(function () {
 
+    Route::get('/sair', [UserController::class, 'logout'])->name('logout');
+
     // Student routes
-    Route::middleware(EnsureIsSecretary::class)->group(function () {
+    Route::middleware(EnsureIsStudent::class)->group(function () {
         Route::get('student/feed', function () {
             return view('student.feed');
         })->name('student.home');
     });
 
     // Teacher routes
-    Route::middleware(EnsureIsSecretary::class)->group(function () {
+    Route::middleware(EnsureIsTeacher::class)->group(function () {
         Route::get('teacher', function () {
             return view('teacher.dashboard');
         })->name('teacher.home');

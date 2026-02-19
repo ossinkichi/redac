@@ -27,7 +27,7 @@
                         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                         <li><a>Perfil</a></li>
                         <li><a>Configurações</a></li>
-                        <li><a>Deslogar</a></li>
+                        <li><a href="{{ route('logout') }}">Deslogar</a></li>
                     </ul>
                 </nav>
             </div>
