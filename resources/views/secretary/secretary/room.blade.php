@@ -16,6 +16,10 @@
 
     <x-secretary.header />
 
-    <main></main>
+    <main>
+        <section>
+
+        </section>
+    </main>
 
 </x-layout>

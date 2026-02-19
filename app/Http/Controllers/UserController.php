@@ -22,7 +22,15 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect('/student/dashboard');
+            $user = Auth::user();
+
+            return match ($user->role) {
+                'secretary' => redirect(route('secretary.home')),
+                'stundent' => redirect(route('student.home')),
+                'teacher' => redirect(route('teacher.home')),
+                'admin' => redirect(route('admin.home')),
+                default => redirect('/'),
+            };
         }
 
         return back()->withErrors([
