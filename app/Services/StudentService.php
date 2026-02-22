@@ -8,7 +8,6 @@ use App\Dtos\Student\UpdateSimpleDataOfStudentDto;
 use App\Dtos\Student\UpdateStudentDataDto;
 use App\Http\Requests\Course\UpdateAllDataCourseRequest;
 use App\Models\Student;
-use App\Repositories\ClassRepository;
 use App\Repositories\StudentRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -19,24 +18,12 @@ class StudentService
 {
     public function __construct(
         private StudentRepository $studentRepository,
-        private ClassRepository $classRepository,
         private CourseService $courseService
-    ) {
-        $this->studentRepository = $studentRepository;
-        $this->classRepository = $classRepository;
-        $this->courseService = $courseService;
-    }
+    ) {}
 
     public function findAll(): Collection
     {
-        $response = $this->studentRepository->findAll();
-
-        if (!$response->empty()) {
-            return  $response->map(function ($studens) {
-                return $this->aditionalInfo($studens);
-            });
-        }
-        return $response;
+        return $this->studentRepository->findAll();
     }
 
     public function find(string $cpf): Student
@@ -44,14 +31,6 @@ class StudentService
         $student = $this->studentRepository->findByCpf($cpf);
 
         !$student && throw new ModelNotFoundException('Estudante não encontrado');
-
-        return $this->aditionalInfo($student);
-    }
-
-    private function aditionalInfo(Student $student): Student
-    {
-        $student['class_id'] = $this->classRepository->find($student['class_id']);
-        $student['course_id'] = $this->courseService->find($student['course_id']);
 
         return $student;
     }

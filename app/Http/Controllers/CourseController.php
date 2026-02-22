@@ -14,7 +14,8 @@ use App\Http\Resources\CourseResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Requests\Course\CreateCourseRequest;
 use App\Http\Requests\Course\UpdateAllDataCourseRequest;
-use App\Http\Requests\Course\UpdateCourseRequest;
+use Illuminate\Support\Facades\Redirect;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class CourseController extends Controller
 {
@@ -24,7 +25,7 @@ class CourseController extends Controller
         $this->service = $service;
     }
 
-    public function findAll(): JsonResource
+    public function index(): JsonResource
     {
         try {
             return CourseResource::collection($this->service->findAll());
@@ -42,13 +43,13 @@ class CourseController extends Controller
         }
     }
 
-    public function store(CreateCourseRequest $request): Response
+    public function store(CreateCourseRequest $request): RedirectResponse
     {
         try {
             $dto = CreateCourseDto::make($request->toArray());
             $this->service->register($dto);
 
-            return response()->noContent();
+            return \redirect()->route('secretary.home');
         } catch (Throwable $th) {
             throw Exceptions::fromMessage($th);
         }

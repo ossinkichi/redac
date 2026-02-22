@@ -11,7 +11,7 @@ class CreateCourseRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,7 @@ class CreateCourseRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'description' => 'sometimes|string',
+            'description' => 'nullable|string',
         ];
     }
 

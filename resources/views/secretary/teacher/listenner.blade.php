@@ -1,49 +1,4 @@
-@props([
-    'teachers' => [
-        [
-            'id' => 1,
-            'full_name' => 'João Silva',
-            'date_of_birth' => '1980-01-01',
-            'email' => 'joao.silva@example.com',
-            'phone_number' => '(11) 99999-9999',
-            'address' => 'Rua Exemplo, 123 - São Paulo/SP',
-            'discipline_specializate' => [
-                'id' => 1,
-                'name' => 'Analista de sistemas',
-            ],
-            'is_active' => true,
-            'created_at' => '2023-01-01 00:00:00',
-        ],
-        [
-            'id' => 1,
-            'full_name' => 'João Silva',
-            'date_of_birth' => '1980-01-01',
-            'email' => 'joao.silva@example.com',
-            'phone_number' => '(11) 99999-9999',
-            'address' => 'Rua Exemplo, 123 - São Paulo/SP',
-            'discipline_specializate' => [
-                'id' => 1,
-                'name' => 'Fisica',
-            ],
-            'is_active' => true,
-            'created_at' => '2023-01-01 00:00:00',
-        ],
-        [
-            'id' => 1,
-            'full_name' => 'João Silva',
-            'date_of_birth' => '1980-01-01',
-            'email' => 'joao.silva@example.com',
-            'phone_number' => '(11) 99999-9999',
-            'address' => 'Rua Exemplo, 123 - São Paulo/SP',
-            'discipline_specializate' => [
-                'id' => 1,
-                'name' => 'Matemática',
-            ],
-            'is_active' => true,
-            'created_at' => '2023-01-01 00:00:00',
-        ],
-    ],
-])
+@props(['teachers' => []])
 
 <x-layout title="- Professores">
 
@@ -53,9 +8,12 @@
         <section>
             <div class="container w-screen px-7">
                 <div>
-                    <h1 class="font-extrabold text-xl mb-5">Professores</h1>
+                    <div class="col-span-3 flex flex-row justify-between">
+                        <h1 class="font-extrabold text-xl mb-5">Professores</h1>
+                        <a href="{{ route('secretary.teacher.register') }}" class="btn btn-base-200 border-base-300 shadow-md rounded-sm">Adicionar professor</a>
+                    </div>
                     @if (count($teachers) == 0)
-                        <span>Nenhum professor encontrado</span>
+                        <span>Nenhum professor(a) encontrado(a)</span>
                     @else
                         <div class="overflow-x-auto w-full">
                             <table class="table">

@@ -13,11 +13,12 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use App\Dtos\Teacher\UpdateSimpleDataOfTeacherDto;
 use App\Http\Requests\Teacher\CreateTeacherRequest;
 use App\Http\Requests\Teacher\SimpleUpdateDataOfTeacher;
+use Illuminate\View\View;
 
 class TeacherController extends Controller
 {
 
-    public function __construct(private TeacherService $service) {}
+    public function __construct(private readonly TeacherService $service) {}
 
     public function index(): JsonResource
     {
@@ -38,10 +39,11 @@ class TeacherController extends Controller
         }
     }
 
-    public function store(CreateTeacherRequest $teacherData): Response
+    public function store(CreateTeacherRequest $request): Response
     {
         try {
-            $dto = CreateTeacherDto::make($teacherData->toArray());
+            \dd($request);
+            $dto = CreateTeacherDto::make($request->toArray());
             $this->service->create($dto);
 
             return response()->noContent();

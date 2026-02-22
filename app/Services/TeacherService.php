@@ -12,25 +12,22 @@ use DomainException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
-use InvalidArgumentException;
 
 class TeacherService
 {
 
     public function __construct(
-        private TeacherRepository $repository,
-        private SubjectRepository $subjectRepository
+        private readonly TeacherRepository $repository,
+        private readonly SubjectRepository $subjectRepository
     ) {}
 
     public function findAll(): Collection
     {
         $teachers = $this->repository->all();
 
-        if ($teachers->isEmpty()) {
-            throw new ModelNotFoundException("Nenhum professor encontrado.");
-        }
-
-        $teachers->map(fn($teacher) => $teacher['discipline_specializate'] = $this->aditionalInfo($teacher['discipline_specializate']));
+        // if (!$teachers->isEmpty()) {
+        //     $teachers->map(fn($teacher) => $teacher['discipline_specializate'] = $this->aditionalInfo($teacher['discipline_specializate']));
+        // }
 
         return $teachers;
     }

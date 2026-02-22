@@ -1,22 +1,4 @@
-@props([
-    'students' => [
-        [
-            'registration' => '20230001',
-            'full_name' => 'Maria Silva',
-            'date_of_birth' => '2005-01-01',
-            'address' => 'Rua Exemplo, 123 - São Paulo/SP',
-            'email' => 'maria.silva@example.com',
-            'phone_number' => '(11) 99999-9999',
-            'course' => [
-                'id' => 1,
-                'name' => 'Analista de sistemas',
-            ],
-            'class_id' => 1,
-            'is_active' => true,
-            'created_at' => '2023-01-01 00:00:00',
-        ],
-    ],
-])
+@props(['students' => []])
 
 <x-layout title="- Lista de alunos">
 
@@ -26,7 +8,10 @@
         <section>
             <div class="container w-screen px-7">
                 <div>
-                    <h1 class="font-extrabold text-xl mb-5">Alunos</h1>
+                    <div class="col-span-3 flex flex-row justify-between">
+                        <h1 class="font-extrabold text-xl mb-5">Alunos</h1>
+                        <a href="{{ route('secretary.aluno.register') }}" class="btn btn-base-200 border-neutral rounded-sm">Adicionar Aluno</a>
+                    </div>
                     @if (count($students) == 0)
                         <span>Nenhum aluno(a) encontrado</span>
                     @else

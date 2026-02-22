@@ -3,13 +3,14 @@
 ])
 
 <label class="select">
-    <span class="label">Cargo</span>
+    <span class="label">Matéria</span>
     <select>
         @if (!$subjects)
-            <option>Nenhuma materia</option>
+            <option disabled>Nenhuma materia</option>
         @else
             @foreach ($subjects as $subject)
-                <option>{{ $subjects['name'] }}</option>
+                <option disabled selected>Escolher matéria</option>
+                <option>{{ $subject['name'] }}</option>
             @endforeach
         @endif
     </select>

@@ -1,32 +1,34 @@
 <x-layout>
     <x-secretary.header />
 
-    <main>
-        <form method="POST" action=""
-            class="flex flex-col gap-6 m-auto fieldset bg-base-200 border-base-300 rounded-box w-xs border p-6">
-            <div>
-                <x-form.input label="Nome completo" />
-            </div>
-            <div>
-                <x-form.input label="cpf" />
-            </div>
-            <div>
-                <x-form.input label="Email" />
-            </div>
-            <div>
-                <x-form.input label="Telefone" />
-            </div>
-            <div>
-                <x-secretary.form.subjects />
-            </div>
+    <main class="max-w-[1200px]">
+        <section class="w-screen">
             <div class="">
-                <div>
-                    <x-secretary.form.gender />
-                </div>
-                <div>
-                    <x-form.date />
-                </div>
+                <form method="POST" action="{{ route('secretary.teacher.store') }}"
+                    class="flex flex-col gap-6 m-auto fieldset bg-base-200 border-base-300 rounded-box w-md border p-6 shadow-md">
+                    @csrf
+
+                    <x-form.input label="Nome completo" placeholder="Nome completo" name="full_name" />
+
+                    <x-form.input label="cpf" />
+
+                    <x-form.input label="Email" />
+
+                    <x-form.input label="Telefone" />
+
+                    <x-secretary.form.subjects />
+
+                    <div>
+                        <div>
+                            <x-form.gender-input />
+                        </div>
+                        <div>
+                            <x-form.date-input />
+                        </div>
+                    </div>
+                    <button class="btn btn-neutral">Registrar</button>
+                </form>
             </div>
-        </form>
+        </section>
     </main>
 </x-layout>

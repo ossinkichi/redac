@@ -15,21 +15,21 @@ use App\Http\Requests\Student\UpdateAllDataStudentRequest;
 use App\Http\Requests\Student\CreateStudentRequest;
 use App\Http\Requests\Student\UpdateSimpleDataOfStudentRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\View\View;
 
 class StudentController extends Controller
 {
 
     public function __construct(
-        private StudentService $service
+        private readonly StudentService $service
     ) {}
 
     public function index(): JsonResource
     {
         try {
-            return
-                StudentResource::collection($this
-                    ->service
-                    ->findAll());
+            return StudentResource::collection($this
+                ->service
+                ->findAll());
         } catch (Throwable $th) {
             throw Exceptions::fromMessage($th);
         }
