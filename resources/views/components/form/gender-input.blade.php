@@ -1,8 +1,9 @@
 <label class="select">
     <span class="label">Genero</span>
-    <select>
-        <option>Masculino</option>
-        <option>Feminino</option>
-        <option>Outro</option>
+    <select name="gender">
+        <option disabled selected>Selecione o genero</option>
+        <option value="Masculino">Masculino</option>
+        <option value="Feminino">Feminino</option>
+        <option value="Outro">Outro</option>
     </select>
 </label>

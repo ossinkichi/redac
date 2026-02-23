@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Dtos\Room\CreateRoomDto;
-use App\Models\ClassModel;
+use App\Models\Room;
 use App\Repositories\RoomRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -22,12 +22,12 @@ class RoomService
         return $this->repository->findAll();
     }
 
-    public function find(int $id): ClassModel
+    public function find(int $id): Room
     {
         return $this->repository->find($id);
     }
 
-    public function register(CreateRoomDto $data): ClassModel
+    public function register(CreateRoomDto $data): Room
     {
         $response = $this->repository->create($data->toArray());
 
@@ -36,7 +36,7 @@ class RoomService
         return $response;
     }
 
-    public function updateStatus(array $data): ClassModel
+    public function updateStatus(array $data): Room
     {
         $room = $this->repository->find($data['id']);
         $room->update($data);

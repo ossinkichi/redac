@@ -10,14 +10,14 @@ class Room extends Model
 
     use HasFactory;
 
-    protected $table = 'Room';
+    protected $table = 'Rooms';
 
     protected $fillable = [
         'id',
         'series',
         'course',
         'shift',
-        'room',
+        'identification',
         'status',
         'created_at'
     ];

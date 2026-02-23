@@ -4,7 +4,7 @@
     <main class="max-w-[1200px]">
         <section class="w-screen">
             <div class="w-full p-6">
-                <x-form.form label="name" method="POST" route="{{ route('secretary.course.store') }}">
+                <x-form.form label="name" method="POST" route="{{ route('course.store') }}">
                     @csrf
                     <p class="text-center font-bold text-2xl">Novo curso</p>
                     <div>

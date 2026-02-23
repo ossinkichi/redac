@@ -10,7 +10,7 @@
                 <div>
                     <div class="col-span-3 flex flex-row justify-between">
                         <h1 class="font-extrabold text-xl mb-5">Alunos</h1>
-                        <a href="{{ route('secretary.aluno.register') }}" class="btn btn-base-200 border-neutral rounded-sm">Adicionar Aluno</a>
+                        <a href="{{ route('secretary.aluno.register') }}" class="btn btn-base-200 border-base-300 shadow-sm rounded-sm">Adicionar Aluno</a>
                     </div>
                     @if (count($students) == 0)
                         <span>Nenhum aluno(a) encontrado</span>

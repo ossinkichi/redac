@@ -11,7 +11,7 @@ class CreateRoomRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,9 +23,9 @@ class CreateRoomRequest extends FormRequest
     {
         return [
             'series' => 'required|integer',
-            'course' => 'required|string',
-            'shift' => 'required|string|in:morning,afternoon,night',
-            'room' => 'required|string'
+            'course' => 'required|int',
+            'shift' => 'required|string|in:matutino,vespertino,noturno',
+            'identification' => 'required|string'
         ];
     }
 
@@ -36,10 +36,10 @@ class CreateRoomRequest extends FormRequest
 
             'course.required' => 'Curso nào informado.',
 
-            'shif.required' => 'Turno nào informado.',
-            'shif.in' => 'Turno nào informado.',
+            'shift.required' => 'Turno nào informado.',
+            'shift.in' => 'Turno nào informado.',
 
-            'room.required' => 'sala nào informado.',
+            'identification.required' => 'sala nào informado.',
         ];
     }
 }

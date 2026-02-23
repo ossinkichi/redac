@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\ClassModel;
+use App\Models\Room;
 use Illuminate\Support\Collection;
 
 class RoomRepository
@@ -10,16 +10,16 @@ class RoomRepository
 
     public function findAll(): Collection
     {
-        return ClassModel::all();
+        return Room::all();
     }
 
-    public function find($id): ClassModel
+    public function find($id): Room
     {
-        return ClassModel::findOrFail($id);
+        return Room::findOrFail($id);
     }
 
-    public function create(array $data): ClassModel
+    public function create(array $data): Room
     {
-        return ClassModel::create($data);
+        return Room::create($data);
     }
 }

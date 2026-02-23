@@ -7,7 +7,7 @@
         <h2 class="card-title uppercase">{{ $course['name'] }}</h2>
         <p class="mb-4 line-clamp-2">{{ $course['description'] }}</p>
         <div class="card-actions justify-end">
-            <a href="{{ route('secretary.rooms', $course['name']) }}" class="btn btn-neutral text-white">
+            <a href="{{ route('secretary.rooms', $course) }}" class="btn btn-neutral text-white">
                 Acessar
             </a>
         </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
@@ -50,9 +51,15 @@ Route::get('secretaria', function () {
     );
 })->name('secretary.home');
 
-Route::get('secretaria/{curso}/salas', function ($room) {
-    return view('secretary.secretary.rooms');
+Route::get('secretaria/{curso}/salas', function ($course) {
+    return view('secretary.secretary.rooms', ['course' => $course]);
 })->name('secretary.rooms');
+
+Route::get('secretaria/{curso}/sala/registrar', function ($course) {
+    return view('secretary.secretary.rooms.register', ['course' => $course]);
+})->name('secretary.room.register');
+
+Route::post('/sala/register', [RoomController::class, 'store'])->name('room.store');
 
 Route::get('secretaria/me', function () {
     return view('secretary.secretary.room');
@@ -69,17 +76,17 @@ Route::get('secretaria/lista/alunos', function () {
 Route::get('secretaria/registrar/curso', function () {
     return view('secretary.secretary.course.register');
 })->name('secretary.course.register');
-Route::post('/curso/registrar', [CourseController::class, 'store'])->name('secretary.course.store');
+Route::post('/curso/registrar', [CourseController::class, 'store'])->name('course.store');
 
 Route::get('secretaria/registrar/aluno', function () {
     return view('secretary.student.register');
 })->name('secretary.aluno.register');
-Route::post('/aluno/registrar', [StudentController::class, 'store'])->name('secretary.student.store');
+Route::post('/aluno/registrar', [StudentController::class, 'store'])->name('student.store');
 
 Route::get('secretaria/registrar/professor', function () {
     return view('secretary.teacher.register');
 })->name('secretary.teacher.register');
-Route::post('/professor/registrar', [TeacherController::class, 'store'])->name('secretary.teacher.store');
+Route::post('/professor/registrar', [TeacherController::class, 'store'])->name('teacher.store');
 
     // });
 

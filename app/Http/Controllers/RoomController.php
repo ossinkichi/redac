@@ -8,7 +8,7 @@ use App\Http\Requests\Room\CreateRoomRequest;
 use App\Http\Resources\ClassResource;
 use App\Services\RoomService;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Throwable;
 
 class RoomController extends Controller
@@ -36,13 +36,13 @@ class RoomController extends Controller
         }
     }
 
-    public function store(CreateRoomRequest $data): Response
+    public function store(CreateRoomRequest $request): RedirectResponse
     {
         try {
-            $dto = CreateRoomDto::make($data->toArray());
+            $dto = CreateRoomDto::make($request->toArray());
             $this->service->register($dto);
 
-            return response()->noContent();
+            return redirect()->route('secretary.rooms', $dto->course);
         } catch (Throwable $th) {
             throw Exceptions::fromMessage($th);
         }

@@ -25,13 +25,13 @@ class CreateStudentRequest extends FormRequest
             'full_name' => 'required|string|max:255|min:15',
             'registration' => 'required|string|min:10',
             'cpf' => 'required|digits:11|cpf|unique:students,cpf',
-            'gender' => 'required|string|in:male,female,outher',
+            'gender' => 'required|string|in:Masculino,Feminino,Outro',
             'date_of_birth' => 'required|date',
             'address' => 'required|string',
             'email' => 'required|string|email|unique:students,email',
             'phone_number' => 'nullable|string|max:15',
             'course_id' => 'required|integer|exists:courses,id',
-            'class_id' => 'sometimes|integer|exists:classes,id',
+            'room_id' => 'required|integer|exists:classes,id',
             'is_active' => 'nullable|boolean',
             'formed' => 'nullable|boolean',
         ];
@@ -69,7 +69,8 @@ class CreateStudentRequest extends FormRequest
             'course_id.required' => 'Curso não informado',
             'course_id.exists' => 'Curso não encontrado.',
 
-            'class.exists' => 'Classe não encontrado.',
+            'room_id.required' => 'Classe não informada.',
+            'room_id.exists' => 'Classe não encontrada.',
         ];
     }
 }

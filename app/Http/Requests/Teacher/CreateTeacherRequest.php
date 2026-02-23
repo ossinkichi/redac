@@ -24,7 +24,7 @@ class CreateTeacherRequest extends FormRequest
         return [
             'full_name' => 'required|string|min:25|max:355',
             'cpf' => 'required|string|max:11|unique:teachers,cpf',
-            'gender' => 'required|string|in:male,female,outher',
+            'gender' => 'required|string|in:Masculino,Feminino,Outro',
             'date_of_birth' => 'required|date',
             'address' => 'required|string|min:10|max:255',
             'email' => 'required|string|email|max:255|unique:teachers,email',
