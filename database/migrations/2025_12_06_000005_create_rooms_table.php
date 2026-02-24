@@ -16,7 +16,7 @@ return new class extends Migration
             function (Blueprint $table) {
                 $table->id();
                 $table->integer('series');
-                $table->foreignId('course')->constrained('courses');
+                $table->foreignId('course_id')->constrained('courses');
                 $table->string('shift');
                 $table->string('identification');
                 $table->boolean('status')->default(true);

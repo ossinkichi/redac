@@ -43,7 +43,7 @@
                         @enderror
                     </div>
 
-                    <x-form.input type="hidden" name="course" :value="$course" />
+                    <x-form.input type="hidden" name="course_id" :value="$course" />
                     <button class="btn btn-neutral">Registrar</button>
                 </form>
             </div>

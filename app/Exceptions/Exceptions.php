@@ -11,7 +11,6 @@ class Exceptions
     {
         return new RuntimeException(
             message: $throwable->getMessage(),
-            code: $throwable->getCode(),
             previous: $throwable
         );
     }

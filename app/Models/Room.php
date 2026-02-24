@@ -10,12 +10,12 @@ class Room extends Model
 
     use HasFactory;
 
-    protected $table = 'Rooms';
+    protected $table = 'rooms';
 
     protected $fillable = [
         'id',
         'series',
-        'course',
+        'course_id',
         'shift',
         'identification',
         'status',
@@ -28,6 +28,11 @@ class Room extends Model
 
     protected $casts = [
         'created_at' => 'datetime:Y-m-d H:i:s',
-        'status' => 'bollean',
+        'status' => 'boolean',
     ];
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id', 'id');
+    }
 }

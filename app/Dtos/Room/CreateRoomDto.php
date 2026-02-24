@@ -6,7 +6,7 @@ class CreateRoomDto
 {
     public function __construct(
         public int $series,
-        public string $course,
+        public int $course_id,
         public string $shift,
         public string $identification,
     ) {}
@@ -15,7 +15,7 @@ class CreateRoomDto
     {
         return new self(
             series: $data['series'],
-            course: $data['course'],
+            course_id: $data['course_id'],
             shift: $data['shift'],
             identification: $data['identification'],
         );

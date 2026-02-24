@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 // use App\Http\Middleware\EnsureIsSecretary;
 use App\Http\Middleware\EnsureIsStudent;
 use App\Http\Middleware\EnsureIsTeacher;
+use App\Models\Room;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(
@@ -51,8 +52,14 @@ Route::get('secretaria', function () {
     );
 })->name('secretary.home');
 
+Route::get('/teste', function () {
+    $room = Room::with('course')->find(1);
+    dd($room->course);
+});
+
 Route::get('secretaria/{curso}/salas', function ($course) {
-    return view('secretary.secretary.rooms', ['course' => $course]);
+    // dd(app(RoomController::class)->show($course));
+    return view('secretary.secretary.rooms', ['rooms' => app(RoomController::class)->show($course), 'course' => $course]);
 })->name('secretary.rooms');
 
 Route::get('secretaria/{curso}/sala/registrar', function ($course) {

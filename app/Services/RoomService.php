@@ -22,7 +22,7 @@ class RoomService
         return $this->repository->findAll();
     }
 
-    public function find(int $id): Room
+    public function find(int $id): Collection
     {
         return $this->repository->find($id);
     }
@@ -36,13 +36,13 @@ class RoomService
         return $response;
     }
 
-    public function updateStatus(array $data): Room
-    {
-        $room = $this->repository->find($data['id']);
-        $room->update($data);
+    // public function updateStatus(array $data): Room
+    // {
+    //     $room = $this->repository->find($data['id']);
+    //     $room->update($data);
 
-        !$room->wasChanged() && new ModelNotFoundException('Nào foi possivel editar a classe.');
+    //     !$room->wasChanged() && new ModelNotFoundException('Nào foi possivel editar a classe.');
 
-        return $room;
-    }
+    //     return $room;
+    // }
 }

@@ -51,7 +51,7 @@
             <div class="w-full p-2">
                 <div class="flex flex-row justify-between">
                     <h2 class="text-2xl font-bold">Turmas</h2>
-                    <a href="{{ route('secretary.room.register',$course, ['course' => $course]) }}"
+                    <a href="{{ route('secretary.room.register',$course) }}"
                         class="btn btn-base-200 border-base-300 shadow-sm rounded-sm">Adicionar sala</a>
                 </div>
                 <ul class="list bg-base-100 rounded-box grid grid-cols-3 gap-4">

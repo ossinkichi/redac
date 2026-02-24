@@ -13,9 +13,9 @@ class RoomRepository
         return Room::all();
     }
 
-    public function find($id): Room
+    public function find($id): Collection
     {
-        return Room::findOrFail($id);
+        return Room::where('id', $id)->get();
     }
 
     public function create(array $data): Room

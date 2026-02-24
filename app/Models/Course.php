@@ -25,4 +25,9 @@ class Course extends Model
     protected $hidden = [
         'updated_at'
     ];
+
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
 }

@@ -23,7 +23,7 @@ class CreateRoomRequest extends FormRequest
     {
         return [
             'series' => 'required|integer',
-            'course' => 'required|int',
+            'course_id' => 'required',
             'shift' => 'required|string|in:matutino,vespertino,noturno',
             'identification' => 'required|string'
         ];
@@ -34,7 +34,7 @@ class CreateRoomRequest extends FormRequest
         return [
             'series.required' => 'Serie nào informada.',
 
-            'course.required' => 'Curso nào informado.',
+            'course_id.required' => 'Curso nào informado.',
 
             'shift.required' => 'Turno nào informado.',
             'shift.in' => 'Turno nào informado.',
