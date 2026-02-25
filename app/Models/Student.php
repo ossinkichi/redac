@@ -19,7 +19,7 @@ class Student extends Model
         'email',
         'phone_number',
         'course_id',
-        'class_id',
+        'room_id',
         'is_active',
         'created_at',
     ];

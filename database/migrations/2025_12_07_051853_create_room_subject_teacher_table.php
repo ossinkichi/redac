@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('room_subject_teacher', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('teahcer_id')->constrained('teachers')->onDelete('cascade');
-            $table->foreignId('room_id')->constrained('classes');
+            $table->foreignId('teahcer_id')->constrained('teachers')->onDelete('cascade')->nullable();
+            $table->foreignId('room_id')->constrained('classes')->onDelete('cascade');
             $table->foreignId('subject_id')->constrained('subjects');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

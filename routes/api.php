@@ -4,11 +4,6 @@ use App\Http\Controllers\SecretaryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
-use App\Http\Controllers\UserController;
-use App\Http\Middleware\EnsureIsAdmin;
-use App\Http\Middleware\EnsureIsSecretary;
-use App\Http\Middleware\EnsureIsStudent;
-use App\Http\Middleware\EnsureIsTeacher;
 
 Route::get('/secretary/{cpf}', [SecretaryController::class, 'show'])->name('secretary.find');
 Route::put('/secretary/update', [SecretaryController::class, 'update'])->name('secretary.update');

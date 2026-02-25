@@ -10,7 +10,8 @@
                 <div>
                     <div class="col-span-3 flex flex-row justify-between">
                         <h1 class="font-extrabold text-xl mb-5">Alunos</h1>
-                        <a href="{{ route('secretary.aluno.register') }}" class="btn btn-base-200 border-base-300 shadow-sm rounded-sm">Adicionar Aluno</a>
+                        <a href="{{ route('secretary.aluno.register') }}"
+                            class="btn btn-base-200 border-base-300 shadow-sm rounded-sm">Adicionar Aluno</a>
                     </div>
                     @if (count($students) == 0)
                         <span>Nenhum aluno(a) encontrado</span>
@@ -29,12 +30,14 @@
                                 <tbody>
                                     @foreach ($students as $student)
                                         <x-card.student :student="$student" />
+                                        <th>
+                                            <a class="btn btn-ghost btn-xs rounded-box">detalhes</a>
+                                        </th>
                                     @endforeach
                                 </tbody>
 
                             </table>
                         </div>
-
                     @endif
                 </div>
             </div>

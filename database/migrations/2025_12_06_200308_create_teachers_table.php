@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('date_of_birth');
             $table->string('address');
             $table->string('email')->unique();
-            $table->string('phone_number')->unique();
-            $table->foreignId('specialization_subject_id')->constrained('subjects');
+            $table->string('phone_number')->unique()->nullable();
+            $table->foreignId('specialization_subject_id')->nullable()->constrained('subjects');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

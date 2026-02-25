@@ -1,8 +1,6 @@
 <tr class="{{ $student['is_active'] ? '' : 'text-error' }}">
     <th>
-{{-- <label>
-<input type="checkbox" class="checkbox" />
-</label> --}}
+        <div class="font-semibold">{{ $student['registration'] }}</div>
     </th>
     <td>
         <div class="flex items-center gap-3">
@@ -26,7 +24,4 @@
             </div>
         </div>
     </td>
-    <th>
-        <a class="btn btn-ghost btn-xs rounded-box">detalhes</a>
-    </th>
 </tr>
