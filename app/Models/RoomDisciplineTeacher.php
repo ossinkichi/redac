@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RoomDisciplineTeacher extends Model
+class RoomSubjectTeacher extends Model
 {
 
     use HasFactory;
 
-    protected $table = 'romm_discipline_teacher';
+    protected $table = 'room_subject_teacher';
 
     protected $fillable = [
         'id',
         'teacher_id',
-        'class_id',
-        'discipline_id',
+        'room_id',
+        'subject_id',
         'created_at',
     ];
 
@@ -24,14 +24,14 @@ class RoomDisciplineTeacher extends Model
         'updated_at'
     ];
 
-    protected function classId()
+    protected function RoomId()
     {
-        return $this->belongsTo(Room::class, 'class_id');
+        return $this->belongsTo(Room::class, 'room_id');
     }
 
-    protected function disciplineId()
+    protected function SubjectId()
     {
-        return $this->belongsTo(Subject::class, 'discipline_id');
+        return $this->belongsTo(Subject::class, 'subject_id');
     }
 
     protected function teacherId()

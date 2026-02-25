@@ -6,14 +6,12 @@ class CreateSubjectDto
 {
     public function __construct(
         public string $name,
-        public ?string $description = '',
     ) {}
 
     public static function make(array $data): self
     {
         return new self(
             name: $data['name'],
-            description: $data['description']
         );
     }
 

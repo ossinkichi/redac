@@ -10,7 +10,7 @@ class SubjectRepository
 
     public function findAll(): Collection
     {
-        return Subject::all();
+        return Subject::all()->sortByDesc('id');
     }
 
     public function find(int $id): Subject

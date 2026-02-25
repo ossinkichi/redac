@@ -34,7 +34,7 @@ class SubjectController extends Controller
             $dto = CreateSubjectDto::make($request->toArray());
             $this->service->register($dto);
 
-            return response()->noContent();
+            return \redirect()->route('subject.register')->with('success', 'Matéria registrada com sucesso!');
         } catch (\Throwable $th) {
             throw Exceptions::fromMessage($th);
         }

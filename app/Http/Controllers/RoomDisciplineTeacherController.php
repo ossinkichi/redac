@@ -8,14 +8,14 @@ use App\Dtos\CreateRoomDisciplineTeacherDto;
 use App\Exceptions\Exceptions;
 use App\Http\Requests\CreateRoomDisciplineTeacherRequest;
 use App\Http\Resources\ClassDisciplineTeacherResource;
-use App\Services\ClassDisciplineTeacherService;
+use App\Services\RoomSubjectTeacherService;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Symfony\Component\HttpFoundation\Response;
 
-class RoomDisciplineTeacherController extends Controller
+class RoomSubjectTeacherController extends Controller
 {
     public function __construct(
-        private ClassDisciplineTeacherService $service
+        private readonly RoomSubjectTeacherService $service
     ) {}
 
     public function index(): JsonResource

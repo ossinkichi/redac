@@ -11,7 +11,7 @@ class CreateSubjectRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,6 @@ class CreateSubjectRequest extends FormRequest
     {
         return [
             'name' => 'required|string|unique:subjects,name',
-            'description' => 'sometimes|string'
         ];
     }
 

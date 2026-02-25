@@ -10,7 +10,10 @@
             <div class="container w-full px-7">
                 <div class="col-span-3 flex flex-row justify-between">
                     <h1 class="font-extrabold text-xl mb-5">Cursos</h1>
-                    <a href="{{ route('secretary.course.register') }}" class="btn btn-base-200 border-base-300 shadow-sm rounded-sm">Adicionar Curso</a>
+                    <div class="flex flex-row gap-6">
+                        <a href="{{ route('subject.register') }}" class="btn btn-base-200 border-base-300 shadow-sm rounded-sm">Criar matéria</a>
+                        <a href="{{ route('course.register') }}" class="btn btn-base-200 border-base-300 shadow-sm rounded-sm">Criar Curso</a>
+                    </div>
                 </div>
                 <div class="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @if (count($courses) == 0)

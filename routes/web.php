@@ -2,13 +2,14 @@
 
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\RoomSubjectTeacherController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 // use App\Http\Middleware\EnsureIsSecretary;
 use App\Http\Middleware\EnsureIsStudent;
-use App\Http\Middleware\EnsureIsTeacher;
-use App\Models\Room;
+// use App\Http\Middleware\EnsureIsTeacher;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(
@@ -37,11 +38,16 @@ Route::middleware(EnsureIsStudent::class)->group(function () {
 });
 
 // Teacher routes
-Route::middleware(EnsureIsTeacher::class)->group(function () {
-    Route::get('teacher', function () {
-        return view('teacher.dashboard');
-    })->name('teacher.home');
-});
+// Route::middleware(EnsureIsTeacher::class)->group(function () {
+Route::get('professor', function () {
+    dd(app(RoomSubjectTeacherController::class)->index());
+    return view(
+        'teacher.dashboard',
+        ['rooms' => app(RoomController::class)->index()]
+    );
+})->name('teacher.home');
+
+// });
 
 // Secretary routes
 // Route::middleware(EnsureIsSecretary::class)->group(function () {
@@ -52,38 +58,47 @@ Route::get('secretaria', function () {
     );
 })->name('secretary.home');
 
-Route::get('/teste', function () {
-    $room = Room::with('course')->find(1);
-    dd($room->course);
-});
-
 Route::get('secretaria/{curso}/salas', function ($course) {
-    // dd(app(RoomController::class)->show($course));
-    return view('secretary.secretary.rooms', ['rooms' => app(RoomController::class)->show($course), 'course' => $course]);
+    return view(
+        'secretary.secretary.room.listing',
+        ['rooms' => app(RoomController::class)->show($course), 'course' => $course]
+    );
 })->name('secretary.rooms');
 
 Route::get('secretaria/{curso}/sala/registrar', function ($course) {
-    return view('secretary.secretary.rooms.register', ['course' => $course]);
+    return view('secretary.secretary.room.register', ['course' => $course]);
 })->name('secretary.room.register');
 
 Route::post('/sala/register', [RoomController::class, 'store'])->name('room.store');
 
+Route::get('secretaria/sala/{room}', function ($room) {
+    return view('secretary.secretary.room.show', ['room' => $room]);
+})->name('secretary.room.show');
+
 Route::get('secretaria/me', function () {
-    return view('secretary.secretary.room');
+    return;
 })->name('secretary.dashboard');
 
 Route::get('secretaria/lista/professores', function () {
-    return view('secretary.teacher.listenner', ['teachers' => app(TeacherController::class)->index()]);
+    return view('secretary.teacher.listing', ['teachers' => app(TeacherController::class)->index()]);
 })->name('secretary.teachers.listenner');
 
 Route::get('secretaria/lista/alunos', function () {
-    return view('secretary.student.listenner', ['students' => app(StudentController::class)->index()]);
+    return view('secretary.student.listing', ['students' => app(StudentController::class)->index()]);
 })->name('secretary.students.listenner');
 
 Route::get('secretaria/registrar/curso', function () {
     return view('secretary.secretary.course.register');
-})->name('secretary.course.register');
+})->name('course.register');
 Route::post('/curso/registrar', [CourseController::class, 'store'])->name('course.store');
+
+Route::get('secretaria/registrar/materia', function () {
+    return view(
+        'secretary.secretary.subject.register',
+        ['subjects' => app(SubjectController::class)->index()]
+    );
+})->name('subject.register');
+Route::post('/materia/registrar', [SubjectController::class, 'store'])->name('subject.store');
 
 Route::get('secretaria/registrar/aluno', function () {
     return view('secretary.student.register');

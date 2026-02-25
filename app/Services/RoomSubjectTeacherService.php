@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Dtos\CreateRoomDisciplineTeacherDto;
-use App\Repositories\ClassDisciplineTeacherRepository;
-use App\Repositories\RoomDisciplineTeacherRepository;
+use App\Repositories\RoomSubjectTeacherRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class ClassDisciplineTeacherService
+class RoomSubjectTeacherService
 {
 
     public function __construct(
-        private readonly  RoomDisciplineTeacherRepository $repository
+        private readonly  RoomSubjectTeacherRepository $repository
     ) {}
 
     public function findAll()
@@ -32,7 +31,7 @@ class ClassDisciplineTeacherService
 
     public function findByTeacher(int $id)
     {
-        $response = $this->repository->findByClass($id);
+        $response = $this->repository->findByTeacher($id);
 
         !$response && throw new ModelNotFoundException('Não foi possivel fazer a busca.');
 

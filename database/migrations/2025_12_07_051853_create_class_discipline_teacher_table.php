@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_discipline_teacher', function (Blueprint $table) {
+        Schema::create('room_subject_teacher', function (Blueprint $table) {
             $table->id();
             $table->foreignId('teahcer_id')->constrained('teachers')->onDelete('cascade');
-            $table->foreignId('class_id')->constrained('classes');
-            $table->foreignId('discipline_id')->constrained('subjects');
+            $table->foreignId('room_id')->constrained('classes');
+            $table->foreignId('subject_id')->constrained('subjects');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_discipline_teacher');
+        Schema::dropIfExists('room_subject_teacher');
     }
 };

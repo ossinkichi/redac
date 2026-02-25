@@ -15,7 +15,7 @@ class RoomRepository
 
     public function find($id): Collection
     {
-        return Room::where('id', $id)->get();
+        return Room::with('course')->where('course_id', $id)->get();
     }
 
     public function create(array $data): Room
