@@ -14,9 +14,11 @@ class Student extends Model
     protected $fillable = [
         'registration',
         'full_name',
+        'cpf',
         'date_of_birth',
         'address',
         'email',
+        'gender',
         'phone_number',
         'course_id',
         'room_id',
@@ -35,13 +37,13 @@ class Student extends Model
         'updated_at'
     ];
 
-    protected function studentCourse()
+    protected function course()
     {
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(Course::class, 'course_id');
     }
 
     protected function studentClass()
     {
-        return $this->belongsTo(Room::class, 'class_id');
+        return $this->belongsTo(Room::class, 'room_id');
     }
 }

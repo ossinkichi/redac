@@ -75,17 +75,21 @@ Route::get('secretaria/sala/{room}', function ($room) {
     return view('secretary.secretary.room.show', ['room' => $room]);
 })->name('secretary.room.show');
 
+Route::get('secretaria/sala/{room}/adicionar-aluno', function ($room) {
+    return view('secretary.student.listing-and-select', ['room' => $room]);
+})->name('secretary.room.addedstudent');
+
 Route::get('secretaria/me', function () {
     return;
 })->name('secretary.dashboard');
 
 Route::get('secretaria/lista/professores', function () {
     return view('secretary.teacher.listing', ['teachers' => app(TeacherController::class)->index()]);
-})->name('secretary.teachers.listenner');
+})->name('secretary.teachers.listing');
 
 Route::get('secretaria/lista/alunos', function () {
     return view('secretary.student.listing', ['students' => app(StudentController::class)->index()]);
-})->name('secretary.students.listenner');
+})->name('secretary.students.listing');
 
 Route::get('secretaria/registrar/curso', function () {
     return view('secretary.secretary.course.register');
@@ -101,7 +105,7 @@ Route::get('secretaria/registrar/materia', function () {
 Route::post('/materia/registrar', [SubjectController::class, 'store'])->name('subject.store');
 
 Route::get('secretaria/registrar/aluno', function () {
-    return view('secretary.student.register');
+    return view('secretary.student.register', ['courses' => app(CourseController::class)->index()]);
 })->name('secretary.aluno.register');
 Route::post('/aluno/registrar', [StudentController::class, 'store'])->name('student.store');
 

@@ -68,7 +68,7 @@
                 <div>
                     <label class="select">
                         <span class="label">Curso</span>
-                        <select name="class_id">
+                        <select name="course_id">
                             <option disabled selected>Selicione o curso</option>
                             @foreach ($courses as $course)
                                 <option value="{{ $course['id'] }}">{{ $course['name'] }}</option>
@@ -79,21 +79,7 @@
                         <x-form.error :message="$message" />
                     @enderror
                 </div>
-                <div>
-                    <label class="select">
-                        <span class="label">Turma</span>
-                        <select name="class_id">
-                            <option disabled selected>Selicione a tuma</option>
-                            @foreach ($rooms as $room)
-                                <option value="{{ $room['id'] }}">{{ $room['name'] }}</option>
-                            @endforeach
-                        </select>
-                    </label>
-                    @error('room_id')
-                        <x-form.error :message="$message" />
-                    @enderror
-                </div>
-                <div>
+                <div class="col-span-2">
                     <label class="label">
                         <input type="checkbox" name="formed" class="checkbox checkbox-primary" />
                         <p class="font-bold">Este aluno está formado</p>

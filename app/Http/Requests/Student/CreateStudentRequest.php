@@ -24,14 +24,13 @@ class CreateStudentRequest extends FormRequest
         return [
             'full_name' => 'required|string|max:255|min:15',
             'registration' => 'required|string|min:10',
-            'cpf' => 'required|digits:11|cpf|unique:students,cpf',
+            'cpf' => 'required|max:14|unique:students,cpf',
             'gender' => 'required|string|in:Masculino,Feminino,Outro',
             'date_of_birth' => 'required|date',
             'address' => 'required|string',
             'email' => 'required|string|email|unique:students,email',
             'phone_number' => 'nullable|string|max:15',
             'course_id' => 'required|integer|exists:courses,id',
-            'room_id' => 'required|integer|exists:classes,id',
             'is_active' => 'nullable|boolean',
             'formed' => 'nullable|boolean',
         ];
@@ -51,9 +50,8 @@ class CreateStudentRequest extends FormRequest
 
             'cpf.required' => 'Campo CPF é obrigatório.',
             'cpf.string' => 'Campo CPF deve ser um texto válido.',
-            'cpf.digits' => 'Campo CPF deve ter exatamente 11 caracteres.',
+            'cpf.max' => 'Campo CPF deve ter no meximo 14 caracteres.',
             'cpf.unique' => 'O CPF informado não é válido.',
-            'cpf.cpf' => 'O CPF informado não é válido.',
 
             'gender.required' => 'Genêro não informado.',
             'gender.in' => 'Genêro não informado.',
@@ -68,9 +66,6 @@ class CreateStudentRequest extends FormRequest
 
             'course_id.required' => 'Curso não informado',
             'course_id.exists' => 'Curso não encontrado.',
-
-            'room_id.required' => 'Classe não informada.',
-            'room_id.exists' => 'Classe não encontrada.',
         ];
     }
 }

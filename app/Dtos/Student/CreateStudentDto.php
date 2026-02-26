@@ -15,8 +15,7 @@ class CreateStudentDto
         public string $email,
         public ?string $phone_number = '',
         public int $course_id,
-        public int $class_id,
-        public ?bool $is_active = false,
+        public ?bool $is_active = true,
         public ?bool $formed = false
     ) {}
 
@@ -32,7 +31,6 @@ class CreateStudentDto
             email: $data['email'],
             phone_number: $data['phone_number'] ?? '',
             course_id: $data['course_id'],
-            class_id: $data['class_id'],
             is_active: $data['is_active'] ?? false,
             formed: $data['formed'] ?? false
         );

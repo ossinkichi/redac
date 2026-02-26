@@ -8,8 +8,8 @@
             <nav>
                 <ul class="menu menu-horizontal px-1">
                     <li><a href="{{ route('secretary.home') }}">Cursos</a></li>
-                    <li><a href="{{ route('secretary.teachers.listenner') }}">Professores</a></li>
-                    <li><a href="{{ route('secretary.students.listenner') }}">Alunos</a></li>
+                    <li><a href="{{ route('secretary.teachers.listing') }}">Professores</a></li>
+                    <li><a href="{{ route('secretary.students.listing') }}">Alunos</a></li>
                 </ul>
             </nav>
         </div>

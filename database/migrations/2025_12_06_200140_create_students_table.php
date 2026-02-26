@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('full_name');
-            $table->integer('registration')->unique();
+            $table->string('registration')->unique();
             $table->string('cpf')->unique();
             $table->string('gender');
             $table->date('date_of_birth');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone_number')->nullable();
             $table->foreignId('course_id')->nullable()->constrained('courses');
-            $table->foreignId('room_id')->nullable()->constrained('classes');
+            $table->foreignId('room_id')->nullable()->constrained('rooms');
             $table->boolean('is_active')->default(true);
             $table->boolean('formed')->default(false);
             $table->timestamps();

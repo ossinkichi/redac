@@ -8,6 +8,7 @@ use App\Dtos\Student\UpdateSimpleDataOfStudentDto;
 use App\Dtos\Student\UpdateStudentDataDto;
 use App\Http\Requests\Course\UpdateAllDataCourseRequest;
 use App\Models\Student;
+use App\Models\User;
 use App\Repositories\StudentRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -18,7 +19,6 @@ class StudentService
 {
     public function __construct(
         private StudentRepository $studentRepository,
-        private CourseService $courseService
     ) {}
 
     public function findAll(): Collection
@@ -37,14 +37,13 @@ class StudentService
 
     public function create(CreateStudentDto $dto): ?Student
     {
-
         return  DB::transaction(function () use ($dto) {
 
             $response =  $this->studentRepository->create($dto->toArray());
 
             $response->exists() || throw new RuntimeException('Erro ao criar estudante.');
 
-            UserService::newUser(
+            User::create(
                 [
                     'user' => $dto->cpf,
                     'password' => $dto->date_of_birth,
