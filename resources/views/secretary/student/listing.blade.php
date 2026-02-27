@@ -20,19 +20,19 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th></th>
+                                        <th>Matricula</th>
                                         <th>Nome</th>
-                                        <th>Endereço</th>
                                         <th>Contato</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($students as $student)
-                                        <x-card.student :student="$student" />
-                                        <th>
-                                            <a class="btn btn-ghost btn-xs rounded-box">detalhes</a>
-                                        </th>
+                                            <x-card.student :student="$student" />
+                                            <th>
+                                                <a class="btn btn-ghost btn-xs rounded-box">detalhes</a>
+                                            </th>
+                                        </tr>
                                     @endforeach
                                 </tbody>
 

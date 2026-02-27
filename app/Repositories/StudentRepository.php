@@ -14,7 +14,7 @@ class StudentRepository
 
     public function findAll()
     {
-        return Student::all();
+        return Student::with('course')->get();
     }
 
     public function findByCpf(string $cpf): ?Student

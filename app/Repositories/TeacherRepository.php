@@ -10,7 +10,7 @@ class TeacherRepository
 
     public function all(): Collection
     {
-        return Teacher::all();
+        return Teacher::with('subject')->get();
     }
     public function newTeacher(array $data): Teacher
     {

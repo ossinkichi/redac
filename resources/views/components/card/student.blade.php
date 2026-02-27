@@ -12,9 +12,6 @@
         </div>
     </td>
     <td>
-        {{ $student['address'] }}
-    </td>
-    <td>
         <div class="flex items-center gap-3">
             <div>
                 <div class="font-bold">{{ $student['email'] }}</div>
@@ -24,4 +21,3 @@
             </div>
         </div>
     </td>
-</tr>

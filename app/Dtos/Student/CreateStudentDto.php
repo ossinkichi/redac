@@ -31,7 +31,7 @@ class CreateStudentDto
             email: $data['email'],
             phone_number: $data['phone_number'] ?? '',
             course_id: $data['course_id'],
-            is_active: $data['is_active'] ?? false,
+            is_active: $data['is_active'] ?? true,
             formed: $data['formed'] ?? false
         );
     }

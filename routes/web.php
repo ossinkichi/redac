@@ -110,7 +110,7 @@ Route::get('secretaria/registrar/aluno', function () {
 Route::post('/aluno/registrar', [StudentController::class, 'store'])->name('student.store');
 
 Route::get('secretaria/registrar/professor', function () {
-    return view('secretary.teacher.register');
+    return view('secretary.teacher.register', ['subjects' => app(SubjectController::class)->index()]);
 })->name('secretary.teacher.register');
 Route::post('/professor/registrar', [TeacherController::class, 'store'])->name('teacher.store');
 

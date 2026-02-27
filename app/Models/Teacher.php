@@ -14,11 +14,13 @@ class Teacher extends Model
     protected $fillable = [
         'id',
         'full_name',
+        'cpf',
         'date_of_birth',
         'email',
         'phone_number',
         'address',
-        'discipline_specializate',
+        'gender',
+        'subject_id',
         'is_active',
         'created_at'
     ];
@@ -32,8 +34,8 @@ class Teacher extends Model
         'updated_at'
     ];
 
-    protected function discipline()
+    public function subject()
     {
-        return $this->belongsTo(Subject::class, 'discipline_specializate');
+        return $this->belongsTo(Subject::class);
     }
 }

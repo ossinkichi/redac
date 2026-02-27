@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('email')->unique();
             $table->string('phone_number')->unique()->nullable();
-            $table->foreignId('specialization_subject_id')->nullable()->constrained('subjects');
+            $table->foreignId('subject_id')->constrained('subjects');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

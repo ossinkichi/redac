@@ -28,7 +28,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($teachers as $teacher)
-                                        <x-card.teacher />
+                                        <x-card.teacher :teacher="$teacher" />
                                             <th>
                                                 <a class="btn btn-ghost btn-xs rounded-box">detalhes</a>
                                             </th>

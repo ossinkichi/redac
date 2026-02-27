@@ -13,7 +13,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use App\Dtos\Teacher\UpdateSimpleDataOfTeacherDto;
 use App\Http\Requests\Teacher\CreateTeacherRequest;
 use App\Http\Requests\Teacher\SimpleUpdateDataOfTeacher;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class TeacherController extends Controller
 {
@@ -39,14 +41,13 @@ class TeacherController extends Controller
         }
     }
 
-    public function store(CreateTeacherRequest $request): Response
+    public function store(CreateTeacherRequest $request): RedirectResponse
     {
         try {
-            \dd($request);
             $dto = CreateTeacherDto::make($request->toArray());
             $this->service->create($dto);
 
-            return response()->noContent();
+            return \redirect()->route('secretary.teachers.listing');
         } catch (\Throwable $th) {
             throw Exceptions::fromMessage($th);
         }

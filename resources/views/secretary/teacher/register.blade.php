@@ -51,11 +51,11 @@
                     <div>
                         <label class="select">
                             <span class="label">Matéria</span>
-                            <select name="specialization_subject_id" required>
+                            <select name="subject_id" required>
                                 <option disabled selected>Escolher matéria</option>
                                 @if ($subjects)
                                     @foreach ($subjects as $subject)
-                                        <option>{{ $subject['name'] }}</option>
+                                        <option value="{{ $subject['id'] }}">{{ $subject['name'] }}</option>
                                     @endforeach
                                 @endif
                             </select>

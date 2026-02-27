@@ -19,7 +19,6 @@ class Room extends Model
         'shift',
         'identification',
         'status',
-        'created_at'
     ];
 
     protected $hidden = [
@@ -27,7 +26,7 @@ class Room extends Model
     ];
 
     protected $casts = [
-        'created_at' => 'datetime:Y-m-d H:i:s',
+        'created_at' => 'date:Y-m-d H:i:s',
         'status' => 'boolean',
     ];
 

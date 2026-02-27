@@ -33,6 +33,6 @@ class Course extends Model
 
     public function students()
     {
-        return $this->hasMany(Room::class);
+        return $this->hasMany(Student::class);
     }
 }

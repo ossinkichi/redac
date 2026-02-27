@@ -6,7 +6,7 @@
                                                     <div>
                                                         <div class="font-bold">{{ $teacher['full_name'] }}</div>
                                                         <div class="text-sm opacity-50">
-                                                            {{ $teacher['discipline_specializate']['name'] }}</div>
+                                                            {{ $teacher['subject']['name'] }}</div>
                                                     </div>
                                                 </div>
                                             </td>

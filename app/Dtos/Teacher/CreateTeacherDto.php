@@ -12,7 +12,7 @@ class CreateTeacherDto
         public string $address,
         public string $email,
         public string $phone_number,
-        public int $specialization_subject_id,
+        public int $subject_id,
         public bool $is_active = true,
     ) {}
 
@@ -26,7 +26,7 @@ class CreateTeacherDto
             address: $data['address'],
             email: $data['email'],
             phone_number: $data['phone_number'],
-            specialization_subject_id: $data['specialization_subject_id'],
+            subject_id: $data['subject_id'],
             is_active: $data['is_active'] ?? true,
         );
     }

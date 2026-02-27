@@ -23,11 +23,10 @@ class Student extends Model
         'course_id',
         'room_id',
         'is_active',
-        'created_at',
     ];
 
     protected $casts = [
-        'date_of_birth' => 'datetime:d-m-Y H:i:s',
+        'date_of_birth' => 'date:d-m-Y',
         'created_at' => 'datetime:d-m-Y H:i:s',
         'is_active' => 'boolean'
     ];
@@ -37,13 +36,13 @@ class Student extends Model
         'updated_at'
     ];
 
-    protected function course()
+    public function course()
     {
-        return $this->belongsTo(Course::class, 'course_id');
+        return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 
-    protected function studentClass()
+    public function room()
     {
-        return $this->belongsTo(Room::class, 'room_id');
+        return $this->belongsTo(Room::class, 'room_id', 'id');
     }
 }

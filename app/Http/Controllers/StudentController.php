@@ -47,7 +47,6 @@ class StudentController extends Controller
     public function store(CreateStudentRequest $request): Response
     {
         $dto = CreateStudentDto::make(($request->toArray()));
-        // \dd($dto->toArray());
 
         $this->service->create($dto);
 

@@ -22,14 +22,14 @@ class CreateTeacherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'full_name' => 'required|string|min:25|max:355',
+            'full_name' => 'required|string|min:15|max:355',
             'cpf' => 'required|string|max:11|unique:teachers,cpf',
             'gender' => 'required|string|in:Masculino,Feminino,Outro',
             'date_of_birth' => 'required|date',
-            'address' => 'required|string|min:10|max:255',
+            'address' => 'required|min:10|max:255',
             'email' => 'required|string|email|max:255|unique:teachers,email',
             'phone_number' => 'required|string|max:15',
-            'specialization_subject_id' => 'required|integer|exists:subjects,id',
+            'subject_id' => 'required|exists:subjects,id',
             'is_active' => 'sometimes|boolean',
         ];
     }
@@ -69,9 +69,8 @@ class CreateTeacherRequest extends FormRequest
             'phone_number.string' => 'Número de telefone inválido.',
             'phone_number.max' => 'Número de telefone inválido.',
 
-            'specialization_subject_id.required' => 'Matéria de especialização não informada.',
-            'specialization_subject_id.integer' => 'Matéria de especialização inválida.',
-            'specialization_subject_id.exists' => 'Matéria de especialização inválida.',
+            'subject_id.required' => 'Matéria de especialização não informada.',
+            'subject_id.exists' => 'Matéria de especialização inválida.',
 
             'is_active.sometimes' => 'Status inválido.',
             'is_active.boolean' => 'Status inválido.',
