@@ -1,6 +1,6 @@
-@props(['room'])
+@props(['room','course'])
 
-<a href="{{ route('secretary.room.show', $room) }}" class="list-row-link">
+<a href="{{ route('secretary.room.show', [$room, $course]) }}" class="list-row-link">
     <li class="list-row shadow">
         <div>
             <p class="font-bold">{{ $room['series'] }} ano de {{ $room['course']['name'] }}, sala <span class="uppercase">{{ $room['identification'] }}</span>

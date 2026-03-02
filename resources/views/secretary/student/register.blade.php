@@ -81,7 +81,7 @@
                 </div>
                 <div class="col-span-2">
                     <label class="label">
-                        <input type="checkbox" name="formed" class="checkbox checkbox-primary" />
+                        <input type="checkbox" value="true" name="formed" class="checkbox checkbox-primary" />
                         <p class="font-bold">Este aluno está formado</p>
                     </label>
                 </div>

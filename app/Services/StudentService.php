@@ -18,7 +18,7 @@ use RuntimeException;
 class StudentService
 {
     public function __construct(
-        private StudentRepository $studentRepository,
+        private readonly StudentRepository $studentRepository,
     ) {}
 
     public function findAll(): Collection
@@ -33,6 +33,11 @@ class StudentService
         !$student && throw new ModelNotFoundException('Estudante não encontrado');
 
         return $student;
+    }
+
+    public function findByCourse($course)
+    {
+        return $this->studentRepository->findByCourse($course);
     }
 
     public function create(CreateStudentDto $dto): ?Student
@@ -52,6 +57,8 @@ class StudentService
             );
         });
     }
+
+    public function roomUpdate() {}
 
     public function update(UpdateAllDataStudentDto $dto)
     {

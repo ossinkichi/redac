@@ -1,5 +1,6 @@
 @props([
     'rooms' => [],
+    'course' => [],
 ])
 
 <x-layout>
@@ -18,7 +19,7 @@
                         <p class="text-gray-500 col-span-3">Nenhuma turma encontrada.</p>
                     @else
                         @foreach ($rooms as $room)
-                            <x-card.room :room="$room" />
+                            <x-card.room :room="$room" :course="$course" />
                         @endforeach
                     @endif
                 </ul>

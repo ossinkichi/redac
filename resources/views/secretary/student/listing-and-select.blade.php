@@ -17,21 +17,26 @@
                     </thead>
                     <tbody>
                         @if (count($students) == 0)
-                        <tr>
-                            <td colspan="5" class="text-gray-500 text-center">Nenhum(a) aluno(a) encontrado(a)</td>
-                        </tr>
+                            <tr>
+                                <td colspan="5" class="text-gray-500 text-center">Nenhum(a) aluno(a) encontrado(a)</td>
+                            </tr>
                         @else
-                        @foreach ($students as $student)
-                            <x-card.student :student="$student" />
-                            <th>
-                                <div>
-                                    <a href="#" class="btn btn-success btn-xs rounded-box">Adicionar</a>
-                                    @if ($student['room'] == $room)
-                                        <a href="#" class="btn btn-error btn-xs rounded-box">Retirar</a>
-                                    @endif
-                                </div>
-                            </th>
-                        @endforeach
+                            @foreach ($students as $student)
+                                <x-card.student :student="$student" />
+                                <th>
+                                    <div>
+                                        <form method="POST" action="{{ route('room.addedstudent', [$room, $student]) }}">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit"
+                                                class="btn btn-success btn-xs rounded-box">Adicionar</button>
+                                        </form>
+                                        @if ($student['room'] == $room)
+                                            <a href="#" class="btn btn-error btn-xs rounded-box">Retirar</a>
+                                        @endif
+                                    </div>
+                                </th>
+                            @endforeach
                         @endif
                     </tbody>
 

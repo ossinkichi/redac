@@ -44,13 +44,28 @@ class StudentController extends Controller
         }
     }
 
+    public function filterCourse($course)
+    {
+        try {
+            return StudentResource::collection($this->service->findByCourse($course));
+        } catch (Throwable $th) {
+            throw Exceptions::fromMessage($th);
+        }
+    }
+
     public function store(CreateStudentRequest $request): Response
     {
         $dto = CreateStudentDto::make(($request->toArray()));
+        // \dd($dto->toArray());
 
         $this->service->create($dto);
 
         return \redirect()->route('secretary.students.listing');
+    }
+
+    public function setRoom($student, $room)
+    {
+        \dd($student, $room);
     }
 
     public function updateAllData(UpdateAllDataStudentRequest $request): Response

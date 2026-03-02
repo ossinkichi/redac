@@ -8,6 +8,137 @@
 
 ## Visão Geral
 
+# TODO - Projeto REDAC (Sistema de Gerenciamento Escolar)
+
+## Como usar este TODO
+
+- Marque tarefas como concluídas editando as caixas de seleção (`- [x]`).
+- Use a seção **Tarefas por Prioridade** para focar na ordem sugerida.
+- Abra as seções abaixo para ver tarefas por área.
+
+## Visão Geral
+
+Projeto em Laravel com arquitetura em camadas (Controller → Service → Repository).
+Substitui um sistema legado; foco atual: expor rotas API, completar camadas para notas/frequência/conteúdos e ajustar autenticação.
+
+---
+
+## Status Atual (27/02/2026)
+
+- [x] Models e Migrations principais criados para todas as entidades.
+- [x] Repositories implementados para: User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher.
+- [ ] Repositories pendentes: Note, Frequency, Content, ContentResponse.
+- [x] Services implementados para Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher.
+- [ ] Services pendentes: Note, Frequency, Content, ContentResponse.
+- [x] DTOs implementados para as entidades acima.
+- [ ] DTOs pendentes: Note, Frequency, Content, ContentResponse.
+- [x] Controllers com rotas expostas: Student, Teacher, Secretary (endereços em `routes/api.php`).
+- [x] Controllers existentes (sem rotas publicadas): Course, Subject, Room, CourseSubject, RoomDisciplineTeacher.
+- [ ] Controllers faltantes: Note, Frequency, Content, ContentResponse.
+
+**Autenticação:**
+
+- [x] Login web funcionando (`resources/views/login.blade.php`).
+- [ ] Logout web: rota existe mas precisa testes/ajustes.
+- [ ] Registro web ainda não completado.
+- [ ] Recuperação de senha pendente.
+- [ ] Autenticação via API (Sanctum/JWT) ainda não implementada.
+
+**Frontend:**
+
+- [x] Componentes base de layout e formulários estão em `resources/views/components`.
+- [x] Páginas: login, dashboards (student/teacher/secretary), feed, profile já existem.
+- [ ] Layout completo com navegação lateral e top bar ainda em construção.
+- [ ] CRUDs no frontend (tabelas/formulários) faltam interatividade e integração com API.
+- [ ] Tabelas com paginação e filtros não implementadas.
+
+**Rotas & Segurança:**
+
+- [x] Rotas API para Student/Teacher/Secretary publicadas em `routes/api.php`.
+- [ ] Rotas API para Course, Subject, Room, CourseSubject, RoomDisciplineTeacher precisam ser expostas.
+- [x] Middlewares de perfis (admin, secretary, teacher, student) criados e registrados (`bootstrap/app.php`).
+- [ ] Organizar rotas por prefixos (admin/, teacher/, secretary/, student/) e aplicar middlewares de roles.
+- [ ] Rotas web completas (register, logout, dashboards) ainda incompletas.
+
+---
+
+## Tarefas por Prioridade (próximos passos recomendados)
+
+### 🔴 P1 — Expor e proteger rotas API críticas
+
+- [ ] Publicar rotas REST para Course, Subject, Room, CourseSubject, RoomDisciplineTeacher.
+- [ ] Adicionar endpoints faltantes em Subject (show, delete, active/desactive).
+- [ ] Implementar update de turma (Room).
+- [ ] Aplicar middlewares de roles nas rotas de API.
+- [ ] Organizar rotas por prefixos e namespaces.
+
+### 🟡 P2 — Completar camadas para Notas, Frequência e Conteúdos
+
+- [ ] Criar Repositories para Note, Frequency, Content, ContentResponse.
+- [ ] Criar Services para Note, Frequency, Content, ContentResponse.
+- [ ] Criar DTOs para as mesmas entidades.
+- [ ] Criar Controllers e rotas API (index, show, store, update, delete).
+- [ ] Form Requests e validações específicas (notas 0‑10, conflitos de horário, upload de arquivos).
+- [ ] Implementar operações de cálculo de médias e relatórios.
+
+### 🟠 P3 — Autenticação e fluxo web
+
+- [ ] Validar e corrigir rota de logout.
+- [ ] Completar fluxo de registro e recuperação de senha (web e API).
+- [ ] Implementar tokens API (Sanctum) e documentar uso.
+- [ ] Implementar política de autorização (gates/policies) para recursos sensíveis.
+
+### 🔵 P4 — Frontend e UX
+
+- [ ] Concluir layout base com header/footer e navegação responsiva.
+- [ ] Implementar CRUDs no frontend conectando com API (tabelas/formulários).
+- [ ] Adicionar paginação, filtros e ordenação nas tabelas.
+- [ ] Criar modais para ações rápidas (ativar/desativar, editar).
+- [ ] Desenvolver páginas de perfil completas para cada tipo de usuário.
+
+### ⚪ P5 — Testes, documentação e deploy
+
+- [ ] Escrever testes unitários para Services.
+- [ ] Escrever testes de integração para Controllers.
+- [ ] Adicionar testes de feature e validação.
+- [ ] Gerar documentação da API (OpenAPI/Swagger ou similar).
+- [ ] Preparar ambiente Docker/Sail, CI/CD e documentação de deploy.
+
+### 🔵 P4+ — Validação, segurança e outras operações
+
+- [ ] Form Requests para todas as entidades faltantes (Note, Frequency, Content, etc.).
+- [ ] Sanitização de dados e rate limiting.
+- [ ] Validar matrícula de alunos em turmas e conflitos de horário.
+- [ ] Implementar matrícula de alunos em turmas (backend + frontend).
+
+### 🟣 P5 — Migração do legado e infraestrutura
+
+- [ ] Analisar estrutura do banco legado (`backup/`).
+- [ ] Criar scripts de migração de dados e realizar testes.
+- [ ] Configurar logging, cache, otimização, e pipeline CI/CD.
+
+### ⚪ P6 — Melhorias Futuras
+
+- [ ] Internacionalização (PT‑BR, possivelmente outros idiomas).
+- [ ] Notificações por e‑mail.
+- [ ] Busca global no sistema.
+- [ ] Tema dark/light.
+- [ ] Dashboards com gráficos e estatísticas.
+
+---
+
+## Estrutura rápida (onde procurar código)
+
+- `app/Models` — modelos
+- `app/Repositories` — repositórios
+- `app/Services` — serviços
+- `app/Http/Controllers` — controladores
+- `app/Dtos` — DTOs
+- `app/Http/Requests` — validações
+- `routes/api.php` e `routes/web.php` — rotas
+
+---
+
 Sistema escolar em Laravel com arquitetura em camadas (Controllers → Services → Repositories). Substitui o sistema legado em PHP. Desenvolvimento contínuo com foco em rotas API, middlewares e frontend.
 
 ---

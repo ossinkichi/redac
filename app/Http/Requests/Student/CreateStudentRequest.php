@@ -31,7 +31,7 @@ class CreateStudentRequest extends FormRequest
             'email' => 'required|string|email|unique:students,email',
             'phone_number' => 'nullable|string|max:15',
             'course_id' => 'required|integer|exists:courses,id',
-            'formed' => 'nullable|boolean',
+            'formed' => 'nullable',
         ];
     }
 
