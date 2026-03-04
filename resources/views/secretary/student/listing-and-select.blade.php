@@ -1,4 +1,4 @@
-@props(['students' => []])
+@props(['students' => [], 'room' => ''])
 <x-layout>
     <x-secretary.header />
 
@@ -25,9 +25,11 @@
                                 <x-card.student :student="$student" />
                                 <th>
                                     <div>
-                                        <form method="POST" action="{{ route('room.addedstudent', [$room, $student]) }}">
+                                        <form method="POST" action="{{ route('room.addedstudent'), $room }}">
                                             @csrf
                                             @method('PATCH')
+                                            <x-form.input type="hidden" name="student" :value="$student['id']" />
+                                            <x-form.input type="hidden" name="room" :value="$room" />
                                             <button type="submit"
                                                 class="btn btn-success btn-xs rounded-box">Adicionar</button>
                                         </form>

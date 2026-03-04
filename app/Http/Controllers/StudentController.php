@@ -11,10 +11,13 @@ use App\Http\Resources\StudentResource;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Dtos\Student\UpdateSimpleDataOfStudentDto;
+use App\Dtos\UpdateRoomOfStudentDto;
+use App\Dtos\UpdateRoomOfStudentDtoDto;
 use App\Http\Requests\Student\UpdateAllDataStudentRequest;
 use App\Http\Requests\Student\CreateStudentRequest;
 use App\Http\Requests\Student\UpdateSimpleDataOfStudentRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateRoomOfStudentRequest;
 use Illuminate\View\View;
 
 class StudentController extends Controller
@@ -55,17 +58,29 @@ class StudentController extends Controller
 
     public function store(CreateStudentRequest $request): Response
     {
-        $dto = CreateStudentDto::make(($request->toArray()));
-        // \dd($dto->toArray());
+        try {
+            $dto = CreateStudentDto::make(($request->toArray()));
+            // \dd($dto->toArray());
 
-        $this->service->create($dto);
+            $this->service->create($dto);
 
-        return \redirect()->route('secretary.students.listing');
+            return \redirect()->route('secretary.students.listing');
+        } catch (Throwable $th) {
+            throw Exceptions::fromMessage($th);
+        }
     }
 
-    public function setRoom($student, $room)
+    public function setRoom(UpdateRoomOfStudentRequest $request)
     {
-        \dd($student, $room);
+        try {
+            $dto = UpdateRoomOfStudentDto::make($request->validated());
+
+            $this->service->roomUpdate($dto);
+
+            return \redirect()->back();
+        } catch (Throwable $th) {
+            throw Exceptions::fromMessage($th);
+        }
     }
 
     public function updateAllData(UpdateAllDataStudentRequest $request): Response

@@ -22,7 +22,7 @@ class SubjectController extends Controller
     public function index(): JsonResource
     {
         try {
-            return SubjectResource::collection($this->service->findAll());
+            return SubjectResource::collection($this->service->findAll()->fresh());
         } catch (\Throwable $th) {
             throw Exceptions::fromMessage($th);
         }

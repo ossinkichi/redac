@@ -6,6 +6,7 @@ use App\Dtos\Student\CreateStudentDto;
 use App\Dtos\Student\UpdateAllDataStudentDto;
 use App\Dtos\Student\UpdateSimpleDataOfStudentDto;
 use App\Dtos\Student\UpdateStudentDataDto;
+use App\Dtos\UpdateRoomOfStudentDto;
 use App\Http\Requests\Course\UpdateAllDataCourseRequest;
 use App\Models\Student;
 use App\Models\User;
@@ -58,7 +59,20 @@ class StudentService
         });
     }
 
-    public function roomUpdate() {}
+    public function roomUpdate(UpdateRoomOfStudentDto $dto): Student
+    {
+        $student = $this->studentRepository->find($dto->student);
+
+        !$student && throw new ModelNotFoundException('Estudante não encontrado');
+
+        $student->update([
+            'room_id' => $dto->room
+        ]);
+
+        !$student->wasChanged() && throw new RuntimeException('Nenhum dado foi alterado.');
+
+        return $student;
+    }
 
     public function update(UpdateAllDataStudentDto $dto)
     {

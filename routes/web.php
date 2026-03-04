@@ -77,7 +77,7 @@ Route::get('secretaria/{course}/sala/{room}', function ($room, $course) {
         ['room' => $room, 'course' => $course]
     );
 })->name('secretary.room.show');
-Route::patch('secretaria/aluno-{stundet}/adicionar/{room}', [StudentController::class, 'setRoom'])->name('room.addedstudent');
+Route::patch('secretaria/aluno/adicionar/{room}', [StudentController::class, 'setRoom'])->name('room.addedstudent');
 
 Route::get('secretaria/{course}/sala/{room}/adicionar-aluno', function ($course, $room) {
     return view('secretary.student.listing-and-select', [$course, 'room' => $room, 'students' => app(StudentController::class)->filterCourse($course)]);
