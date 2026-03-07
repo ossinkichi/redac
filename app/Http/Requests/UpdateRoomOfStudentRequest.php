@@ -22,7 +22,7 @@ class UpdateRoomOfStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'stundnet' => "required|exists:students,id",
+            'student' => "required|exists:students,id",
             'room' => "required|exists:rooms,id"
         ];
     }

@@ -5,9 +5,7 @@ namespace App\Services;
 use App\Dtos\Student\CreateStudentDto;
 use App\Dtos\Student\UpdateAllDataStudentDto;
 use App\Dtos\Student\UpdateSimpleDataOfStudentDto;
-use App\Dtos\Student\UpdateStudentDataDto;
 use App\Dtos\UpdateRoomOfStudentDto;
-use App\Http\Requests\Course\UpdateAllDataCourseRequest;
 use App\Models\Student;
 use App\Models\User;
 use App\Repositories\StudentRepository;
@@ -36,6 +34,24 @@ class StudentService
         return $student;
     }
 
+    public function findByRoom($course, $room)
+    {
+        $students = $this->studentRepository->findByCourse($course);
+
+        return $students->reject(function (Student $student) use ($room) {
+            return $student->room_id != $room;
+        });
+    }
+
+    public function findByCourseDoNotInToRoom($course, $room)
+    {
+        $students = $this->studentRepository->findByCourse($course);
+
+        return $students->reject(function (Student $student) use ($room) {
+            return $student->room_id == $room;
+        });
+    }
+
     public function findByCourse($course)
     {
         return $this->studentRepository->findByCourse($course);
@@ -44,7 +60,6 @@ class StudentService
     public function create(CreateStudentDto $dto): ?Student
     {
         return  DB::transaction(function () use ($dto) {
-
             $response =  $this->studentRepository->create($dto->toArray());
 
             $response->exists() || throw new RuntimeException('Erro ao criar estudante.');

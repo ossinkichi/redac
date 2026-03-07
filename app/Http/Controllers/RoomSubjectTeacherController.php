@@ -55,7 +55,7 @@ class RoomSubjectTeacherController extends Controller
             $dto = CreateRoomDisciplineTeacherDto::make($data->toArray());
             $this->service->register($dto);
 
-            return response()->noContent();
+            return \redirect()->back();
         } catch (\Throwable $th) {
             throw Exceptions::fromMessage($th);
         }

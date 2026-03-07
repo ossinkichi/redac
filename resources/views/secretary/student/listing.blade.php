@@ -6,7 +6,7 @@
 
     <main class="max-w-[1200px] m-auto">
         <section>
-            <div class="container w-screen px-7">
+            <div class="container w-screen p-7">
                 <div>
                     <div class="col-span-3 flex flex-row justify-between">
                         <h1 class="font-extrabold text-xl mb-5">Alunos</h1>

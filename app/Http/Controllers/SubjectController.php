@@ -11,6 +11,7 @@ use App\Http\Requests\Subject\CreateSubjectRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Requests\Subject\UpdateAllDataOfSubjectRequest;
+use Illuminate\Http\RedirectResponse;
 
 class SubjectController extends Controller
 {
@@ -22,19 +23,19 @@ class SubjectController extends Controller
     public function index(): JsonResource
     {
         try {
-            return SubjectResource::collection($this->service->findAll()->fresh());
+            return SubjectResource::collection($this->service->findAll());
         } catch (\Throwable $th) {
             throw Exceptions::fromMessage($th);
         }
     }
 
-    public function store(CreateSubjectRequest $request): Response
+    public function store(CreateSubjectRequest $request): RedirectResponse
     {
         try {
             $dto = CreateSubjectDto::make($request->toArray());
             $this->service->register($dto);
 
-            return \redirect()->route('subject.register')->with('success', 'Matéria registrada com sucesso!');
+            return \redirect()->route('subject.register');
         } catch (\Throwable $th) {
             throw Exceptions::fromMessage($th);
         }

@@ -23,6 +23,7 @@ class Student extends Model
         'course_id',
         'room_id',
         'is_active',
+        'formed',
     ];
 
     protected $casts = [

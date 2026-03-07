@@ -15,7 +15,7 @@ class CreateStudentDto
         public string $email,
         public ?string $phone_number = '',
         public int $course_id,
-        public ?bool $formed = false
+        public ?bool $formed
     ) {}
 
     public static function make(array $data): self
@@ -30,7 +30,7 @@ class CreateStudentDto
             email: $data['email'],
             phone_number: $data['phone_number'] ?? '',
             course_id: $data['course_id'],
-            formed: $data['formed'] ?? false
+            formed: $data['formed']
         );
     }
 

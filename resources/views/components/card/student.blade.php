@@ -1,4 +1,4 @@
-<tr class="{{ $student['is_active'] ? '' : 'text-error' }}">
+<tr class="{{ $student['is_active'] ? '' : 'text-error'}}{{ $student['formed'] ? 'text-emerald-500' : '' }}">
     <th>
         <div class="font-semibold">{{ $student['registration'] }}</div>
     </th>

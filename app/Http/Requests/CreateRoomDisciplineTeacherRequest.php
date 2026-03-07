@@ -11,7 +11,7 @@ class CreateRoomDisciplineTeacherRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,23 +22,23 @@ class CreateRoomDisciplineTeacherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'teacher_id' => 'required|integer|exists:teachers',
-            'class_id' => 'required|integer|exists:classes',
-            'discipline_id' => 'required|integer|exists:subjects',
+            'teacher' => 'exists:teachers,id',
+            'room' => 'required|exists:rooms,id',
+            'subject' => 'required|exists:subjects,id',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'teacher_id.required' => 'Professor não informado.',
-            'teacher_id.exists' => 'Professor não encontrado.',
+            // 'teacher.required' => 'Professor não informado.',
+            'teacher.exists' => 'Professor não encontrado.',
 
-            'class_id.required' => 'classe não informado.',
-            'class_id.required' => 'classe não encontrada.',
+            'room.required' => 'classe não informado.',
+            'room.required' => 'classe não encontrada.',
 
-            'discipline_id.required' => 'disciplina não informado.',
-            'discipline_id.exists' => 'disciplina não encontrado.',
+            'subject.required' => 'disciplina não informado.',
+            'subject.exists' => 'disciplina não encontrado.',
         ];
     }
 }

@@ -74,14 +74,19 @@ Route::post('/sala/register', [RoomController::class, 'store'])->name('room.stor
 Route::get('secretaria/{course}/sala/{room}', function ($room, $course) {
     return view(
         'secretary.secretary.room.show',
-        ['room' => $room, 'course' => $course]
+        ['room' => $room, 'course' => $course, 'students' => app(StudentController::class)->getRoom($course, $room)]
     );
 })->name('secretary.room.show');
-Route::patch('secretaria/aluno/adicionar/{room}', [StudentController::class, 'setRoom'])->name('room.addedstudent');
+
+Route::get('secretaria/{course}/sala/{room}/adicionar-materia', function ($course, $room) {
+    return view('secretary.student.listing-and-select', [$course, 'room' => $room, 'teachers' => app(TeacherController::class)->index(), 'subjects' => app(SubjectController::class)->index()]);
+})->name('secretary.room.listingsubjectsofadded');
+Route::patch('secretaria/aluno/adicionar', [StudentController::class, 'setRoom'])->name('room.addedstudent');
 
 Route::get('secretaria/{course}/sala/{room}/adicionar-aluno', function ($course, $room) {
-    return view('secretary.student.listing-and-select', [$course, 'room' => $room, 'students' => app(StudentController::class)->filterCourse($course)]);
+    return view('secretary.teacher.listing-and-select', [$course, 'room' => $room, 'students' => app(StudentController::class)->filterCourseToEnterInRoom($course, $room),]);
 })->name('secretary.room.listingstudentofadded');
+Route::post('secretaria/materia/adicionar', [RoomSubjectTeacherController::class, 'store'])->name('room.subjectandteacher');
 
 Route::get('secretaria/me', function () {
     return;

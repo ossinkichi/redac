@@ -60,7 +60,7 @@
                                 @endif
                             </select>
                         </label>
-                        @error('specialization_subject_id')
+                        @error('subject_id')
                             <x-form.error :message="$message" />
                         @enderror
                     </div>

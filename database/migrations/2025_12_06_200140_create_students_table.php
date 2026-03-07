@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('email')->unique();
             $table->string('phone_number')->nullable();
-            $table->foreignId('course_id')->nullable()->constrained('courses');
-            $table->foreignId('room_id')->nullable()->constrained('rooms');
+            $table->foreignId('course_id')->nullable()->constrained('courses')->nullOnDelete();;
+            $table->foreignId('room_id')->nullable()->constrained('rooms')->nullOnDelete();;
             $table->boolean('is_active')->default(true);
             $table->boolean('formed')->default(false);
             $table->timestamps();

@@ -19,7 +19,7 @@ class StudentRepository
 
     public function find(int $student)
     {
-        return Student::findOrFail($student)->first();
+        return Student::where('id', $student)->first();
     }
 
     public function findByCourse($course)

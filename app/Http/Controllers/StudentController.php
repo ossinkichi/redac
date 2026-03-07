@@ -12,12 +12,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Dtos\Student\UpdateSimpleDataOfStudentDto;
 use App\Dtos\UpdateRoomOfStudentDto;
-use App\Dtos\UpdateRoomOfStudentDtoDto;
 use App\Http\Requests\Student\UpdateAllDataStudentRequest;
 use App\Http\Requests\Student\CreateStudentRequest;
 use App\Http\Requests\Student\UpdateSimpleDataOfStudentRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateRoomOfStudentRequest;
+use App\Models\Student;
 use Illuminate\View\View;
 
 class StudentController extends Controller
@@ -47,6 +47,15 @@ class StudentController extends Controller
         }
     }
 
+    public function filterCourseToEnterInRoom($course, $room)
+    {
+        try {
+            return StudentResource::collection($this->service->findByCourseDoNotInToRoom($course, $room));
+        } catch (Throwable $th) {
+            throw Exceptions::fromMessage($th);
+        }
+    }
+
     public function filterCourse($course)
     {
         try {
@@ -60,7 +69,6 @@ class StudentController extends Controller
     {
         try {
             $dto = CreateStudentDto::make(($request->toArray()));
-            // \dd($dto->toArray());
 
             $this->service->create($dto);
 
@@ -78,6 +86,15 @@ class StudentController extends Controller
             $this->service->roomUpdate($dto);
 
             return \redirect()->back();
+        } catch (Throwable $th) {
+            throw Exceptions::fromMessage($th);
+        }
+    }
+
+    public function getRoom($course, $room)
+    {
+        try {
+            return StudentResource::collection($this->service->findByRoom($course, $room));
         } catch (Throwable $th) {
             throw Exceptions::fromMessage($th);
         }

@@ -28,7 +28,7 @@ class CreateTeacherRequest extends FormRequest
             'date_of_birth' => 'required|date',
             'address' => 'required|min:10|max:255',
             'email' => 'required|string|email|max:255|unique:teachers,email',
-            'phone_number' => 'required|string|max:15',
+            'phone_number' => 'required|string|max:15|unique:teachers,phone_number',
             'subject_id' => 'required|exists:subjects,id',
             'is_active' => 'sometimes|boolean',
         ];
@@ -68,6 +68,7 @@ class CreateTeacherRequest extends FormRequest
             'phone_number.required' => 'Número de telefone não informado.',
             'phone_number.string' => 'Número de telefone inválido.',
             'phone_number.max' => 'Número de telefone inválido.',
+            'phone_number.unique' => 'Número de telefone em uso.',
 
             'subject_id.required' => 'Matéria de especialização não informada.',
             'subject_id.exists' => 'Matéria de especialização inválida.',
