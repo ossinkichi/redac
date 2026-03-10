@@ -74,7 +74,7 @@ Route::post('/sala/register', [RoomController::class, 'store'])->name('room.stor
 Route::get('secretaria/{course}/sala/{room}', function ($room, $course) {
     return view(
         'secretary.secretary.room.show',
-        ['room' => $room, 'course' => $course, 'students' => app(StudentController::class)->getRoom($course, $room)]
+        ['room' => $room, 'course' => $course, 'students' => app(StudentController::class)->getRoom($course, $room), 'subjects' => app(RoomSubjectTeacherController::class)->showByRoom($room)]
     );
 })->name('secretary.room.show');
 

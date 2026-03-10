@@ -15,7 +15,7 @@ class RoomSubjectTeacherRepository
 
     public function findByRoom(int $room): Collection
     {
-        return RoomSubjectTeacher::where('room_id', $room)->get();
+        return RoomSubjectTeacher::with(['room', 'teacher', 'subject'])->where('room_id', $room)->get();
     }
 
     public function findByTeacher(int $TeacherId): Collection

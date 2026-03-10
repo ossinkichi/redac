@@ -38,10 +38,10 @@ class RoomSubjectTeacherController extends Controller
         }
     }
 
-    public function showByClass(int $id): JsonResource
+    public function showByRoom(int $roomId): JsonResource
     {
         try {
-            $reponse = $this->service->findByClass($id);
+            $reponse = $this->service->findByClass($roomId);
 
             return ClassDisciplineTeacherResource::collection($reponse);
         } catch (\Throwable $th) {
@@ -52,8 +52,12 @@ class RoomSubjectTeacherController extends Controller
     public function store(CreateRoomDisciplineTeacherRequest $data): Response
     {
         try {
-            $dto = CreateRoomDisciplineTeacherDto::make($data->toArray());
-            $this->service->register($dto);
+            $dto = CreateRoomDisciplineTeacherDto::make($data->validated());
+            $response = $this->service->register($dto);
+
+            if ($response) {
+                return \redirect()->back()->with('alert', 'Matéria já existente!');
+            }
 
             return \redirect()->back();
         } catch (\Throwable $th) {

@@ -17,7 +17,7 @@ class RoomSubjectTeacher extends Model
         'teacher_id',
         'room_id',
         'subject_id',
-        'created_at',
+        'status'
     ];
 
     protected $hidden = [

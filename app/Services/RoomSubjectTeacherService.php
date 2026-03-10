@@ -20,13 +20,15 @@ class RoomSubjectTeacherService
         return $this->repository->findAll();
     }
 
-    public function findByClass(int $id)
+    public function findByClass(int $room)
     {
-        $response = $this->repository->findByRoom($id);
+        $response = $this->repository->findByRoom($room);
 
         !$response && throw new ModelNotFoundException('Não foi possivel fazer a busca.');
 
-        return $response;
+        return $response->reject(function ($response) {
+            return $response->status != true;
+        });
     }
 
     public function findByTeacher(int $id)
@@ -51,7 +53,7 @@ class RoomSubjectTeacherService
         });
 
         if ($records->count() == 0) {
-            return;
+            return false;
         }
 
         $response = $this->repository->create($dto->toArray());
