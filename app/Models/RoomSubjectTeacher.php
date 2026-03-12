@@ -24,18 +24,18 @@ class RoomSubjectTeacher extends Model
         'updated_at'
     ];
 
-    protected function RoomId()
+    public function room()
     {
-        return $this->belongsTo(Room::class, 'room_id');
+        return $this->belongsTo(Room::class, 'room_id', 'id');
     }
 
-    protected function SubjectId()
+    public function subject()
     {
-        return $this->belongsTo(Subject::class, 'subject_id');
+        return $this->belongsTo(Subject::class, 'subject_id', 'id');
     }
 
-    protected function teacherId()
+    public function teacher()
     {
-        return $this->belongsTo(Teacher::class, 'teacher_id');
+        return $this->belongsTo(Teacher::class, 'teacher_id', 'id');
     }
 }

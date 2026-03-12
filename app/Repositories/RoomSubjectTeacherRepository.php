@@ -13,7 +13,7 @@ class RoomSubjectTeacherRepository
         return RoomSubjectTeacher::findOrFail($id);
     }
 
-    public function findByRoom(int $room): Collection
+    public function findByRoom($room): Collection
     {
         return RoomSubjectTeacher::with(['room', 'teacher', 'subject'])->where('room_id', $room)->get();
     }

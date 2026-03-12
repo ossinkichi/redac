@@ -8,32 +8,22 @@
 
 ## Visão Geral
 
-# TODO - Projeto REDAC (Sistema de Gerenciamento Escolar)
-
-## Como usar este TODO
-
-- Marque tarefas como concluídas editando as caixas de seleção (`- [x]`).
-- Use a seção **Tarefas por Prioridade** para focar na ordem sugerida.
-- Abra as seções abaixo para ver tarefas por área.
-
-## Visão Geral
-
 Projeto em Laravel com arquitetura em camadas (Controller → Service → Repository).
 Substitui um sistema legado; foco atual: expor rotas API, completar camadas para notas/frequência/conteúdos e ajustar autenticação.
 
 ---
 
-## Status Atual (27/02/2026)
+## Status Atual (9/03/2026)
 
-- [x] Models e Migrations principais criados para todas as entidades.
-- [x] Repositories implementados para: User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher.
+- [x] Models e Migrations criados para todas as entidades: User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomSubjectTeacher, Note, Frequency, Content, ContentResponse.
+- [x] Repositories implementados para: User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomSubjectTeacher.
 - [ ] Repositories pendentes: Note, Frequency, Content, ContentResponse.
-- [x] Services implementados para Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher.
+- [x] Services implementados para: User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomSubjectTeacher.
 - [ ] Services pendentes: Note, Frequency, Content, ContentResponse.
-- [x] DTOs implementados para as entidades acima.
+- [x] DTOs implementados para as entidades acima (exceto as pendentes).
 - [ ] DTOs pendentes: Note, Frequency, Content, ContentResponse.
 - [x] Controllers com rotas expostas: Student, Teacher, Secretary (endereços em `routes/api.php`).
-- [x] Controllers existentes (sem rotas publicadas): Course, Subject, Room, CourseSubject, RoomDisciplineTeacher.
+- [x] Controllers existentes (sem rotas publicadas): Course, Subject, Room, CourseSubject, RoomSubjectTeacher.
 - [ ] Controllers faltantes: Note, Frequency, Content, ContentResponse.
 
 **Autenticação:**
@@ -55,7 +45,7 @@ Substitui um sistema legado; foco atual: expor rotas API, completar camadas para
 **Rotas & Segurança:**
 
 - [x] Rotas API para Student/Teacher/Secretary publicadas em `routes/api.php`.
-- [ ] Rotas API para Course, Subject, Room, CourseSubject, RoomDisciplineTeacher precisam ser expostas.
+- [ ] Rotas API para Course, Subject, Room, CourseSubject, RoomSubjectTeacher precisam ser expostas.
 - [x] Middlewares de perfis (admin, secretary, teacher, student) criados e registrados (`bootstrap/app.php`).
 - [ ] Organizar rotas por prefixos (admin/, teacher/, secretary/, student/) e aplicar middlewares de roles.
 - [ ] Rotas web completas (register, logout, dashboards) ainda incompletas.
@@ -66,7 +56,7 @@ Substitui um sistema legado; foco atual: expor rotas API, completar camadas para
 
 ### 🔴 P1 — Expor e proteger rotas API críticas
 
-- [ ] Publicar rotas REST para Course, Subject, Room, CourseSubject, RoomDisciplineTeacher.
+- [ ] Publicar rotas REST para Course, Subject, Room, CourseSubject, RoomSubjectTeacher.
 - [ ] Adicionar endpoints faltantes em Subject (show, delete, active/desactive).
 - [ ] Implementar update de turma (Room).
 - [ ] Aplicar middlewares de roles nas rotas de API.
@@ -140,64 +130,6 @@ Substitui um sistema legado; foco atual: expor rotas API, completar camadas para
 ---
 
 Sistema escolar em Laravel com arquitetura em camadas (Controllers → Services → Repositories). Substitui o sistema legado em PHP. Desenvolvimento contínuo com foco em rotas API, middlewares e frontend.
-
----
-
-## Status Atual (18/02/2026)
-
-**Backend:**
-
-- [x] Estrutura Laravel com Models, Migrations, Seeders configurados
-- [x] Todas as 12 Models criadas: User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher, Note, Frequency, Content, ContentResponse
-- [x] Repositories para 9 entidades: User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomDisciplineTeacher
-- [ ] Repositories para 4 entidades: Note, Frequency, Content, ContentResponse
-- [x] Services para 9 entidades + ClassDisciplineTeacher
-- [ ] Services para Note, Frequency, Content, ContentResponse
-- [x] DTOs para 9 entidades principais
-- [ ] DTOs para Note, Frequency, Content, ContentResponse
-- [x] Controllers com CRUDs: Student, Teacher, Secretary (rotas expostas)
-- [x] Controllers criados: Course, Subject, Room, CourseSubject, RoomDisciplineTeacher (SEM rotas expostas)
-- [ ] Controllers para Note, Frequency, Content, ContentResponse
-
-**Autenticação:**
-
-- [x] Login web implementado
-- [ ] Logout web funcional (rota existe, mas precisa teste)
-- [ ] Register web completo
-- [ ] Recuperação de senha
-- [ ] API Tokens (Sanctum)
-
-**Frontend:**
-
-- [x] Componentes base de layout
-- [x] Páginas: login, dashboards (student/teacher/secretary), feed/profile
-- [ ] Layout completo com navegação e header/footer
-- [ ] CRUDs no frontend (tabelas, formulários, listagens)
-- [ ] Tabelas com paginação e filtros
-
-**Rotas & Middlewares:**
-
-- [x] Middlewares de roles criados: Admin, Secretary, Teacher, Student
-- [ ] Rotas API expostas para Course, Subject, Room, CourseSubject, RoomDisciplineTeacher
-- [ ] Middlewares aplicados nas rotas
-- [ ] Rotas web completas (register, logout, dashboards)
-- [ ] Organização de rotas por prefixo (admin/, teacher/, secretary/, student/)
-
----
-
-## Tarefas por Prioridade
-
-### 🔴 P1 - Expor Rotas API Faltantes
-
-- [ ] Expor rotas API para Course (CourseController já existe)
-- [ ] Expor rotas API para Subject (SubjectController já existe)
-- [ ] Expor rotas API para Room (RoomController já existe)
-- [ ] Expor rotas API para CourseSubject (Controller já existe)
-- [ ] Expor rotas API para RoomDisciplineTeacher (Controller já existe)
-- [ ] Adicionar endpoints faltantes em Subject (show, delete, active/desactive)
-- [ ] Adicionar método update em Room
-- [ ] Aplicar middlewares de roles nas rotas API
-- [ ] Organizar rotas por prefixos (admin/, teacher/, secretary/, student/)
 
 ### 🟡 P2 - Implementar Notas, Frequência e Conteúdos
 

@@ -40,20 +40,19 @@ class RoomSubjectTeacherService
         return $response;
     }
 
+    private function isRegistry($records, $room)
+    {
+        return $records->filter(function ($record) use ($room) {
+            return $record->room->id == $room;
+        });
+    }
+
     public function register(CreateRoomDisciplineTeacherDto $dto)
     {
         $records = $this->repository->findByRoom($dto->room_id);
 
-        $records = $records->reject(function ($record) {
-            return $record->status == false;
-        });
-
-        $records = $records->reject(function ($record) use ($dto) {
-            return $record->subject_id != $dto->subject_id;
-        });
-
-        if ($records->count() == 0) {
-            return false;
+        if (!$this->isRegistry($records, $dto->room_id)) {
+            return;
         }
 
         $response = $this->repository->create($dto->toArray());

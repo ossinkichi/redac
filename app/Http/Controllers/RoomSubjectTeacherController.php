@@ -55,11 +55,11 @@ class RoomSubjectTeacherController extends Controller
             $dto = CreateRoomDisciplineTeacherDto::make($data->validated());
             $response = $this->service->register($dto);
 
-            if ($response) {
+            if (!$response) {
                 return \redirect()->back()->with('alert', 'Matéria já existente!');
             }
 
-            return \redirect()->back();
+            return \redirect()->back()->with('message', 'Matéria cadastrada com sucesso');
         } catch (\Throwable $th) {
             throw Exceptions::fromMessage($th);
         }

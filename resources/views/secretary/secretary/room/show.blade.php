@@ -18,7 +18,7 @@
                         <thead>
                             <tr>
                                 <th>Matéria</th>
-                                <th>Responsavel</th>
+                                <th class="text-end">Responsavel</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -30,8 +30,8 @@
                             @else
                                 @foreach ($subjects as $subject)
                                     <tr>
-                                        <td>{{ $subject['name'] }}</td>
-                                        <td>{{ $subject['teacher']['name'] }}</td>
+                                        <td>{{ $subject['subject']['name'] }}</td>
+                                        <td class="text-end">{{ $subject['teacher']['full_name'] }}</td>
                                     </tr>
                                 @endforeach
                             @endif
