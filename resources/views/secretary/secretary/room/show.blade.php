@@ -47,7 +47,7 @@
             <div>
                 <div class="flex items-center justify-between mb-4">
                     <span class="font-extrabold uppercase text-2x1 tracking-wide">Alunos</span>
-                    <a href="{{ route('secretary.room.listingstudentofadded', [$room, $course]) }}"
+                    <a href="{{ route('secretary.room.assignStudent', [$room, $course]) }}"
                         class="btn btn-base-200 border-base-300 shadow-sm rounded-sm self-end">Adicionar Aluno</a>
                 </div>
                 <div>

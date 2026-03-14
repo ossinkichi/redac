@@ -1,5 +1,5 @@
 @props([
-    'rooms' => [],
+    'rooms',
 ])
 
 <x-layout>
@@ -12,7 +12,7 @@
                     <h2 class="text-2xl col-span-3 font-bold">Turmas</h2>
 
                     <ul class="list col-span-3 bg-base-100 rounded-box grid grid-cols-3 gap-4">
-                        @if ($rooms == [])
+                        @if (count($rooms) == 0)
                             <span>Nenhuma sala encontrada</span>
                         @else
                             @foreach ($rooms as $room)
