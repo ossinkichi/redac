@@ -38,6 +38,9 @@ class RoomSubjectTeacherService
         !$response && throw new ModelNotFoundException('Não foi possivel fazer a busca.');
 
         return $response;
+        // return $response->filter(function ($res) {
+        //     return $res->status == true;
+        // });
     }
 
     private function isRegistry($records, $room)
