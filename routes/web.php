@@ -41,7 +41,11 @@ Route::get('professor', function () {
     return view('teacher.home', ['rooms' => []]);
 })->name('teacher.home');
 
-Route::get('professor/sala/{room}', function ($room) {})->name('teacher.room');
+Route::get('professor/sala/{room}', function ($room) {
+    $students = app(StudentController::class)->getRoom($room);
+    $activts = [];
+    return view('teacher.activits', []);
+})->name('teacher.room');
 
 // });
 

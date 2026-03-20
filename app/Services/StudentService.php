@@ -34,13 +34,9 @@ class StudentService
         return $student;
     }
 
-    public function findByRoom($course, $room)
+    public function findByRoom($room)
     {
-        $students = $this->studentRepository->findByCourse($course);
-
-        return $students->reject(function (Student $student) use ($room) {
-            return $student->room_id != $room;
-        });
+        return $this->studentRepository->findByRoom($room);
     }
 
     public function findByCourseDoNotInToRoom($course, $room)

@@ -91,10 +91,10 @@ class StudentController extends Controller
         }
     }
 
-    public function getRoom($course, $room)
+    public function getRoom($room)
     {
         try {
-            return StudentResource::collection($this->service->findByRoom($course, $room));
+            return StudentResource::collection($this->service->findByRoom($room));
         } catch (Throwable $th) {
             throw Exceptions::fromMessage($th);
         }

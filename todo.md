@@ -13,7 +13,7 @@ Substitui um sistema legado; foco atual: expor rotas API, completar camadas para
 
 ---
 
-## Status Atual (9/03/2026)
+## Status Atual (15/03/2026)
 
 - [x] Models e Migrations criados para todas as entidades: User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomSubjectTeacher, Note, Frequency, Content, ContentResponse.
 - [x] Repositories implementados para: User, Student, Teacher, Secretary, Course, Subject, Room, CourseSubject, RoomSubjectTeacher.
